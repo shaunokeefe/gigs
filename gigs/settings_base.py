@@ -115,9 +115,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'gigs.gig_registry',
+    'batchimport',
+    'xlrd',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+BATCH_IMPORT_IMPORTABLE_MODELS = ['gig_registry.Gig',]
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

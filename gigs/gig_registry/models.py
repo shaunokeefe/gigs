@@ -64,14 +64,20 @@ class Location(models.Model):
 class Venue(models.Model):
     name = models.CharField(max_length=50)
     location = models.ForeignKey(Location)
+    venue_type = models.CharField(max_length=50)
+    open_date = models.DateField()
+    close_date = models.DateField()
+    status_notes = models.CharField(max_length=50)
+    venue_comments = models.CharField(max_length=150)
 
     def __unicode__(self):
         return self.name
 
 class Gig(models.Model):
+    name = models.CharField(max_length=50)
     start = models.DateTimeField()
     finish = models.DateTimeField()
-    venue = models.ForeignKey(Venue)
+    venue = models.ForeignKey(Venue, null=True, blank=True)
 
     # TODO members can be absent on the night..is this a problem?
     # maybe an 'appearance' model or something like that?
@@ -80,9 +86,3 @@ class Gig(models.Model):
     def __unicode__(self):
         print self.bands
         return ", ".join(map(str, self.bands.all())) + " @ " + self.venue.name
-
-
-class Test(models.Model):
-    a = models.CharField(max_length=50)
-    b = models.CharField(max_length=50)
-    gig = models.ForeignKey(Gig)
