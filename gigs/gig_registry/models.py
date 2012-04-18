@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 class Person(models.Model):
     first_name = models.CharField(max_length=40)
@@ -69,17 +70,19 @@ class Venue(models.Model):
         return self.name
 
 class Gig(models.Model):
-    start = models.DateTimeField()
-    finish = models.DateTimeField()
-    venue = models.ForeignKey(Venue)
+    start = models.DateTimeField(default=datetime.now)
+    finish = models.DateTimeField(default=datetime.now)
+    venue = models.ForeignKey(Venue, blank=True, null=True)
 
     # TODO members can be absent on the night..is this a problem?
     # maybe an 'appearance' model or something like that?
     bands= models.ManyToManyField(Band)
 
     def __unicode__(self):
-        print self.bands
-        return ", ".join(map(str, self.bands.all())) + " @ " + self.venue.name
+        name = ", ".join(map(str, self.bands.all()))
+        if self.venue:
+            name +=  " @ " + self.venue.name
+        return name
 
 
 class Test(models.Model):
