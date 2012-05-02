@@ -54,38 +54,69 @@ class BandMembership(models.Model):
 
 class Location(models.Model):
     # this will be replaced with geodjango
+    street_address = models.CharField(max_length=150)
     country = models.CharField(max_length=150)
     state = models.CharField(max_length=150)
     suburb = models.CharField(max_length=150)
     post_code  = models.CharField(max_length=150)
     
     def __unicode__(self):
-        return self.location
+        return "%s, %s" % (self.street_address, self.suburb)
+
+class Stage(models.Model):
+    name = models.CharField(max_length=50)
+    capacity = models.IntegerField(blank=True)
+
+class Sibling(models.Model):
+    name = models.CharField(max_length=50)
 
 class Venue(models.Model):
-    name = models.CharField(max_length=50)
-    location = models.ForeignKey(Location)
+    STATUS_CHOICES = (
+            ('O', 'Open'),
+            ('C', 'Closed'),
+            )
+    #uid = models.CharField(max_length=5, unique=True)
+    uid = models.CharField(max_length=5)
+    name = models.CharField(max_length=50, default='Unnamed Venue')
+    location = models.ForeignKey(Location, blank=True, null=True)
+    stages = models.ManyToManyField(Stage, blank=True)
+    venue_type = models.CharField(max_length=50, blank=True)# TODO: make this a set list or fk
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, blank=True)
+    status_notes = models.CharField(max_length=300, blank=True)
+    comment = models.CharField(max_length=300, blank=True)
+    sibling = models.ManyToManyField(Sibling)
+
 
     def __unicode__(self):
         return self.name
 
 class Gig(models.Model):
+
     start = models.DateTimeField(default=datetime.now)
     finish = models.DateTimeField(default=datetime.now)
     venue = models.ForeignKey(Venue, blank=True, null=True)
+    name  = models.CharField(max_length=150, blank=True)
+    #cost = models.FloatField(blank=True)
+    comment = models.CharField(max_length=300, blank=True)
 
     # TODO members can be absent on the night..is this a problem?
     # maybe an 'appearance' model or something like that?
-    bands= models.ManyToManyField(Band)
+    bands = models.ManyToManyField(Band)
+
+    # TODO optional name
 
     def __unicode__(self):
-        name = ", ".join(map(str, self.bands.all()))
+        if self.name:
+            return self.name
+        name = ""
+        if self.bands:
+            name = ", ".join(map(str, self.bands.all()))
         if self.venue:
             name +=  " @ " + self.venue.name
+
+        if self.start:
+            name += " on %s " % (self.start.date())
+    
+        if not name:
+            name = "No bands and no venue specified"
         return name
-
-
-class Test(models.Model):
-    a = models.CharField(max_length=50)
-    b = models.CharField(max_length=50)
-    gig = models.ForeignKey(Gig)
