@@ -1,0 +1,10 @@
+{% extends "portal/portal_base.html" %}
+
+{% block content %}
+<div id="content">
+{% for gig in gig_list %}
+    {% include "portal/gig_summary.html" %}
+    {% endfor %}
+</div>
+{% endblock %}
+

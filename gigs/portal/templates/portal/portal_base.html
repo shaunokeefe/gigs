@@ -1,0 +1,114 @@
+{#  Copyright (c) 2012, VeRSI Consortium                   #}
+{#    (Victorian eResearch Strategic Initiative, Australia)           #}
+{#  All rights reserved.                           #}
+{#                                        #}
+{#  Redistribution and use in source and binary forms, with or without       #}
+{#  modification, are permitted provided that the following conditions       #}
+{#  are met:                                   #}
+{#                                        #}
+{#     * Redistributions of source code must retain the above copyright       #}
+{#       notice, this list of conditions and the following disclaimer.       #}
+{#     * Redistributions in binary form must reproduce the above       #}
+{#       copyright notice, this list of conditions and the following       #}
+{#       disclaimer in the documentation and/or other materials provided   #}
+{#       with the distribution.                           #}
+{#     * Neither the name of the VeRSI, the VeRSI Consortium members, nor  #}
+{#       the names of its contributors may be used to endorse or promote   #}
+{#       products derived from this software without specific prior       #}
+{#       written permission.                           #}
+{#                                        #}
+{#  THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS''       #}
+{#  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,  #}
+{#  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A           #}
+{#  PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS AND   #}
+{#  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,  #}
+{#  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,       #}
+{#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR       #}
+{#  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY       #}
+{#  OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT       #}
+{#  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE  #}
+{#  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.   #}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>The Ultimate Gig Guide</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css?{% now "U" %}">
+    <link rel="stylesheet" href="/static/css/default.css?{% now "U" %}">
+   
+    <script src="twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>  
+    <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-dropdown.js"></script>  
+    {% block script %}
+    {% endblock script %}
+  </head>
+  <body>
+    <!-- Navbar
+    ================================================== --> 
+    <div class="navbar navbar-fixed-top"> 
+      <div class="navbar-inner"> 
+        <div class="container-fluid"> 
+          <a class="brand" href="{% url home %}">TUGG</a>
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
+            <span class="icon-bar"></span> 
+            <span class="icon-bar"></span> 
+            <span class="icon-bar"></span> 
+          </a> 
+          <div class="nav-collapse collapse"> 
+            <ul class="nav"> 
+                <li class="active"><a href="{% url home %}">Home</a></li> 
+              <li><a href="{% url about %}">About</a></li> 
+              <li><a href="{% url contact%}">Contact</a></li> 
+            </ul>
+            <div class="btn-group pull-right">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user"></i> sokeefe
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Sign Out</a></li>
+                </ul>
+            </div> <!-- btn-group -->
+            <form class="navbar-search pull-right">
+              <input type="text" class="search-query" placeholder="Search">
+            </form>
+          </div><!-- nav-collapse -->
+        </div><!-- container-fluid -->
+      </div><!-- navbar-inner -->
+    </div><!-- navbar -->
+
+    <div class="container-fluid">
+      <div id=middle class="row-fluid">
+        <div class="span3">
+          {% block sidebar %}
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Pages</li>      
+              <li class="active"><a href="{% url home %}">Home</a></li>      
+              <li><a href="{% url index %}">View  Gigs</a></li>      
+              <li><a href="#">Search Gigs</a></li>     
+              <li><a href="#">TUGG Stats</a></li>     
+              <li class="nav-header">Admin</li>      
+              <li><a href="{% url admin:gig_registry_gig_add %}">Add a Gig</a></li>     
+              <li><a href="{% url admin:gig_registry_gig_changelist %}">Edit a Gig</a></li>
+              <li><a href="{% url admin:auth_user_changelist %}">Manage Users</a></li>
+            </ul>
+          </div>
+          {% endblock %}
+        </div> <!-- end sidebar-->
+        <div id=content class="span8">
+          {% block content %}
+          {% endblock %}
+        </div> <!-- content-->
+      </div> <!-- middle-->
+
+      {% block footer %}
+      <footer> 
+        <p>&copy; Deakin University, RMIT and VeRSI 2012</p> 
+      </footer> 
+      {% endblock %}
+    </div><!--container-fluid-->
+  </body>
+</html>
