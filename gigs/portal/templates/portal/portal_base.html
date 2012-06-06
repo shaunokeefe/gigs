@@ -38,9 +38,13 @@
     <meta name="description" content="">
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css?{% now "U" %}">
     <link rel="stylesheet" href="/static/css/default.css?{% now "U" %}">
-   
-    <script src="twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>  
-    <script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-dropdown.js"></script>  
+    <style>
+    body {
+      /* 60px to make the container go all the way to the bottom of the topbar */
+      padding-top: 60px;
+      }
+    </style>
+
     {% block script %}
     {% endblock script %}
   </head>
@@ -56,7 +60,7 @@
             <span class="icon-bar"></span> 
             <span class="icon-bar"></span> 
           </a> 
-          <div class="nav-collapse collapse"> 
+          <div class="nav-collapse"> 
             <ul class="nav"> 
                 <li class="active"><a href="{% url home %}">Home</a></li> 
               <li><a href="{% url about %}">About</a></li> 
@@ -110,5 +114,9 @@
       </footer> 
       {% endblock %}
     </div><!--container-fluid-->
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.js"></script>  
+
   </body>
 </html>
