@@ -1,10 +1,21 @@
 {% extends "portal/portal_base.html" %}
 
 {% block content %}
-<div id="content">
-{% for gig in gig_list %}
-    {% include "portal/gig_summary.html" %}
+<div class="row-fluid">
+    <h1>Gig List</h1>
+</div>
+<br>
+<div class="row-fluid">
+  <table class="table table-bordered">
+    <thead>
+        <tr><th>Gig Name</th/><th>Venue Name</th/><th>Headlining Band</th><th>Gig Start Time</th/></tr>
+    </thead>
+    <tbody>
+    {% for gig in gig_list %}
+      {% include "portal/gig_row.html" %}
     {% endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}
 
