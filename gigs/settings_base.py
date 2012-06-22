@@ -116,7 +116,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'gigs.gig_registry',
     'gigs.portal',
+    'gigs.search',
     'csvimport',
+    'haystack',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -143,3 +145,7 @@ LOGGING = {
         },
     }
 }
+
+HAYSTACK_SITECONF = 'gigs.search.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
+HAYSTACK_WHOOSH_PATH = os.path.join(os.path.dirname(__file__), 'whoosh_index')
