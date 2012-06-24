@@ -1,0 +1,17 @@
+{% extends 'portal/portal_base.html' %}
+
+{% block content %}
+
+{% if error %}
+<div class="alert alert-error">
+    <p><strong>Woops!</strong> Looks like you got your username or password wrong. Try again!</p>
+</div>
+{% endif %}
+
+<form action="{% url login %}" method="post">
+  {% csrf_token %}
+    <input type="text" name="username" placeholder="User Name"/> 
+    <input type="password" name="password" placeholder="Password"/> 
+    <input class="btn btn-primary" type="submit"/> 
+</form>
+{% endblock %}
