@@ -115,10 +115,12 @@
               <li><a href="{% url haystack_search %}">Search Gigs</a></li>     
               <li><a href="#";e
                   >TUGG Stats</a></li>     
+              {% if user.is_authenticated and user.is_staff %}
               <li class="nav-header">Admin</li>      
               <li><a href="{% url admin:gig_registry_gig_add %}" data-toggle="tab">Add a Gig</a></li>     
               <li><a href="{% url admin:gig_registry_gig_changelist %}" data-toggle="tab">Edit a Gig</a></li>
               <li><a href="{% url admin:auth_user_changelist %}" data-toggle="tab">Manage Users</a></li>
+              {% endif%}
             </ul>
           </div>
           {% endblock %}
