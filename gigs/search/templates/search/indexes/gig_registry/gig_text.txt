@@ -1,2 +1,18 @@
 {{object.name}}
+{% for band in object.bands.all %}
+{{band.name}}
+{% for musician in band.musicians.all%}
+{{musician.first_name}}
+{{musician.last_name}}
+{{musician.nick_name}}
+{% endfor %}
+{% endfor %}
 {{object.venue.name}}
+{{object.location.street_address}}
+{{object.location.country}}
+{{object.location.state}}
+{{object.location.postcode}}
+{{object.location.suburb}}
+{% for genre in object.genres.all %}
+{{genre.name}}
+{% endfor %}
