@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.template.defaultfilters import date as _date
 
 class Person(models.Model):
     first_name = models.CharField(max_length=40)
@@ -103,19 +104,21 @@ class Gig(models.Model):
     # maybe an 'appearance' model or something like that?
     bands = models.ManyToManyField(Band)
 
-    # TODO optional name
-
     def __unicode__(self):
         if self.name:
             return self.name
         name = ""
-        if self.bands:
-            name = ", ".join(map(str, self.bands.all()))
+        if self.bands.count():
+            bands = self.bands.all()
+            name = bands[0].name
+            if bands.count() > 1:
+                name += " and others"
+
         if self.venue:
             name +=  " @ " + self.venue.name
 
         if self.start:
-            name += " on %s " % (self.start.date())
+            name += " on %s " % _date(self.start.date(), "l, M j, o")
     
         if not name:
             name = "No bands and no venue specified"
