@@ -1,0 +1,76 @@
+{% extends "portal/portal_base.html" %}
+
+{% block content %}
+<h1><a href="{% url portal_gig_detail gig.id %}">{{gig}}</a></h1>
+<br>
+<div id="gig-info" class="row-fluid">
+  <h2>Gig Info</h2>
+  <div class="span12 well">
+      <a href="{% url portal_gig_detail gig.id %}">{{gig}}</a>
+    <p><strong>start time:</strong> {{gig.start|date:"l, M j, o"}}</p>
+  </div>
+</div>
+<div id="gig-children" class="row-fluid">
+    <div id="bands-divider" class="span6">
+        
+      <h2>Bands</h2>
+      {% for band in gig.bands.all%}
+      <div class="well">
+          <p><strong><a href = "{% url portal_band_detail band.id %}">{{band.name}}</a></strong></p>
+        {% if band.members.count %}
+        {% for member in band.members.all %}
+          <p>{{member}}</p>
+        {% endfor %}
+        {% endif %}
+      </div>
+      {% endfor %}
+
+  </div><!-- bands-divider -->
+  <div id="other-divider" class="span6">
+    <div id="venue-info" class="row-fluid">
+      <h2>Venue</h2>
+      {% with gig.venue as venue %}
+      <div id="venue" class="span12 well">
+        <dl class="dl-horizontal">
+          <dt>Venue name</dt>
+      <dd><a href="{% url portal_venue_detail venue.id %}">{{venue.name}}</a></dd>
+          <dt>Status</dt> 
+          <dd>{{venue.status}}</dd>
+          <dt>venue type<dt> 
+          <dd>{{venue.venue_type}}</dd>
+          <dt>Comment</dt> 
+          <dd>{{venue.comment}}</dd>
+        </dl>
+      </div><!-- venue-->
+      <div id="location-info" class="row-fluid">
+        <h2>Location</h2>
+        {% with venue.location as location %}
+        <div id="location" class="span12 well">
+          <a href="{% url portal_location_detail location.id %}">
+          <address>
+            <strong>{{venue.location.name}}</strong>
+            <br>
+            {{location.street_address}}
+            <br>
+            {{location.suburb}}, {{location.postcode}}
+            <br>
+            {{location.country}}
+        </address>
+        </a>
+        </div><!-- location -->
+        {% endwith %}
+      </div><!-- location-info -->
+    </div><!-- venue-info -->
+    <h2>Stages</h2>
+    <div id="stages" class="span12 well">
+      <ul>
+        {% for stage in gig.stages.all %}
+        <li>{{stage.name}}(capacity:{{stage.capacity}})</li>
+        {% endfor %}
+      </ul>
+    </div><!-- stages -->
+    {% endwith %}
+  </div><!-- other-divider -->
+</div><!-- gig-children -->
+{% endblock %}
+
