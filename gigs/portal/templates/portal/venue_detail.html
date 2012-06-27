@@ -4,32 +4,24 @@
 <div id="venue-info" class="row-fluid">
   <h1><a href="{% url portal_venue_detail venue.id %}">{{venue.name}}</a></h1>
   <div id="venue" class="span12">
-    <dl class="dl-horizontal">
+    <dl>
       <dt>Status</dt> 
-      <dd>{{venue.status}}</dd>
+      <dd>{{venue.status|default:"None"}}</dd>
       <dt>venue type<dt> 
-      <dd>{{venue.venue_type}}</dd>
+      <dd>{{venue.venue_type|default:"None"}}</dd>
       <dt>Comment</dt> 
-      <dd>{{venue.comment}}</dd>
+      <dd>{{venue.comment|default:"None"}}</dd>
     </dl>
   </div><!-- venue-->
-  <div id="location-info" class="row-fluid">
+  <div id="location-info" class="row-fluid"> 
     <h2>Location</h2>
+    {% if venue.location %}
     {% with venue.location as location %}
-    <div id="location" class="span12 well">
-      <a href="{% url portal_location_detail location.id %}">
-      <address>
-        <strong>{{venue.location.name}}</strong>
-        <br>
-        {{location.street_address}}
-        <br>
-        {{location.suburb}}, {{location.postcode}}
-        <br>
-        {{location.country}}
-    </address>
-    </a>
-    </div><!-- location -->
+    {% include "portal/basic_location_info.html" %}
     {% endwith %}
+    {% else %}
+    <p>No location listed</p>
+    {% endif %}
   </div><!-- location-info -->
 </div><!-- venue-info -->
 {% endblock %}

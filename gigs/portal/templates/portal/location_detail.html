@@ -3,11 +3,14 @@
 {% block content %}
 <div id="location-info" class="row-fluid">
     <h1><a href="{% url portal_location_detail location.id %}">
-    <strong>{{venue.location.name}}</strong>
-    {{location.street_address}}
-    {{location.suburb}}, {{location.postcode}}
-    {{location.country}}
-</a></h1>
-</div><!-- location -->
+    <address>
+      <strong>{{venue.location.name}}</strong>
+      {{location.street_address}}
+      {{location.suburb}}, {{location.postcode}}
+      {{location.country}}
+    </address>
+</a>
+</h1>
+</div>
 {% endblock %}
 

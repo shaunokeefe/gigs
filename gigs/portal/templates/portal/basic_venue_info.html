@@ -1,0 +1,25 @@
+<div id="venue-info" class="row-fluid">
+  <div id="venue" class="span12 well">
+    <dl class="dl-horizontal">
+      <dt>Venue name</dt>
+        <dd><a href="{% url portal_venue_detail venue.id %}">{{venue.name}}</a></dd>
+        <dt>Status</dt> 
+        <dd>{{venue.status}}</dd>
+        <dt>venue type<dt> 
+        <dd>{{venue.venue_type}}</dd>
+        <dt>Comment</dt> 
+        <dd>{{venue.comment}}</dd>
+      </dl>
+    </div><!-- venue-->
+
+    <div id="location-info" class="row-fluid">
+      <h2>Location</h2>
+      {% if venue.location.count %}
+      {% with venue.location as location %}
+      {% include "portal/basic_location_info.html" %}
+    {% endwith %}
+    {% else %}
+    <p>No location listed for this venue</p>
+    {% endif %}
+  </div><!-- location-info -->
+</div><!-- venue-info -->

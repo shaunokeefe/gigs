@@ -1,0 +1,13 @@
+<div id="location" class="span12 well">
+  <a href="{% url portal_location_detail location.id %}">
+    <address>
+      <strong>{{venue.location.name}}</strong>
+      <br>
+      {{location.street_address}}
+      <br>
+      {{location.suburb}}, {{location.postcode}}
+      <br>
+      {{location.country}}
+    </address>
+  </a>
+</div><!-- location -->
