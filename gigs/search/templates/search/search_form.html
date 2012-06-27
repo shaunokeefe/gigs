@@ -1,0 +1,4 @@
+<form class="form-search" action="{% url haystack_search %}">
+    <input type="text" name="q" class="input-xlarge"{% if query %}value="{{query}}"{% endif %}>
+  <button type="submit" class="btn btn-primary">Go &raquo;</button>
+</form>

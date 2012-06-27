@@ -4,14 +4,10 @@
 <div class="row-fluid">
     <h1>Gig List</h1>
     <br>
-<form class="form-search" action=".">
-    <input type="text" name="q" class="input-xlarge"{% if query%} value="{{query}}"{% endif %}>
-  <button type="submit" class="btn btn-primary">Go &raquo;</button>
-</form>
+    {% include "search/search_form.html" %}  
 </div>
 <br>
 <div class="row-fluid">
-  {% if query %}
   {% if page.object_list %}
   <table class="table table-bordered">
     <thead>
@@ -26,15 +22,16 @@
     </tbody>
     </table>
   {% else %}
+    {% if query %}
     <div class="alert alert-error">
       <p>Your search didn't return any results.</p>
     </div>
-  {%endif %}
-  {% else %}
-  <div class="alert alert-info">
+    {% else %}
+    <div class="alert alert-info">
       <p>Please enter a search term</p>
-  </div>
-  {% endif %}
+    </div>
+    {% endif %}
+  {%endif %}
 </div>
 {% endblock %}
 
