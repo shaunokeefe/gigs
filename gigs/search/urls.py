@@ -1,8 +1,8 @@
 from django.conf.urls.defaults import *
-from django.views.generic import DetailView, ListView, TemplateView
-from gigs.gig_registry.models import Gig
+#from haystack.views import SearchView
+from gigs.search.views import LoggedSearchView
 
 urlpatterns = patterns(
     'search.views.',
-    url(r'^$', TemplateView.as_view(template_name='portal/home.html'), name='home'),
+    url(r'^$', LoggedSearchView(), name='search_view'),
 )
