@@ -62,7 +62,13 @@ class Location(models.Model):
     post_code  = models.CharField(max_length=150)
     
     def __unicode__(self):
-        return "%s, %s" % (self.street_address, self.suburb)
+        return "%s, %s %s, %s %s" % (
+                self.street_address, 
+                self.suburb, 
+                self.state, 
+                self.post_code, 
+                self.country
+                )
 
 class Stage(models.Model):
     name = models.CharField(max_length=50)
