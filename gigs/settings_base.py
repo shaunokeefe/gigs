@@ -119,6 +119,7 @@ INSTALLED_APPS = (
     'gigs.search',
     'csvimport',
     'haystack',
+    'gmapi',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
