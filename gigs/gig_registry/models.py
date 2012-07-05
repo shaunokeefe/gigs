@@ -5,8 +5,8 @@ from django.template.defaultfilters import date as _date
 class Person(models.Model):
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
-    nick_name = models.CharField(max_length=40)
-    date_of_birth = models.DateField()#widget=DateInput(format='%d-%m-%y'), input_formats=('%d-%m-%y'))
+    nick_name = models.CharField(max_length=40, blank=True)
+    date_of_birth = models.DateField(blank=True, null=True)
 
     def __unicode__(self):
         name = [self.first_name, self.last_name]
@@ -20,7 +20,7 @@ class Manager(Person):
     pass
 
 class Musician(Person):
-    instrument = models.CharField(max_length=50)
+    instrument = models.CharField(max_length=50, blank=True)
 
 class Owner(Person):
     # Not sure if this will be a thing yet. Just a placeholder
@@ -34,8 +34,9 @@ class Genre(models.Model):
 
 class Band(models.Model):
     name = models.CharField(max_length=50)
-    genre = models.ManyToManyField(Genre)
-    members = models.ManyToManyField(Musician, through='BandMembership')
+    genre = models.ManyToManyField(Genre, blank=True, null=True)
+    members = models.ManyToManyField(Musician, through='BandMembership', blank=True, null=True)
+    founded = models.DateField(blank=True, null=True)
 
     def __unicode__(self):
         return self.name
@@ -68,36 +69,32 @@ class Stage(models.Model):
     name = models.CharField(max_length=50)
     capacity = models.IntegerField(blank=True)
 
-class Sibling(models.Model):
-    name = models.CharField(max_length=50)
-
 class Venue(models.Model):
     STATUS_CHOICES = (
             ('O', 'Open'),
             ('C', 'Closed'),
             )
-    #uid = models.CharField(max_length=5, unique=True)
-    uid = models.CharField(max_length=5)
-    name = models.CharField(max_length=50, default='Unnamed Venue')
-    location = models.ForeignKey(Location, blank=True, null=True)
-    stages = models.ManyToManyField(Stage, blank=True)
+    uid = models.CharField(max_length=6, unique=True)
+    name = models.CharField(max_length=50)
+    location = models.ForeignKey(Location)
+    stages = models.ManyToManyField(Stage, blank=True, null=True)
     venue_type = models.CharField(max_length=50, blank=True)# TODO: make this a set list or fk
-    status = models.CharField(max_length=1, choices=STATUS_CHOICES, blank=True)
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='O')
     status_notes = models.CharField(max_length=300, blank=True)
     comment = models.CharField(max_length=300, blank=True)
-    sibling = models.ManyToManyField(Sibling)
-
 
     def __unicode__(self):
-        return self.name
+        if self.name:
+            return self.name
+        return 'Unnamed venue'
 
 class Gig(models.Model):
 
-    start = models.DateTimeField(default=datetime.now)
-    finish = models.DateTimeField(default=datetime.now)
-    venue = models.ForeignKey(Venue, blank=True, null=True)
+    start = models.DateField(default=datetime.now)
+    finish = models.DateField(blank=True, null=True)
+    venue = models.ForeignKey(Venue)
     name  = models.CharField(max_length=150, blank=True)
-    #cost = models.FloatField(blank=True)
+    cost = models.FloatField(blank=True, null=True)
     comment = models.CharField(max_length=300, blank=True)
 
     # TODO members can be absent on the night..is this a problem?
@@ -118,7 +115,7 @@ class Gig(models.Model):
             name +=  " @ " + self.venue.name
 
         if self.start:
-            name += " on %s " % _date(self.start.date(), "l, M j, o")
+            name += " on %s " % _date(self.start, "l, M j")
     
         if not name:
             name = "No bands and no venue specified"
