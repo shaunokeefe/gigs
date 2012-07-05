@@ -73,7 +73,7 @@ class Venue(models.Model):
             ('O', 'Open'),
             ('C', 'Closed'),
             )
-    uid = models.CharField(max_length=6, unique=True)
+    uid = models.CharField(max_length=20, unique=True)
     name = models.CharField(max_length=50)
     location = models.ForeignKey(Location)
     stages = models.ManyToManyField(Stage, blank=True, null=True)
