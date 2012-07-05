@@ -1,5 +1,4 @@
 from django.db import models
-from datetime import datetime
 from django.template.defaultfilters import date as _date
 
 class Person(models.Model):
@@ -90,7 +89,7 @@ class Venue(models.Model):
 
 class Gig(models.Model):
 
-    start = models.DateField(default=datetime.now)
+    start = models.DateField()
     finish = models.DateField(blank=True, null=True)
     venue = models.ForeignKey(Venue)
     name  = models.CharField(max_length=150, blank=True)
