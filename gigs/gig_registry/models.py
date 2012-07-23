@@ -76,6 +76,7 @@ class Venue(models.Model):
     uid = models.CharField(max_length=20, unique=True)
     name = models.CharField(max_length=50)
     location = models.ForeignKey(Location)
+    established = models.IntegerField(blank=True, null=True)
     stages = models.ManyToManyField(Stage, blank=True, null=True)
     venue_type = models.CharField(max_length=50, blank=True)# TODO: make this a set list or fk
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='O')
