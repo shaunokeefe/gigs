@@ -60,6 +60,8 @@ class Location(models.Model):
     state = models.CharField(max_length=150)
     suburb = models.CharField(max_length=150)
     post_code  = models.CharField(max_length=150)
+    lat = models.DecimalField(max_digits=12, decimal_places=6, verbose_name='latitude', blank=True, null=True)
+    lon = models.DecimalField(max_digits=12, decimal_places=6, verbose_name='longitude', blank=True, null=True)
     
     def __unicode__(self):
         return "%s, %s %s, %s %s" % (
