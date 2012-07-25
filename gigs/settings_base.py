@@ -117,6 +117,7 @@ INSTALLED_APPS = (
     'gigs.gig_registry',
     'gigs.portal',
     'gigs.search',
+    'gigs.maps',
     'csvimport',
     'haystack',
     'gmapi',
