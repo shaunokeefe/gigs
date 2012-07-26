@@ -1,4 +1,5 @@
 {% extends "portal/portal_base.html" %}
+{% load maps %}
 
 {% block content %}
 <div id="bands-divider" class="span6">
@@ -11,5 +12,10 @@
   {% else %}
   <p>No members currently listed</p>
   {% endif %}
+  <h2>Gigs played</h2>
+  <br/>
+  {% map band %}
+  {{ form.map }}
+  {{ form.media.js }}
 </div>
 {% endblock %}

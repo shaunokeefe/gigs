@@ -1,4 +1,5 @@
 {% extends "portal/portal_base.html" %}
+{% load maps %}
 
 {% block content %}
 <h1><a href="{% url portal_gig_detail gig.id %}">{{gig}}</a></h1>
@@ -24,6 +25,9 @@
       {% with gig.venue as venue %}
       {% include "portal/basic_venue_info.html" %}
       {% endwith %}
+      {% map gig %}
+      {{ form.map }}
+      {{ form.media.js }}
     {% else %}
     <p>No Venue listed for this gig</p>
     {% endif %}

@@ -1,5 +1,5 @@
 {% extends "portal/portal_base.html" %}
-
+{% load maps %}
 {% block content %}
 <div id="venue-info" class="row-fluid">
   <h1><a href="{% url portal_venue_detail venue.id %}">{{venue.name}}</a></h1>
@@ -15,13 +15,20 @@
   </div><!-- venue-->
   <div id="location-info" class="row-fluid"> 
     <h2>Location</h2>
-    {% if venue.location %}
-    {% with venue.location as location %}
-    {% include "portal/basic_location_info.html" %}
-    {% endwith %}
-    {% else %}
-    <p>No location listed</p>
-    {% endif %}
+    <div id="location-text" class="span6">
+      {% if venue.location %}
+      {% with venue.location as location %}
+      {% include "portal/basic_location_info.html" %}
+      {% endwith %}
+      {% else %}
+      <p>No location listed</p>
+      {% endif %}
+    </div> <!-- location-text -->
+    <div id="locations-map" class="span6">
+      {% map venue %}
+      {{ form.map }}
+      {{ form.media.js }}
+    </div><!-- locations-map -->
   </div><!-- location-info -->
 </div><!-- venue-info -->
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.query import QuerySet
 from django.template.defaultfilters import date as _date
 
 class Person(models.Model):
@@ -53,6 +54,39 @@ class BandMembership(models.Model):
                     self.started,
                     self.finished if self.finished else 'present')
 
+class LocationManager(models.Manager):
+    
+
+    def _filter_instance_or_queryset(self, field, instances):
+        if isinstance(instances, QuerySet):
+            field += '__in'
+        filter_set = {field: instances}
+        return Location.objects.filter(**filter_set).distinct()
+
+    def for_bands(self, band):
+        return self._filter_instance_or_queryset('venue__gig__bands', band)
+
+    def for_venues(self, venue):
+        return self._filter_instance_or_queryset('venue', venue)
+
+    def for_gigs(self, gigs):
+        return self._filter_instance_or_queryset('venue__gig', gigs)
+
+    if False:
+        model_mapping = {
+                Gig: for_gigs,
+                Venue: for_venues, 
+                Band : for_bands,
+                }
+        
+        def for_instances(self, matchable_instances):
+            if isinstance(matchable_instances, QuerySet):
+                cls = matchable_instances.model
+            else:
+                cls == matchable_instances.__class__
+            return self.model_mapping[cls](matchable_instances)
+
+
 class Location(models.Model):
     # this will be replaced with geodjango
     street_address = models.CharField(max_length=150)
@@ -63,6 +97,8 @@ class Location(models.Model):
     lat = models.DecimalField(max_digits=12, decimal_places=6, verbose_name='latitude', blank=True, null=True)
     lon = models.DecimalField(max_digits=12, decimal_places=6, verbose_name='longitude', blank=True, null=True)
     
+    objects = LocationManager()
+
     def __unicode__(self):
         return "%s, %s %s, %s %s" % (
                 self.street_address, 
