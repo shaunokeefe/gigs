@@ -59,7 +59,7 @@ def generate_longlat(sender, **kwargs):
         # need to have fields auto filled
         return
     
-    if not loc.street_adress and not loc_suburb:
+    if not loc.street_address and not loc.suburb:
         # no suburb or address so we're not going to
         # get meaningful results
         return
@@ -149,4 +149,4 @@ def generate_longlat(sender, **kwargs):
             [field_name, fmt] = addr_mappings.get(t, (None, None))
             if field_name and not loc.__getattribute__(field_name):
                 # TODO make content safe
-                loc.__setattr__/\s\+$//e``field_name, component[fmt])
+                loc.__setattr__(field_name, component[fmt])
