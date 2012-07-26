@@ -14,10 +14,10 @@
 
     <div id="location-info" class="row-fluid">
       <h2>Location</h2>
-      {% if venue.location.count %}
+    {% if venue.location %}
       {% with venue.location as location %}
       {% include "portal/basic_location_info.html" %}
-    {% endwith %}
+      {% endwith %}
     {% else %}
     <p>No location listed for this venue</p>
     {% endif %}
