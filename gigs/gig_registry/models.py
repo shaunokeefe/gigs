@@ -58,6 +58,9 @@ class LocationManager(models.Manager):
     def for_band(self, band):
         return Location.objects.filter(venue__gig__bands=band).distinct()
 
+    def for_venue(self, venue):
+        return Location.objects.filter(venue=venue).distinct()
+
 class Location(models.Model):
     # this will be replaced with geodjango
     street_address = models.CharField(max_length=150)

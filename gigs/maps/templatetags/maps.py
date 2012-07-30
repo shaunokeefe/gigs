@@ -19,21 +19,22 @@ class GigMapNode(template.Node):
         except template.VariableDoesNotExist:
             return ''
 
-        lat = gig.venue.location.lat
-        lon = gig.venue.location.lon
-        gmap = maps.Map(opts = {
-            'center': maps.LatLng(lat, lon),
-            'mapTypeId': maps.MapTypeId.ROADMAP,
-            'zoom': 15,
-            'mapTypeControlOptions': {
-            'style': maps.MapTypeControlStyle.DROPDOWN_MENU
-                },
-            })
-        marker = maps.Marker(opts = {
-            'map': gmap,
-            'position': maps.LatLng(lat, lon),
-            })
-        context['form'] = MapForm(initial={'map':gmap})
+        if gig.venue.location:
+            lat = gig.venue.location.lat
+            lon = gig.venue.location.lon
+            gmap = maps.Map(opts = {
+                'center': maps.LatLng(lat, lon),
+                'mapTypeId': maps.MapTypeId.ROADMAP,
+                'zoom': 15,
+                'mapTypeControlOptions': {
+                'style': maps.MapTypeControlStyle.DROPDOWN_MENU
+                    },
+                })
+            marker = maps.Marker(opts = {
+                'map': gmap,
+                'position': maps.LatLng(lat, lon),
+                })
+            context['form'] = MapForm(initial={'map':gmap})
         return ''
         
 def do_gig_map(parser, token):
@@ -97,9 +98,57 @@ def do_band_map(parser, token):
     return BandMapNode(band)
  
 
+class VenueMapNode(template.Node):
+
+    def __init__(self, venue):
+        self.venue = template.Variable(venue)
+
+    def render(self, context):
+        try:
+            venue = self.venue.resolve(context)
+        except template.VariableDoesNotExist:
+            return ''
+      
+        # TODO how to get this?
+        # Currently we're just on Swanston St.
+        lat = -37.809018
+        lon = 144.963635
+        gmap = maps.Map(opts = {
+            'center': maps.LatLng(lat, lon),
+            'mapTypeId': maps.MapTypeId.ROADMAP,
+            'zoom': 8,
+            'mapTypeControlOptions': {
+            'style': maps.MapTypeControlStyle.DROPDOWN_MENU
+                },
+            })
+
+        for location in Location.objects.for_venue(venue):
+            lat = location.lat
+            lon = location.lon
+            
+            marker = maps.Marker(opts = {
+                'map': gmap,
+                'position': maps.LatLng(lat, lon),
+                })
+            info = maps.InfoWindow({
+                        'content': "gig location",
+                        'disableAutoPan': True
+                                    })
+            info.open(gmap, marker)
+        context['form'] = MapForm(initial={'map':gmap})
+        return ''
+        
+def do_venue_map(parser, token):
+
+    try:
+        tag_name, venue = token.split_contents()
+    except ValueError:
+        raise template.TemplateSyntaxError('%r tag requires 1 argument' % 
+                token.contents.split()[0])
+
+    return VenueMapNode(venue)
 
 register = template.Library()
 register.tag('gig_map', do_gig_map)
 register.tag('band_map', do_band_map)
-
-
+register.tag('venue_map', do_venue_map)
