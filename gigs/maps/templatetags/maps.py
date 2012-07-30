@@ -3,48 +3,95 @@ from django import forms
 from gmapi.forms.widgets import GoogleMap
 from gmapi import maps
 
-from gigs.gig_registry.models import Location
+from gigs.gig_registry.models import Location, Gig
 
 
 class MapForm(forms.Form):
     map = forms.Field(widget=GoogleMap(attrs={'width':510, 'height':510}))
     
 
-class GigMapNode(template.Node):
-    def __init__(self, gig):
-        self.gig = template.Variable(gig)
+class GigSearchMapNode(template.Node):
+    def __init__(self, gigs):
+        self.gigs = template.Variable(gigs)
+    
     def render(self, context):
         try:
-            gig = self.gig.resolve(context)
+            gigs = self.gigs.resolve(context)
         except template.VariableDoesNotExist:
             return ''
+        
+        lat = -37.809018
+        lon = 144.963635
+        gmap = maps.Map(opts = {
+            'center': maps.LatLng(lat, lon),
+            'mapTypeId': maps.MapTypeId.ROADMAP,
+            'zoom': 8,
+            'mapTypeControlOptions': {
+            'style': maps.MapTypeControlStyle.DROPDOWN_MENU
+                },
+            })
+        
+        for gig_search_result in gigs:
+            gig = gig_search_result.object
+            if gig.venue and  gig.venue.location:
+                lat = gig.venue.location.lat
+                lon = gig.venue.location.lon
+                marker = maps.Marker(opts = {
+                    'map': gmap,
+                    'position': maps.LatLng(lat, lon),
+                    })
+                info = maps.InfoWindow({
+                            'content': "gig location",
+                            'disableAutoPan': True
+                                        })
+                info.open(gmap, marker)
+                context['form'] = MapForm(initial={'map':gmap})
+        return ''
 
-        if gig.venue.location:
-            lat = gig.venue.location.lat
-            lon = gig.venue.location.lon
-            gmap = maps.Map(opts = {
-                'center': maps.LatLng(lat, lon),
-                'mapTypeId': maps.MapTypeId.ROADMAP,
-                'zoom': 15,
-                'mapTypeControlOptions': {
-                'style': maps.MapTypeControlStyle.DROPDOWN_MENU
-                    },
-                })
-            marker = maps.Marker(opts = {
-                'map': gmap,
-                'position': maps.LatLng(lat, lon),
-                })
-            context['form'] = MapForm(initial={'map':gmap})
+class GigMapNode(template.Node):
+    
+    def __init__(self, gig):
+        self.gig = template.Variable(gig)
+   
+    def render(self, context):
+        try:
+            gigs = self.gig.resolve(context)
+        except template.VariableDoesNotExist:
+            return ''
+        if isinstance(gigs, Gig):
+            gigs = [gigs]
+
+        lat = -37.809018
+        lon = 144.963635
+        gmap = maps.Map(opts = {
+            'center': maps.LatLng(lat, lon),
+            'mapTypeId': maps.MapTypeId.ROADMAP,
+            'zoom': 10,
+            'mapTypeControlOptions': {
+            'style': maps.MapTypeControlStyle.DROPDOWN_MENU
+                },
+            })
+
+        for gig in gigs:
+            if gig.venue and  gig.venue.location:
+                lat = gig.venue.location.lat
+                lon = gig.venue.location.lon
+                marker = maps.Marker(opts = {
+                    'map': gmap,
+                    'position': maps.LatLng(lat, lon),
+                    })
+        context['form'] = MapForm(initial={'map':gmap})
         return ''
         
 def do_gig_map(parser, token):
 
     try:
-        tag_name, gig = token.split_contents()
+        tag_name, gig, search_results = token.split_contents()
     except ValueError:
-        raise template.TemplateSyntaxError('%r tag requires 1 argument' % 
+        raise template.TemplateSyntaxError('%r tag requires 2 arguments' % 
                 token.contents.split()[0])
-
+    if search_results == "search":
+        return GigSearchMapNode(gig)
     return GigMapNode(gig)
 
 class BandMapNode(template.Node):

@@ -14,6 +14,12 @@
         <tr><th>Gig Name</th/><th>Venue Name</th/><th>Headlining Band</th><th>Gig Start Time</th/></tr>
     </thead>
     <tbody>
+    {% load maps %}
+
+    {% gig_map page.object_list "search" %}
+    {{ form.map }}
+    <br/>
+    {{ form.media.js }}
     {% for gig_result in page.object_list %}
     {% with gig_result.object as gig %}
     {% include "portal/gig_row.html" %}
