@@ -53,6 +53,11 @@ class BandMembership(models.Model):
                     self.started,
                     self.finished if self.finished else 'present')
 
+class LocationManager(models.Manager):
+
+    def for_band(self, band):
+        return Location.objects.filter(venue__gig__bands=band).distinct()
+
 class Location(models.Model):
     # this will be replaced with geodjango
     street_address = models.CharField(max_length=150)
@@ -63,6 +68,7 @@ class Location(models.Model):
     lat = models.DecimalField(max_digits=12, decimal_places=6, verbose_name='latitude', blank=True, null=True)
     lon = models.DecimalField(max_digits=12, decimal_places=6, verbose_name='longitude', blank=True, null=True)
     
+    objects = LocationManager()
     def __unicode__(self):
         return "%s, %s %s, %s %s" % (
                 self.street_address, 
