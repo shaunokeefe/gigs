@@ -1,4 +1,5 @@
 {% extends "portal/portal_base.html" %}
+{% load maps %}
 
 {% block content %}
 <div id="location-info" class="row-fluid">
@@ -11,6 +12,9 @@
     </address>
 </a>
 </h1>
+{% map location %}
+{{form.map}}
+{{form.media.js}}
 </div>
 {% endblock %}
 

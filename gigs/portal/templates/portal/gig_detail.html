@@ -25,7 +25,7 @@
       {% with gig.venue as venue %}
       {% include "portal/basic_venue_info.html" %}
       {% endwith %}
-      {% gig_map gig "regular" %}
+      {% map gig %}
       {{ form.map }}
       {{ form.media.js }}
     {% else %}
