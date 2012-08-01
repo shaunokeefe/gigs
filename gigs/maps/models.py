@@ -1,6 +1,7 @@
 from gmapi.maps import Geocoder
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from django.conf import settings
 
 from gigs.gig_registry.models import Location
 
@@ -32,6 +33,9 @@ addr_mappings = {
 def generate_longlat(sender, **kwargs):
     geocoder = Geocoder()
     loc = kwargs['instance']
+    
+    region_bias = getattr(settings, 'MAPS_REGION_BIAS', None)
+    region_bounds = getattr(settings, 'MAPS_REGION_BOUNDS', None)
 
     if False:
         # check if the instance is being created
@@ -67,7 +71,18 @@ def generate_longlat(sender, **kwargs):
     addr = str(loc)
     
     # See of google can find the address
-    result, code = geocoder.geocode({'address':addr})
+
+    query_dict = {'address':addr}
+    if region_bias:
+        # Limit to a certain country using a cctl (e.g. 'au' for Australia)
+        query_dict['region'] = region_bias
+
+    if region_bounds:
+        # limit to a certain viewport (e.g. Melbourne)
+        l, t, r, b= region_bounds
+        query_dict['bounds'] = "%d,%d|%d,%d" % (l,t,r,b)
+
+    result, code = geocoder.geocode(query_dict)
 
     if code != 'OK':
         # something went wrong...
