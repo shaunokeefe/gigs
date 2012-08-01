@@ -58,7 +58,7 @@ class LocationManager(models.Manager):
     
 
     def _filter_instance_or_queryset(self, field, instances):
-        if isinstance(instances, QuerySet):
+        if isinstance(instances, (QuerySet, list,)):
             field += '__in'
         filter_set = {field: instances}
         return Location.objects.filter(**filter_set).distinct()

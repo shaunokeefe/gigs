@@ -16,19 +16,20 @@
       <h2>Location</h2>
   <div id="location-info" class="row-fluid"> 
     <div id="location-text" class="span6">
-      {% if venue.location %}
+      {% if venue|has_locations %}
       {% with venue.location as location %}
       {% include "portal/basic_location_info.html" %}
       {% endwith %}
-      {% else %}
-      <p>No location listed</p>
-      {% endif %}
     </div> <!-- location-text -->
     <div id="locations-map" class="span6">
       {% map venue %}
       {{ form.map }}
       {{ form.media.js }}
     </div><!-- locations-map -->
+      {% else %}
+      <p>No location listed</p>
+  </div><!--  location-text -->
+      {% endif %}
   </div><!-- location-info -->
 </div><!-- venue-info -->
 {% endblock %}
