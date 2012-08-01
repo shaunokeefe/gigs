@@ -72,21 +72,6 @@ class LocationManager(models.Manager):
     def for_gigs(self, gigs):
         return self._filter_instance_or_queryset('venue__gig', gigs)
 
-    if False:
-        model_mapping = {
-                Gig: for_gigs,
-                Venue: for_venues, 
-                Band : for_bands,
-                }
-        
-        def for_instances(self, matchable_instances):
-            if isinstance(matchable_instances, QuerySet):
-                cls = matchable_instances.model
-            else:
-                cls == matchable_instances.__class__
-            return self.model_mapping[cls](matchable_instances)
-
-
 class Location(models.Model):
     # this will be replaced with geodjango
     street_address = models.CharField(max_length=150)
