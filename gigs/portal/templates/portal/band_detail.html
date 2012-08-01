@@ -12,10 +12,12 @@
   {% else %}
   <p>No members currently listed</p>
   {% endif %}
-  <h2>Gigs played</h2>
   <br/>
+  {% if band|has_locations %}
+  <h2>Gigs played</h2>
   {% map band %}
   {{ form.map }}
   {{ form.media.js }}
+  {% endif %}
 </div>
 {% endblock %}
