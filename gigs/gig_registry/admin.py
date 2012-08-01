@@ -42,11 +42,17 @@ class GigAdmin(admin.ModelAdmin):
     filter_horizontal = ('bands',)
     list_filter = ('venue', 'bands',)
 
+class VenueAdmin(admin.ModelAdmin):
+    list_display = ['name', 'location']
+
+class LocationAdmin(admin.ModelAdmin):
+    fields = ['street_address', 'suburb', 'state', 'post_code', 'country', 'lat', 'lon']
+
 admin.site.register(models.Band, BandAdmin)
-admin.site.register(models.Musician)#, MusicianAdmin)
+admin.site.register(models.Musician)
 admin.site.register(models.Owner)
 admin.site.register(models.Venue, VenueAdmin)
-admin.site.register(models.Location)
+admin.site.register(models.Location, LocationAdmin)
 admin.site.register(models.Genre)
 admin.site.register(models.Gig, GigAdmin)
 admin.site.register(models.BandMembership, MembershipAdmin)
