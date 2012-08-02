@@ -15,9 +15,7 @@
     <tbody>
     {% load maps %}
     {% map gig_list %}
-    {{ form.map }}
     <br/>
-    {{ form.media.js }}
     {% for gig in gig_list %}
       {% include "portal/gig_row.html" %}
     {% endfor %}

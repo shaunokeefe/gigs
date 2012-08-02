@@ -15,11 +15,8 @@
     </thead>
     <tbody>
     {% load maps %}
-
     {% search_map page.object_list %}
-    {{ form.map }}
     <br/>
-    {{ form.media.js }}
     {% for gig_result in page.object_list %}
     {% with gig_result.object as gig %}
     {% include "portal/gig_row.html" %}

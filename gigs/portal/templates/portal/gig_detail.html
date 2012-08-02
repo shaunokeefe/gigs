@@ -27,8 +27,6 @@
       {% endwith %}
       {% if gig|has_locations %}
       {% map gig %}
-      {{ form.map }}
-      {{ form.media.js }}
       {% endif %}
     {% else %}
     <p>No Venue listed for this gig</p>
