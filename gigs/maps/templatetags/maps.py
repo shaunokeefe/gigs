@@ -1,6 +1,8 @@
 from django import template
 from django import forms
 from django.db.models.query import QuerySet
+from django.template.loader import render_to_string
+
 from gmapi.forms.widgets import GoogleMap
 from gmapi import maps
 
@@ -79,31 +81,6 @@ class MapNode(template.Node):
         
         locations = get_location_queryset(locatables)
 
- #       if isinstance(locatables, QuerySet):
- #           cls = locatables.model
- #       else:
- #           try:
- #               cls = locatables.__class__
- #               if cls == Location:
- #                   locatables = [locatables]
- #           except AttributeError:
- #               return ''
- #       
- #       funcs = {
- #               Gig: Location.objects.for_gigs,
- #               Venue: Location.objects.for_venues,
- #               Band: Location.objects.for_bands,
- #               }
-        
-#        try:
-#            func = funcs[cls]
-#            locations = func(locatables)
-#        except KeyError:
-#            if cls == Location:
-#                locations = locatables
-#            else:
-#                return ''
-#
         for location in locations:
             lat = location.lat
             lon = location.lon
@@ -111,8 +88,11 @@ class MapNode(template.Node):
                 'map': self.gmap,
                 'position': maps.LatLng(lat, lon),
                 })
-        context['form'] = MapForm(initial={'map': self.gmap})
-        return ''
+        form = MapForm(initial={'map':self.gmap})
+        rendered_form = render_to_string('maps/map_form_and_js.html', {'form': form})
+        return rendered_form
+        #context['form'] = MapForm(initial={'map': self.gmap})
+        #return ''
 
 class GigSearchMapNode(MapNode):
     
@@ -132,20 +112,14 @@ class GigSearchMapNode(MapNode):
         for location in locations:
             lat = location.lat
             lon = location.lon
-
             marker = maps.Marker(opts = {
                 'map': self.gmap,
                 'position': maps.LatLng(lat, lon),
                 })
-            info = maps.InfoWindow({
-                        'content': "gig location",
-                        'disableAutoPan': True
-                                    })
-            info.open(self.gmap, marker)
         
-        context['form'] = MapForm(initial={'map':self.gmap})
-        
-        return ''
+        form = MapForm(initial={'map':self.gmap})
+        rendered_form = render_to_string('maps/map_form_and_js.html', {'form': form})
+        return rendered_form
 
 def do_map(parser, token):
     
