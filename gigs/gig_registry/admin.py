@@ -46,7 +46,28 @@ class VenueAdmin(admin.ModelAdmin):
     list_display = ['name', 'location']
 
 class LocationAdmin(admin.ModelAdmin):
-    fields = ['street_address', 'suburb', 'state', 'post_code', 'country', 'lat', 'lon']
+    #fields = ['street_address', 'suburb', 'state', 'post_code', 'country', 'lat', 'lon']
+    fieldsets = [
+            ('Address', 
+                {'fields': 
+                    [
+                        'street_address', 
+                        'suburb', 
+                        'state', 
+                        'post_code', 
+                        'country', 
+                    ]
+                }
+            ),
+            ('Co-ordinates',
+                {'fields':
+                    [
+                        'lat',
+                        'lon',
+                    ]
+                }
+            )
+        ]
 
 admin.site.register(models.Band, BandAdmin)
 admin.site.register(models.Musician)
