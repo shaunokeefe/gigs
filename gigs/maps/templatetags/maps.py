@@ -14,16 +14,29 @@ class MapForm(forms.Form):
         return True
 
 def get_location_queryset(locatables):
-    if isinstance(locatables, QuerySet):
+   
+    classes = {}
+    if isinstance(locatables, (QuerySet)):
         cls = locatables.model
         if cls == Location:
             return locatables
+        classes[cls] = locatables
+
+    elif isinstance(locatables, list):
+        for locatable in locatables:
+            cls = locatable.__class__
+            if not cls in classes:
+                classes[cls] = [locatable]
+            else:
+                classes[cls].append(locatable)
+
     else:
         try:
             cls = locatables.__class__
             if cls == Location:
                 # forgive me
                 return cls.objects.filter(pk=locatables.pk)
+            classes[cls] = locatables
         except AttributeError:
             return Location.objects.none()
      
@@ -33,11 +46,15 @@ def get_location_queryset(locatables):
             Band: Location.objects.for_bands,
             }
     
-    try:
-        func = funcs[cls]
-        return func(locatables)
-    except KeyError:
-        return Location.objects.none()
+    locations = Location.objects.none()
+    for cls, locatable_group in classes.items(): 
+        try:
+            func = funcs[cls]
+            locations = locations | func(locatables)
+        except KeyError:
+            continue
+    
+    return locations
 
 class MapNode(template.Node):
     
