@@ -114,6 +114,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'south',
     'gigs.gig_registry',
     'gigs.portal',
     'gigs.search',
