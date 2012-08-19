@@ -1,8 +1,8 @@
 from gigs.gig_registry.models import Gig
-from haystack.indexes import SearchIndex, CharField
+from haystack.indexes import RealTimeSearchIndex, CharField
 from haystack import site
 
-class GigIndex(SearchIndex):
+class GigIndex(RealTimeSearchIndex):
     text = CharField(document=True, use_template=True)
 
     def index_queryset(self):
