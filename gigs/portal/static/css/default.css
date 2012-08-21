@@ -1,0 +1,22 @@
+.vapourware {
+    font-style: italic;
+	zoom: 1;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+#front-page-art {
+-webkit-transform: rotate(2deg);
+background-color: rgba(180, 180, 144, 0.6);
+opacity: 0.6;
+}
+
+.img-rounded {
+/* supported in more recent Bootstrap? */
+    border-radius: 10px;
+}
+
+/*.sidebar-nav {
+	background-image: url('/static/img/go_fade.png');
+	opacity: 0.4;
+}*/
