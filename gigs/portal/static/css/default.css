@@ -16,6 +16,30 @@ opacity: 0.6;
     border-radius: 10px;
 }
 
+.hero-unit {
+	background-color: rgb(153,194,115); /* grass green */
+}
+
+a {
+	color: rgb(255, 18, 94); /* magenta */
+}
+
+.btn-primary {
+	background-color: rgb(255, 18, 94);
+	
+	background-image: -ms-linear-gradient(top, #08C, #05C);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(255, 18, 94)), to(rgb(255, 18, 94)));
+	background-image: -webkit-linear-gradient(top, rgb(255, 18, 94), rgb(200, 18, 60));
+	background-image: -o-linear-gradient(top, #08C, #05C);
+	background-image: -moz-linear-gradient(top, #08C, #05C);
+	background-image: linear-gradient(top, #08C, #05C);
+	background-repeat: repeat-x;
+	border-color: #a52;
+	filter: progid:dximagetransform.microsoft.gradient(startColorstr='#0088cc', endColorstr='#0055cc', GradientType=0);
+	filter: progid:dximagetransform.microsoft.gradient(enabled=fals
+	
+}
+
 /*.sidebar-nav {
 	background-image: url('/static/img/go_fade.png');
 	opacity: 0.4;

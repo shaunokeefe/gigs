@@ -112,7 +112,7 @@
               <li class="nav-header">Pages</li>      
               <li><a href="{% url home %}"><i class="icon-home"></i>Home</a></li>      
               <li><a href="{% url index %}"><i class="icon-th-list"></i>Gigs</a></li>     
-              <li><a href="#"><i class="icon-signal"></i>Stats</a></li>     
+              <li><a href="#" class="vapourware"><i class="icon-signal"></i>Stats</a></li>     
               {% if user.is_authenticated and user.is_staff %}
               <li class="nav-header">Admin</li>      
               <li><a href="{% url admin:gig_registry_gig_add %}"><i class="icon-plus"></i>Add a Gig</a></li>     
