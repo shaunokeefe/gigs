@@ -6,9 +6,8 @@
 }
 
 #front-page-art {
--webkit-transform: rotate(2deg);
-background-color: rgba(180, 180, 144, 0.6);
-opacity: 0.6;
+/*background-color: rgba(180, 180, 144, 0.6);
+opacity: 0.6;*/
 }
 
 .img-rounded {
@@ -43,23 +42,7 @@ a:hover {
 	filter: progid:dximagetransform.microsoft.gradient(enabled=false);
 	
 }
-/*
-.btn-primary:hover {
-	background-color: rgb(255, 18, 9);
-	
-	background-image: -ms-linear-gradient(top, #08C, #05C);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(255, 18, 9)), to(rgb(255, 18, 9)));
-	background-image: -webkit-linear-gradient(top, rgb(255, 18, 0), rgb(200, 18, 0));
-	background-image: -o-linear-gradient(top, #F8C, #F5C);
-	background-image: -moz-linear-gradient(top, #F8C, #F5C);
-	background-image: linear-gradient(top, #f35, #f35);
-	background-repeat: repeat-x;
-	border-color: #a52;
-	filter: progid:dximagetransform.microsoft.gradient(startColorstr='#f34', endColorstr='#f34', GradientType=0);
-	filter: progid:dximagetransform.microsoft.gradient(enabled=false);
-	
-}
-*/
+
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary.active,
@@ -69,12 +52,6 @@ a:hover {
   *background-color: #b14;
 }
 
-
-
-/*.sidebar-nav {
-	background-image: url('/static/img/go_fade.png');
-	opacity: 0.4;
-}*/
 
 blockquote {
     border-left: none;
