@@ -104,35 +104,39 @@
     </div><!-- navbar -->
 
     <div class="container-fluid">
-      <div id=middle class="row-fluid">
-        <div class="span3">
+      <div id="middle" class="row-fluid">
+        <div class="span2">
           {% block sidebar %}
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Pages</li>      
-              <li><a href="{% url home %}">Home</a></li>      
-              <li><a href="{% url index %}">View/Search Gigs</a></li>     
-              <li><a href="#";e
-                  >TUGG Stats</a></li>     
+              <li><a href="{% url home %}"><i class="icon-home"></i>Home</a></li>      
+              <li><a href="{% url index %}"><i class="icon-th-list"></i>Gigs</a></li>     
+              <li><a href="#" class="vapourware"><i class="icon-signal"></i>Stats</a></li>     
               {% if user.is_authenticated and user.is_staff %}
               <li class="nav-header">Admin</li>      
-              <li><a href="{% url admin:gig_registry_gig_add %}">Add a Gig</a></li>     
-              <li><a href="{% url admin:gig_registry_gig_changelist %}">Edit a Gig</a></li>
-              <li><a href="{% url admin:auth_user_changelist %}">Manage Users</a></li>
+              <li><a href="{% url admin:gig_registry_gig_add %}"><i class="icon-plus"></i>Add a Gig</a></li>     
+              <li><a href="{% url admin:gig_registry_gig_changelist %}"><i class="icon-edit"></i>Edit a Gig</a></li>
+              <li><a href="{% url admin:auth_user_changelist %}"><i class="icon-user"></i>Manage Users</a></li>
               {% endif%}
             </ul>
+            
           </div>
           {% endblock %}
         </div> <!-- end sidebar-->
-        <div id=content class="span8">
+        <div id=content class="span7">
           {% block content %}
           {% endblock %}
         </div> <!-- content-->
+        <div id="front-page-art" class="span3">
+          <img src="/static/img/go.png"/>
+
+        </div> <!-- front-page-art -->
       </div> <!-- middle-->
 
       {% block footer %}
       <footer> 
-        <p>&copy; Deakin University, RMIT and VeRSI 2012</p> 
+        <p>&copy; Deakin University, VeRSI 2012</p> 
       </footer> 
       {% endblock %}
     </div><!--container-fluid-->

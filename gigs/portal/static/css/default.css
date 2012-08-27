@@ -1,0 +1,83 @@
+.vapourware {
+    font-style: italic;
+	zoom: 1;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+#front-page-art {
+-webkit-transform: rotate(2deg);
+background-color: rgba(180, 180, 144, 0.6);
+opacity: 0.6;
+}
+
+.img-rounded {
+/* supported in more recent Bootstrap? */
+    border-radius: 10px;
+}
+
+.hero-unit {
+	background-color: rgb(153,194,115); /* grass green */
+}
+
+a {
+	color: rgb(255, 18, 94); /* magenta */
+}
+
+a:hover {
+    color: rgb(190,10,80);
+}
+
+.btn-primary {
+	background-color: rgb(255, 18, 94);
+	
+	background-image: -ms-linear-gradient(top, #08C, #05C);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(255, 18, 94)), to(rgb(255, 18, 94)));
+	background-image: -webkit-linear-gradient(top, rgb(255, 18, 94), rgb(200, 18, 60));
+	background-image: -o-linear-gradient(top, #F8C, #F5C);
+	background-image: -moz-linear-gradient(top, #08C, #05C);
+	background-image: linear-gradient(top, #F8C, #F5C);
+	background-repeat: repeat-x;
+	border-color: #a52;
+	filter: progid:dximagetransform.microsoft.gradient(startColorstr='#FF88cc', endColorstr='#FF55cc', GradientType=0);
+	filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+	
+}
+/*
+.btn-primary:hover {
+	background-color: rgb(255, 18, 9);
+	
+	background-image: -ms-linear-gradient(top, #08C, #05C);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(255, 18, 9)), to(rgb(255, 18, 9)));
+	background-image: -webkit-linear-gradient(top, rgb(255, 18, 0), rgb(200, 18, 0));
+	background-image: -o-linear-gradient(top, #F8C, #F5C);
+	background-image: -moz-linear-gradient(top, #F8C, #F5C);
+	background-image: linear-gradient(top, #f35, #f35);
+	background-repeat: repeat-x;
+	border-color: #a52;
+	filter: progid:dximagetransform.microsoft.gradient(startColorstr='#f34', endColorstr='#f34', GradientType=0);
+	filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+	
+}
+*/
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+  background-color: #b14;
+  *background-color: #b14;
+}
+
+
+
+/*.sidebar-nav {
+	background-image: url('/static/img/go_fade.png');
+	opacity: 0.4;
+}*/
+
+blockquote {
+    border-left: none;
+}
+
+
