@@ -1,35 +1,44 @@
 {% extends "portal/portal_base.html"%}
 {% block content %}
         <div class="hero-unit"> 
-            <h1>Welcome to The Ultimate Gig Guide</h1> 
-            <p>TUGG is a database containing information about gigs and is 
-            sorely in need of someone who is better at marketing than this
-            poor old software engineer. To begin, enter a name, date or band name from a gig you're 
-            looking for and we'll see what we can turn up.
+            <h1>The Ultimate Gig Guide</h1> 
+            <p style="color: white;"><big>
+The Ultimate Gig Guide (TUGG) tracks the history of the live music scene
+in Melbourne from organised dance hall events, to discos and the
+thriving pub music scene of today.</big></p>
+<p>Answer
+questions like...</p>
+<blockquote>
+<strong>...was jazz always an inner-city phenomenon?</strong><br/>
+<strong>...where did my favourite band get their start?</strong><br/>
+<strong>...when and where did rockabilly reach its peak?</strong><br/>
+</blockquote>
+<p> and
+visualise the musical journey of major bands from their early roots.
             </p>
             {% include "search/search_form.html" %}  
           </div> 
           <div class="row-fluid">
               <div class="span4">
+              	  <img src="/static/img/musicphoto1-bw.jpg" class="img-rounded"
+              	  style="height:120px"/>
                   <h2>Browse Gigs</h2>
-                  <p>TUGG currently contains over a billion records of historical gig
-                  data, all of which can be browsed. You can hardly believe it, but 
-                  it's true. To browse, search, and export this data, start here.</p>
-                  <p><a class="btn btn-large">Go &raquo;</a></p> 
+                  <p>Start exploring Melbourne's rich music history here.</p>
+                  <p><a class="btn btn-primary" href="index">Go &raquo;</a></p> 
               </div>
-              <div class="span4">
+              <div class="span4 vapourware">
+              	  <img src="/static/img/cowboys-bw.jpg" class="img-rounded"
+              	  style="height:120px;"/>
                   <h2>Add Gigs</h2>
-                  <p>TUGG is growing constantly growing in size and needs your help. 
-                  To add data by hand or bulk import from various data sources such as 
-                  CVS files and space telescopes, start here.</p>
-                  <p><a class="btn btn-large">Go &raquo;</a></p> 
+                  <p>Contribute contemporary gig listings or upload your own spreadsheets.</p>
+                  <p><a class="btn">Go &raquo;</a></p> 
               </div>
-              <div class="span4">
+              <div class="span4 vapourware">
+              	  <img src="/static/img/musicphoto3-bw-fade.jpg" class="img-rounded"
+              	  style="height:120px;"/>
                   <h2>Review Gigs</h2>
-                  <p>TUGG draws data from various sources, including submissions by
-                  users. The more feedback we have on this data, the
-                  better it is; like rock music. To review data entered by other users, start here.</p>
-                  <p><a class="btn btn-large">Go &raquo;</a></p> 
+                  <p>Check if our version of history matches your recollections.</p>
+                  <p><a class="btn">Go &raquo;</a></p> 
               </div>
           </div>
 {% endblock %}
