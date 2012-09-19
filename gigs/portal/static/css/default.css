@@ -57,4 +57,24 @@ blockquote {
     border-left: none;
 }
 
+.hero-unit:before {
 
+	content: "Development preview";
+	color: #a11;
+	border: 8px double #a22;
+	font-family: Courier, Monospace;
+	font-size: 24pt;
+	transform: rotate(-25deg);
+	-webkit-transform: rotate(-10deg);
+	text-shadow: 1px 1px 5px #888;
+	box-shadow: 2px 2px 5px #444;
+	background:rgb(153,194,115);
+	opacity: 0.95;
+	position: absolute;
+	left: 230px;
+	top: 50px;
+	height:30px;
+	background-size: 100% 100%;
+	padding: 0.4em 0.5em 0.2em;
+	border-radius: 12px;
+}
