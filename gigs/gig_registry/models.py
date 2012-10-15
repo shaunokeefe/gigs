@@ -104,7 +104,7 @@ class Venue(models.Model):
             )
     uid = models.CharField(max_length=20, unique=True)
     name = models.CharField(max_length=50)
-    location = models.ForeignKey(Location)
+    location = models.ManyToManyField(Location, through='TemporalAssociation')
     established = models.IntegerField(blank=True, null=True)
     stages = models.ManyToManyField(Stage, blank=True, null=True)
     venue_type = models.CharField(max_length=50, blank=True)# TODO: make this a set list or fk
@@ -116,6 +116,12 @@ class Venue(models.Model):
         if self.name:
             return self.name
         return 'Unnamed venue'
+
+class TemporalAssociation(models.Model):
+    started = models.DateField()
+    finished = models.DateField(blank=True, null=True)
+    venue = models.ForeignKey(Venue)
+    location = models.ForeignKey(Location)
 
 class Gig(models.Model):
 

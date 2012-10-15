@@ -4,8 +4,8 @@ from django.contrib import admin
 from gigs.gig_registry import models
 
 
-class VenueAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'uid':('name',)}
+#class VenueAdmin(admin.ModelAdmin):
+#    prepopulated_fields = {'uid':('name',)}
 
 class MusicianInline(admin.TabularInline):
     fields = ['musician', 'started', 'finished', 'date_of_birth', 'instrument',]
@@ -42,8 +42,17 @@ class GigAdmin(admin.ModelAdmin):
     filter_horizontal = ('bands',)
     list_filter = ('venue', 'bands',)
 
+class TemporalAssociationInline(admin.TabularInline):
+    model = models.TemporalAssociation
+    verbose_name = "Venue Location"
+    verbose_name_plural = "Venue Locations"
+    fields = ['location', 'started','finished']
+
+    extra = 3
+
 class VenueAdmin(admin.ModelAdmin):
-    list_display = ['name', 'location']
+    list_display = ['name',]#, 'location']
+    inlines=[TemporalAssociationInline]
 
 class LocationAdmin(admin.ModelAdmin):
     #fields = ['street_address', 'suburb', 'state', 'post_code', 'country', 'lat', 'lon']
