@@ -37,6 +37,7 @@ class GigAdmin(admin.ModelAdmin):
             (None, {'fields': ['name', 'venue','bands', 'cost']}),
             ('Dates', {'fields': ['start', 'finish']}),
             ('Meta', {'fields': ['comment']}),
+            ('Notes', {'fields': ['note'], 'classes': ['wide', 'extrapretty']}),
         ]
     
     filter_horizontal = ('bands',)
@@ -69,6 +70,7 @@ class LocationAdmin(admin.ModelAdmin):
             )
         ]
 
+admin.site.register(models.Note)
 admin.site.register(models.Band, BandAdmin)
 admin.site.register(models.Musician)
 admin.site.register(models.Owner)
