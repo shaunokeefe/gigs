@@ -2,7 +2,7 @@
 ## CSV Imports
 CSV imports are currently performed using the Django Admin Inerface.
 ### Log In
-Go to the URL for the Django Admin Interface (http://<the url of the current deployment>/admin/)
+Go to the URL for the Django Admin Interface (http://\<the url of the current deployment\>/admin/)
 
 Log in as prompted (you'll need to be an admin to do this - contact the site admin if you're not!)
 
@@ -23,7 +23,7 @@ can deal with multiple models in a single spreadsheet (e.g. a spreadsheet that l
 venue and information about its location), but best results, you should try to 
 [normalise](http://en.wikipedia.org/wiki/Database_normalization) your data as best as possible.
 
-Choose gig_registry.<model>, replacing <model> that your spreadsheet deals with.
+Choose gig_registry.\<model\>, replacing \<model\> that your spreadsheet deals with.
 The prefix 'gig_registry' simply specifies the django application the model belongs to. All the imports you'll be
 doing are for models in gig_registry, so don't worry about this too much.
 
