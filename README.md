@@ -35,8 +35,8 @@ that contains your data to a separate CSV file (File -> save as -> choose 'CSV' 
 that this will onl save the active sheet)
 
 2. Mark up the columns, telling the cvsimport application which columns in your spreadsheet map to which field in the
-model you're importing. The applications doesn't inforce a strict layour for your spreadsheet (e.g. first field is
-'street name', second is 'postcode' etc.). Instead, it allows you to add a cell to the top of each column to tell
+model you're importing. The application doesn't enforce a strict layout for your spreadsheet (e.g. first field is
+'street name', second is 'postcode' etc.). Instead, it allows you to add a cell to the top of each column to tell it
 what data each column contains. So, if you're importing location data, like the following:
 <table>
   <tr>
@@ -62,7 +62,7 @@ This simply tells the importer to create a location model instance with the stre
 'Richmond', and the post code '3121'
 
 The naming of the fields is pretty specific (e.g. 'postcdoe' wont work - it has to be 'post_code' as this is the name
-of the field in the data model. Here's a lost of all the field names you can use in each of the core models:
+of the field in the data model). Here's a list of all the field names you can use in each of the core models:
 
 * Locations
  * street_address
