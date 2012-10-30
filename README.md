@@ -61,7 +61,7 @@ Then you need to mark it up like this:
 This simply tells the importer to create a location model instance with the street address '57 Swan St', the suburb
 'Richmond', and the post code '3121'
 
-The naming of the fields is pretty specific (e.g. 'postcdoe' wont work - it has to be 'post_code' as this is the name
+The naming of the fields is pretty specific (e.g. 'postcode' wont work - it has to be 'post_code' as this is the name
 of the field in the data model). Here's a list of all the field names you can use in each of the core models:
 
 * Locations
