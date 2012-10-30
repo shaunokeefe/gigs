@@ -1,0 +1,144 @@
+# Adding Data
+## CSV Imports
+CSV imports are currently performed using the Django Admin Inerface.
+### Log In
+Go to the URL for the Django Admin Interface (http://<the url of the current deployment>/admin/)
+
+Log in as prompted (you'll need to be an admin to do this - contact the site admin if you're not!)
+
+### Start adding a cvs import
+
+On the site administration page, there will be a list of applications (auth, cvsimport, gig_registry etc.).
+You want to add a cvsimport so in the cvsimport app, select the 'add' button next to the cvsimport model entry.
+
+This should take you to the http://<your url>/admin/csvimport/csvimport/add/ page
+
+From here you will add a description of the CVS info you're looking to import, and the django app will then 
+attempt to import it for you. 
+
+### Select the model you're importing
+
+Each import you do will deal primarily with one model type  (e.g. locations, venues, gigs). A single import 
+can deal with multiple models in a single spreadsheet (e.g. a spreadsheet that lists both information about a 
+venue and information about its location), but best results, you should try to 
+[normalise](http://en.wikipedia.org/wiki/Database_normalization) your data as best as possible.
+
+Choose gig_registry.<model>, replacing <model> that your spreadsheet deals with.
+The prefix 'gig_registry' simply specifies the django application the model belongs to. All the imports you'll be
+doing are for models in gig_registry, so don't worry about this too much.
+
+### Prepare your spreadsheet
+While you can leave your spreadsheet largely in its current format when importing, there are two requirements:
+
+1. It will need to be in CSV format. This means that if you're working in XLS, you'll need to save the specific sheet
+that contains your data to a separate CSV file (File -> save as -> choose 'CSV' for the format and 'ok' when prompted
+that this will onl save the active sheet)
+
+2. Mark up the columns, telling the cvsimport application which columns in your spreadsheet map to which field in the
+model you're importing. The applications doesn't inforce a strict layour for your spreadsheet (e.g. first field is
+'street name', second is 'postcode' etc.). Instead, it allows you to add a cell to the top of each column to tell
+what data each column contains. So, if you're importing location data, like the following:
+<table>
+  <tr>
+    <th>3121</th>
+    <td>1/9 Tennyson St</td>
+    <td>Richmond</td>
+  </tr>
+</table>
+Then you need to mark it up like this:
+<table>
+  <tr>
+    <th>post_code</th>
+    <td>street_address</td>
+    <td>suburb</td>
+  </tr>
+  <tr>
+    <th>3121</th>
+    <td>1/9 Tennyson St</td>
+    <td>Richmond</td>
+  </tr>
+
+</table>
+This simply tells the importer to create a location model instance with the street address '1/9 Tennyson St', the suburb
+'Richmond', and the post code '3121'
+
+The naming of the fields is pretty specific (e.g. 'postcdoe' wont work - it has to be 'post_code' as this is the name
+of the field in the data model. Here's a lost of all the field names you can use in each of the core models:
+
+* Locations
+ * street_address
+ * country
+ * state
+ * suburb
+ * post_code
+ * lat\*\*\*
+ * lon\*\*\*
+* Venue
+ * uid
+ * name
+ * location\*
+ * established
+ * stages
+ * venue_type
+ * status
+ * status_notes
+ * comment
+* Gig
+ * start
+ * finish
+ * venue\*
+ * name
+ * cost
+ * comment
+* Band
+ * name
+ * genre\*\*
+ * members\*\*
+ * founded
+
+\* This is a 'foreign key' entry. See 'Related Fields' below.
+\*\* This is a 'many to many' entry. See Many to Many Fields below.
+\*\*\* Latitude and Longitude can be manually entered, but TUGG will also try
+to work them out for you automatically anyway. It will also try to guess any missing fields
+from location data using the Google Maps API.
+
+### Choose your file
+After you have marked up your spreadsheet and exported the relevant sheet to a csv file, choose the 'choose file' button next to 'Upload File' and browse to and select your CSV file. 
+
+### Running the import
+Select 'Save and continue editing' on the add csvimport page and the importer will attempt to import your data into TUGG. Any erros will be listed in the 'Error log' field.
+
+### Related Fields
+It is possible to import multiple different models (remember, models are *types* of data, not individual entries) from  a single spreadhseet. For example, if you have a list of venues with their addresses in a spreadsheet, you can mark your spreadsheet up so that the csvimporter will split each row into a location model isntance and a venue model instance and then link them in the database.
+
+For example, your data might look like this:
+
+<table>
+  <tr>
+    <th>3121</th>
+    <td>1/9 Tennyson St</td>
+    <td>Richmond</td>
+  </tr>
+</table>
+  <tr>
+
+
+<table>
+  <tr>
+    <th>3121</th>
+    <td>1/9 Tennyson St</td>
+    <td>Richmond</td>
+  </tr>
+</table>
+Then you need to mark it up like this:
+<table>
+  <tr>
+    <th>post_code</th>
+    <td>street_address</td>
+    <td>suburb</td>
+  </tr>
+  <tr>
+    <th>3121</th>
+    <td>1/9 Tennyson St</td>
+    <td>Richmond</td>
+  </tr>
