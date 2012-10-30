@@ -96,9 +96,11 @@ of the field in the data model. Here's a lost of all the field names you can use
  * founded
 
 
-*\* This is a 'foreign key' entry. See 'Related Fields' below.
-*\*\* This is a 'many to many' entry. See Many to Many Fields below.
-*\*\*\* Latitude and Longitude can be manually entered, but TUGG will also try
+\* This is a 'foreign key' entry. See 'Related Fields' below.
+
+\*\* This is a 'many to many' entry. See Many to Many Fields below.
+
+\*\*\* Latitude and Longitude can be manually entered, but TUGG will also try
 to work them out for you automatically anyway. It will also try to guess any missing fields
 from location data using the Google Maps API.
 
