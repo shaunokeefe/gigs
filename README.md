@@ -168,4 +168,5 @@ means that each gig can have many bands, and each band can have played at many g
 If you want to specify a gig with a number of related bands in a single spreadsheet, you need to use slightly special
 mark up. Rather than prefixing fields with 'bands.' as we've done in earlier examples, you'll need to mark each field
 'bands.1.', 'bands.2.' and so forth, in order to specify which of the multiple bands you're adding each field belongs
-to.
+to. For example, you have two bands, The Wild Cherries and The cherokees. Above the cell containing the name 'The Wild
+Cherries', you'd enter 'bands.1.name', and abovve the cell containing the name 'The Cherokees' you'd enter 'bands.2.name'.
