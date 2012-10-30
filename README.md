@@ -11,7 +11,7 @@ Log in as prompted (you'll need to be an admin to do this - contact the site adm
 On the site administration page, there will be a list of applications (auth, cvsimport, gig_registry etc.).
 You want to add a cvsimport so in the cvsimport app, select the 'add' button next to the cvsimport model entry.
 
-This should take you to the http://<your url>/admin/csvimport/csvimport/add/ page
+This should take you to the http://\<your url\>/admin/csvimport/csvimport/add/ page
 
 From here you will add a description of the CVS info you're looking to import, and the django app will then 
 attempt to import it for you. 
@@ -23,7 +23,7 @@ can deal with multiple models in a single spreadsheet (e.g. a spreadsheet that l
 venue and information about its location), but best results, you should try to 
 [normalise](http://en.wikipedia.org/wiki/Database_normalization) your data as best as possible.
 
-Choose gig_registry.\<model\>, replacing \<model\> that your spreadsheet deals with.
+Choose gig_registry.\<model\>, replacing \<model\> with the name of the model that your spreadsheet deals with.
 The prefix 'gig_registry' simply specifies the django application the model belongs to. All the imports you'll be
 doing are for models in gig_registry, so don't worry about this too much.
 
