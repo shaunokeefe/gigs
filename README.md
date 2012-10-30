@@ -58,7 +58,7 @@ Then you need to mark it up like this:
     <td>Richmond</td>
   </tr>
 </table>
-This simply tells the importer to create a location model instance with the street address '1/9 Tennyson St', the suburb
+This simply tells the importer to create a location model instance with the street address '57 Swan St', the suburb
 'Richmond', and the post code '3121'
 
 The naming of the fields is pretty specific (e.g. 'postcdoe' wont work - it has to be 'post_code' as this is the name
