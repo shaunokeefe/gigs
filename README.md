@@ -40,7 +40,7 @@ model you're importing. The applications doesn't inforce a strict layour for you
 what data each column contains. So, if you're importing location data, like the following:
 <table>
   <tr>
-    <th>3121</th>
+    <td>3121</td>
     <td>57 Swan St</td>
     <td>Richmond</td>
   </tr>
@@ -48,16 +48,15 @@ what data each column contains. So, if you're importing location data, like the 
 Then you need to mark it up like this:
 <table>
   <tr>
-    <th>post_code</th>
+    <td>post_code</td>
     <td>street_address</td>
     <td>suburb</td>
   </tr>
   <tr>
-    <th>3121</th>
+    <td>3121</td>
     <td>57 Swan St</td>
     <td>Richmond</td>
   </tr>
-
 </table>
 This simply tells the importer to create a location model instance with the street address '1/9 Tennyson St', the suburb
 'Richmond', and the post code '3121'
@@ -96,9 +95,10 @@ of the field in the data model. Here's a lost of all the field names you can use
  * members\*\*
  * founded
 
-\* This is a 'foreign key' entry. See 'Related Fields' below.
-\*\* This is a 'many to many' entry. See Many to Many Fields below.
-\*\*\* Latitude and Longitude can be manually entered, but TUGG will also try
+
+*\* This is a 'foreign key' entry. See 'Related Fields' below.
+*\*\* This is a 'many to many' entry. See Many to Many Fields below.
+*\*\*\* Latitude and Longitude can be manually entered, but TUGG will also try
 to work them out for you automatically anyway. It will also try to guess any missing fields
 from location data using the Google Maps API.
 
