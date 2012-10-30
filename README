@@ -41,7 +41,7 @@ what data each column contains. So, if you're importing location data, like the 
 <table>
   <tr>
     <th>3121</th>
-    <td>1/9 Tennyson St</td>
+    <td>57 Swan St</td>
     <td>Richmond</td>
   </tr>
 </table>
@@ -54,7 +54,7 @@ Then you need to mark it up like this:
   </tr>
   <tr>
     <th>3121</th>
-    <td>1/9 Tennyson St</td>
+    <td>57 Swan St</td>
     <td>Richmond</td>
   </tr>
 
@@ -115,30 +115,55 @@ For example, your data might look like this:
 
 <table>
   <tr>
-    <th>3121</th>
-    <td>1/9 Tennyson St</td>
+    <td>The Corner Hotel</td>
+    <td>3121</td>
+    <td>57 Swan St</td>
     <td>Richmond</td>
   </tr>
 </table>
   <tr>
 
+Then you'll need to mark it up like this:
 
 <table>
   <tr>
-    <th>3121</th>
-    <td>1/9 Tennyson St</td>
+    <td>name</td>
+    <td>location.post_code</td>
+    <td>location.street_address</td>
+    <td>location.suburb</td>
+  </tr>
+  <tr>
+    <td>The Corner Hotel</td>
+    <td>3121</td>
+    <td>57 Swan St</td>
     <td>Richmond</td>
   </tr>
 </table>
-Then you need to mark it up like this:
-<table>
-  <tr>
-    <th>post_code</th>
-    <td>street_address</td>
-    <td>suburb</td>
-  </tr>
-  <tr>
-    <th>3121</th>
-    <td>1/9 Tennyson St</td>
-    <td>Richmond</td>
-  </tr>
+
+What was that all about? Well, firstly, you need to tell the importer which models you want which fields to be mapped
+to. This wasn't necesary in the earlier example as you were only importing one type of model. Now you're importing two - 
+a location and a venue. So, here we prefix all the location model's fields with 'location.' to tell the importer they 
+go into the location model. Why aren't the venue fields prefixed with 'venue'? Because you only have to specify the model
+type for 'child' models. You select the model type for the parent from the 'Model name' drop down box on the 'Add csv
+import' page as mentioned earlier. That is, for the example, you'll choose 'gig_registry.venue'.
+
+...What's a child/parent? Easy; describe the relationship by saying 'A has a B'. 'B' is the child. In this case, it's 'A 
+venuehas a location', and the location is the child. Likewise, if you had a sheet with a gig, a venue, and a location 
+on each row, the location would be the child of the venue, and the venue the child of the gig, with the gig being the parent.
+You'd prefix all location fields with 'venue.location.', all venue fields with 'venue.', and choose 'gig_registry.gig'
+from the 'Model name' drop down box on the 'Add csv import' page.
+
+When you import the sheet, the importer will do something extra. As well as creating instancesof the primary 
+'parent' models for each row, it will also create related child data. First, it will search for existing data
+that matches the fields specified for the child. In our example, it will look for the location '57 Swan St Richmond VIC 
+312' in the database. If it finds it, it will skip creating it and instead, simply link the venue to that location. 
+It will then create the parent as usual.
+
+### Many to Many Fields
+A number of fields in the models are Many to Many fields. For example 'bands' in the 'gigs' model. This simply 
+means that each gig can have many bands, and each band can have played at many gigs. 
+
+If you want to specify a gig with a number of related bands in a single spreadsheet, you need to use slightly special
+mark up. Rather than prefixing fields with 'bands.' as we've done in earlier examples, you'll need to mark each field
+'bands.1.', 'bands.2.' and so forth, in order to specify which of the multiple bands you're adding each field belongs
+to.
