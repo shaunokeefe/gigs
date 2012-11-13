@@ -2,6 +2,7 @@ from django.contrib import admin
 #from django.db import models as django_models
 #from django.forms.extras.widgets import SelectDateWidget
 from gigs.gig_registry import models
+from django_tablib.admin import TablibAdmin
 
 
 class VenueAdmin(admin.ModelAdmin):
@@ -32,20 +33,48 @@ class BandInline(admin.TabularInline):
     model = models.Gig.bands.through
 
 
-class GigAdmin(admin.ModelAdmin):
+def get_venue_id(gig):
+    return gig.venue.id
+
+class GigAdmin(TablibAdmin):
+    
     fieldsets = [
             (None, {'fields': ['name', 'venue','bands', 'cost']}),
             ('Dates', {'fields': ['start', 'finish']}),
             ('Meta', {'fields': ['comment']}),
         ]
-    
+    formats = ['csv', 'xls'] 
+    headers={
+        'name': 'name',
+        'start': 'start',
+        'finish': 'finish',
+        'cost': 'cost',
+        'comment': 'comment',
+        'venue.id': get_venue_id,
+        }
+
     filter_horizontal = ('bands',)
     list_filter = ('venue', 'bands',)
 
-class VenueAdmin(admin.ModelAdmin):
-    list_display = ['name', 'location']
+def get_location_id(venue):
+    return venue.location.id
 
-class LocationAdmin(admin.ModelAdmin):
+class VenueAdmin(TablibAdmin):
+    list_display = ['name', 'location']
+    
+    formats = ['csv', 'xls'] 
+    headers={
+        'name': 'name',
+        'uid': 'uid',
+        'location.id': get_location_id,
+        'established': 'established',
+        'venue_type':'venue_type',
+        'status':'status',
+        'status_notes':'status_notes',
+        'comment':'comment',
+        }
+
+class LocationAdmin(TablibAdmin):
     #fields = ['street_address', 'suburb', 'state', 'post_code', 'country', 'lat', 'lon']
     fieldsets = [
             ('Address', 
@@ -68,6 +97,8 @@ class LocationAdmin(admin.ModelAdmin):
                 }
             )
         ]
+    
+    formats = ['csv', 'xls'] 
 
 admin.site.register(models.Band, BandAdmin)
 admin.site.register(models.Musician)

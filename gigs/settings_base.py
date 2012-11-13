@@ -86,7 +86,6 @@ SECRET_KEY = 'pqp!%=u2ppup9&9n+dm3t4iz1p1w^(a$=%g5swu^x0g%g98n)c'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -120,6 +119,7 @@ INSTALLED_APPS = (
     'gigs.search',
     'gigs.maps',
     'csvimport',
+    'django_tablib',
     'haystack',
     'gmapi',
     # Uncomment the next line to enable admin documentation:
