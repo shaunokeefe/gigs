@@ -84,10 +84,11 @@ class MapNode(template.Node):
         for location in locations:
             lat = location.lat
             lon = location.lon
-            marker = maps.Marker(opts = {
-                'map': self.gmap,
-                'position': maps.LatLng(lat, lon),
-                })
+            if lat and lon:
+                marker = maps.Marker(opts = {
+                    'map': self.gmap,
+                    'position': maps.LatLng(lat, lon),
+                    })
         form = MapForm(initial={'map':self.gmap})
         rendered_form = render_to_string('maps/map_form_and_js.html', {'form': form})
         return rendered_form
@@ -112,10 +113,11 @@ class GigSearchMapNode(MapNode):
         for location in locations:
             lat = location.lat
             lon = location.lon
-            marker = maps.Marker(opts = {
-                'map': self.gmap,
-                'position': maps.LatLng(lat, lon),
-                })
+            if lat and lon:
+                marker = maps.Marker(opts = {
+                    'map': self.gmap,
+                    'position': maps.LatLng(lat, lon),
+                    })
         
         form = MapForm(initial={'map':self.gmap})
         rendered_form = render_to_string('maps/map_form_and_js.html', {'form': form})
