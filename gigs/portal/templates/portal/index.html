@@ -16,6 +16,11 @@
     {% load maps %}
     {% map gig_list %}
     <br/>
+    <form action="/export_gigs/">
+    <p>
+      <button class="btn btn-large btn-primary btn-block" type="submit">Download results</button>
+      </p>
+      </form>
     {% for gig in gig_list %}
       {% include "portal/gig_row.html" %}
     {% endfor %}
