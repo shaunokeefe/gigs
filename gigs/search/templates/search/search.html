@@ -17,6 +17,12 @@
     {% load maps %}
     {% search_map page.object_list %}
     <br/>
+    <form action="/gig_csv_subset/">
+    <p>
+    <input type=hidden name=ids value={% for g in page.object_list %}{% if not forloop.first %},{% endif %}{{g.object.pk}}{% endfor %}>
+      <button class="btn btn-large btn-primary btn-block" type="post">Download results</button>
+      </p>
+      </form>
     {% for gig_result in page.object_list %}
     {% with gig_result.object as gig %}
     {% include "portal/gig_row.html" %}

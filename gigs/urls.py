@@ -23,6 +23,7 @@ urlpatterns = patterns(
     (r'^export_locations/$', 'django_tablib.views.export', {
             'model': Location,
             }),
+    (r'^gig_csv_subset/', 'gigs.portal.views.get_gigs_data'),
 )
 
 
