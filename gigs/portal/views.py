@@ -4,13 +4,15 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 
+from django.http import Http404, HttpResponse
+from django_tablib.base import mimetype_map
+
+from gigs.portal.datasets import ModelRelatedDataset
 from gigs.gig_registry import models
 
-from django_tablib import models as tablib_models
-from django_tablib import views as tablib_views
 
 def portal_login(request):
-    
+
     error = False
     form = None
 
@@ -28,20 +30,40 @@ def portal_login(request):
 
     form = AuthenticationForm()
     c = RequestContext(request, {'form':form, 'error': error})
-    
+
     return render_to_response('portal/portal_login.html', c)
 
-class GigDataset(tablib_models.ModelDataset):
-    class Meta:
-        #queryset = models.Gig.objects.filter(is_aw
-        model = models.Gig
+
+def export(request, queryset=None, model=None, headers=None, format='xls',
+           filename='export'):
+    if queryset is None:
+        queryset = model.objects.all()
+
+    dataset = ModelRelatedDataset(queryset)
+    filename = '%s.%s' % (filename, format)
+    if not hasattr(dataset, format):
+        raise Http404
+    response = HttpResponse(
+        getattr(dataset, format),
+        mimetype=mimetype_map.get(format, 'application/octet-stream')
+        )
+    response['Content-Disposition'] = 'attachment; filename=%s' % filename
+    return response
 
 
 def get_gigs_data(request):
-    gigs_ids_string = request.GET.get('ids', '')
-    gig_ids = gigs_ids_string.split(',')
     queryset = models.Gig.objects.all()
-    if gig_ids:
+    gigs_ids_string = request.GET.get('ids', None)
+    if gigs_ids_string:
+        gig_ids = gigs_ids_string.split(',')
         queryset = queryset.filter(pk__in=gig_ids)
-    return tablib_views.export(request, queryset=queryset)
+
+    headers = [
+            'venue.id',
+            'venue.name',
+            'venue.location.id',
+            'venue.location.street_address',
+            ]
+
+    return export(request, queryset=queryset, headers=headers)
 
