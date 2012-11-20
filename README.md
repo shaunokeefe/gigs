@@ -65,6 +65,7 @@ The naming of the fields is pretty specific (e.g. 'postcode' wont work - it has 
 of the field in the data model). Here's a list of all the field names you can use in each of the core models:
 
 * Locations
+ * uuid
  * street_address
  * country
  * state
@@ -73,7 +74,7 @@ of the field in the data model). Here's a list of all the field names you can us
  * lat\*\*\*
  * lon\*\*\*
 * Venue
- * uid
+ * uuid
  * name
  * location\*
  * established
@@ -83,6 +84,7 @@ of the field in the data model). Here's a list of all the field names you can us
  * status_notes
  * comment
 * Gig
+ * uuid
  * start
  * finish
  * venue\*
@@ -90,6 +92,7 @@ of the field in the data model). Here's a list of all the field names you can us
  * cost
  * comment
 * Band
+ * uuid
  * name
  * genre\*\*
  * members\*\*
