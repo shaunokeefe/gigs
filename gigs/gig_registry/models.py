@@ -2,7 +2,12 @@ from django.db import models
 from django.db.models.query import QuerySet
 from django.template.defaultfilters import date as _date
 
+import datetime
+
 class Person(models.Model):
+    uuid = models.CharField(max_length=40, null=True)
+    created_at = models.DateField(default=datetime.date.today)
+    updated_at = models.DateField(blank=True, null=True)
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
     nick_name = models.CharField(max_length=40, blank=True)
@@ -33,6 +38,9 @@ class Genre(models.Model):
         return self.name
 
 class Band(models.Model):
+    uuid = models.CharField(max_length=40, null=True)
+    created_at = models.DateField(default=datetime.date.today)
+    updated_at = models.DateField(blank=True, null=True)
     name = models.CharField(max_length=50)
     genre = models.ManyToManyField(Genre, blank=True, null=True)
     members = models.ManyToManyField(Musician, through='BandMembership', blank=True, null=True)
@@ -73,6 +81,9 @@ class LocationManager(models.Manager):
         return self._filter_instance_or_queryset('venue__gig', gigs)
 
 class Location(models.Model):
+    uuid = models.CharField(max_length=40, null=True)
+    created_at = models.DateField(default=datetime.date.today)
+    updated_at = models.DateField(blank=True, null=True)
     # this will be replaced with geodjango
     street_address = models.CharField(max_length=150)
     country = models.CharField(max_length=150)
@@ -102,7 +113,7 @@ class Venue(models.Model):
             ('O', 'Open'),
             ('C', 'Closed'),
             )
-    uid = models.CharField(max_length=20, unique=True)
+    uuid = models.CharField(max_length=40, null=True)
     name = models.CharField(max_length=50)
     location = models.ForeignKey(Location)
     established = models.IntegerField(blank=True, null=True)
@@ -118,7 +129,9 @@ class Venue(models.Model):
         return 'Unnamed venue'
 
 class Gig(models.Model):
-
+    uuid = models.CharField(max_length=40, null=True)
+    created_at = models.DateField(default=datetime.date.today)
+    updated_at = models.DateField(blank=True, null=True)
     start = models.DateField()
     finish = models.DateField(blank=True, null=True)
     venue = models.ForeignKey(Venue)

@@ -1,21 +1,10 @@
 from django.contrib import admin
-#from django.db import models as django_models
-#from django.forms.extras.widgets import SelectDateWidget
 from gigs.gig_registry import models
 
-
-class VenueAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'uid':('name',)}
 
 class MusicianInline(admin.TabularInline):
     fields = ['musician', 'started', 'finished', 'date_of_birth', 'instrument',]
     model = models.Musician
-
-#class MusicianAdmin(admin.ModelAdmin):
-#    inlines = [MembershipInline]
-
-class MembershipAdmin(admin.ModelAdmin):
-    pass#inlines = [MusicianInline]
 
 class MembershipInline(admin.TabularInline):
     model = models.BandMembership
@@ -36,7 +25,7 @@ class GigAdmin(admin.ModelAdmin):
     fieldsets = [
             (None, {'fields': ['name', 'venue','bands', 'cost']}),
             ('Dates', {'fields': ['start', 'finish']}),
-            ('Meta', {'fields': ['comment']}),
+            ('Meta', {'fields': ['uuid','comment']}),
         ]
     
     filter_horizontal = ('bands',)
@@ -46,7 +35,6 @@ class VenueAdmin(admin.ModelAdmin):
     list_display = ['name', 'location']
 
 class LocationAdmin(admin.ModelAdmin):
-    #fields = ['street_address', 'suburb', 'state', 'post_code', 'country', 'lat', 'lon']
     fieldsets = [
             ('Address', 
                 {'fields': 
@@ -66,6 +54,13 @@ class LocationAdmin(admin.ModelAdmin):
                         'lon',
                     ]
                 }
+            ),
+            ('Metadata',
+                {'fields':
+                    [
+                        'uuid',
+                    ]
+                }
             )
         ]
 
@@ -76,4 +71,4 @@ admin.site.register(models.Venue, VenueAdmin)
 admin.site.register(models.Location, LocationAdmin)
 admin.site.register(models.Genre)
 admin.site.register(models.Gig, GigAdmin)
-admin.site.register(models.BandMembership, MembershipAdmin)
+admin.site.register(models.BandMembership)
