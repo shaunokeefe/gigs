@@ -10,7 +10,6 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Write your forwards methods here."
         # Note: Remember to use orm['appname.ModelName'] rather than "from appname.models..."
-        import pdb; pdb.set_trace()
         for person in orm.Person.objects.all():
             info = ' '.join([person.first_name, person.last_name])
             person.uuid = hashlib.sha1(info).hexdigest() 
