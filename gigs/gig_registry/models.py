@@ -5,7 +5,7 @@ from django.template.defaultfilters import date as _date
 import datetime
 
 class Person(models.Model):
-    uuid = models.CharField(max_length=40, null=True)
+    uuid = models.CharField(max_length=40, unique=True)
     created_at = models.DateField(default=datetime.date.today)
     updated_at = models.DateField(blank=True, null=True)
     first_name = models.CharField(max_length=40)
@@ -38,7 +38,7 @@ class Genre(models.Model):
         return self.name
 
 class Band(models.Model):
-    uuid = models.CharField(max_length=40, null=True)
+    uuid = models.CharField(max_length=40, null=True, blank=True)
     created_at = models.DateField(default=datetime.date.today)
     updated_at = models.DateField(blank=True, null=True)
     name = models.CharField(max_length=50)
@@ -81,7 +81,7 @@ class LocationManager(models.Manager):
         return self._filter_instance_or_queryset('venue__gig', gigs)
 
 class Location(models.Model):
-    uuid = models.CharField(max_length=40, null=True)
+    uuid = models.CharField(max_length=40, unique=True)
     created_at = models.DateField(default=datetime.date.today)
     updated_at = models.DateField(blank=True, null=True)
     # this will be replaced with geodjango
@@ -113,7 +113,7 @@ class Venue(models.Model):
             ('O', 'Open'),
             ('C', 'Closed'),
             )
-    uuid = models.CharField(max_length=40, null=True)
+    uuid = models.CharField(max_length=40, unique=True)
     name = models.CharField(max_length=50)
     location = models.ForeignKey(Location)
     established = models.IntegerField(blank=True, null=True)
@@ -129,7 +129,7 @@ class Venue(models.Model):
         return 'Unnamed venue'
 
 class Gig(models.Model):
-    uuid = models.CharField(max_length=40, null=True)
+    uuid = models.CharField(max_length=40, unique=True)
     created_at = models.DateField(default=datetime.date.today)
     updated_at = models.DateField(blank=True, null=True)
     start = models.DateField()
