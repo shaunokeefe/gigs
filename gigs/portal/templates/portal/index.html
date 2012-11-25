@@ -97,7 +97,8 @@ $.extend( $.fn.dataTableExt.oPagination, {
 $(document).ready(function() {
         $('#index-table').dataTable({
         "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-        "sPaginationType": "bootstrap"
+        "sPaginationType": "bootstrap",
+        "bFilter": false,"bInfo": false
     } );
 });
 
@@ -117,7 +118,7 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 <div class="row-fluid">
   <table class="table table-bordered" id="index-table">
     <thead>
-        <tr><th>Gig Name</th/><th>Date</th/><th>Cost</th/><th>Venue Name</th/><th>Address</th/><th>Bands</th></tr>
+        <tr><th>Date</th/><th>Venue Name</th><th>Bands</th><th>Gig Name</th/><th>Cost</th/><th>Address</th/></tr>
     </thead>
     <tbody>
     {% load maps %}

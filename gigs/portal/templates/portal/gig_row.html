@@ -1,9 +1,6 @@
 <tr>
-    <td><a href="{% url portal_gig_detail gig.id %}">{% if gig.name %}{{gig.name}}{% else %}{{gig}}{% endif %}</a></td> 
     <td>{{gig.start|date:"l, M j, o"}}</td>
-    <td>{{gig.cost}}</td> 
     <td><a href="{% url portal_venue_detail gig.venue.id %}">{{gig.venue.name}}</a></td>
-    <td><a href="{% url portal_venue_detail gig.venue.id %}">{{gig.venue.location}}</a></td> 
     <td>
     <div class="accordian" id="band-list-accordian">    
       <div class="accordian-group">
@@ -26,4 +23,7 @@
     </div>
   </div>
   </td>
+  <td><a href="{% url portal_gig_detail gig.id %}">{% if gig.name %}{{gig.name}}{% else %}(None){% endif %}</a></td> 
+  <td>{% if gig.cost %}{{gig.cost}}{% else %}(Not specified){% endif %}</td> 
+  <td><a href="{% url portal_venue_detail gig.venue.id %}">{{gig.venue.location}}</a></td> 
 </tr>
