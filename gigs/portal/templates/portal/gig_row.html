@@ -1,4 +1,5 @@
 <tr>
+    <td><a href="{% url portal_gig_detail gig.id %}"><i class="icon-zoom-in"></i></a></td>
     <td>{{gig.start|date:"l, M j, o"}}</td>
     <td><a href="{% url portal_venue_detail gig.venue.id %}">{{gig.venue.name}}</a></td>
     <td>
