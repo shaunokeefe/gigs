@@ -1,12 +1,29 @@
 <tr>
-    <td><a href="{% url portal_gig_detail gig.id %}">{{gig}}</a></td> 
-    <td><a href="{% url portal_venue_detail gig.venue.id %}">{{gig.venue.name}}</a></td>
-    <td>
-    {% for band in gig.bands.all %}
-    {% if forloop.first %}
-    <a href="{% url portal_band_detail band.id %}">{{band.name}}</a> 
-    {% endif %}
-    {% endfor %}
-    </td>
+    <td><a href="{% url portal_gig_detail gig.id %}">{% if gig.name %}{{gig.name}}{% else %}{{gig}}{% endif %}</a></td> 
     <td>{{gig.start|date:"l, M j, o"}}</td>
+    <td>{{gig.cost}}</td> 
+    <td><a href="{% url portal_venue_detail gig.venue.id %}">{{gig.venue.name}}</a></td>
+    <td><a href="{% url portal_venue_detail gig.venue.id %}">{{gig.venue.location}}</a></td> 
+    <td>
+    <div class="accordian" id="band-list-accordian">    
+      <div class="accordian-group">
+        {% for band in gig.bands.all %}
+        {% if forloop.first %}
+        <div class "accordian-heading">
+            <a href="{% url portal_band_detail band.id %}">{{band.name}}</a>
+            {% if gig.bands.count|add:-1%}
+            <a class="accordian-toggle" data-toggle="collapse" data-parent="#band-list-accordian" href="#collapse-{{gig.id}}">({{gig.bands.count|add:-1}} other{{gigs.bands.count|add:-1|pluralize}})</a> 
+            {% endif %}
+        </div>
+        <div id="collapse-{{gig.id}}" class="accordion-body collapse">
+        <div class="accordian-inner">
+        {% else %}
+          <a href="{% url portal_band_detail band.id %}">{{band.name}}</a> 
+        {% endif %}
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  </td>
 </tr>
