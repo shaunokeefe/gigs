@@ -126,7 +126,8 @@ $.extend($.fn.dataTableExt.oStdClasses, {
     <br/>
     <form action="/gig_csv_subset/">
     <p>
-      <button class="btn btn-large btn-primary btn-block" type="submit">Download results</button>
+    <input type=hidden name=ids value={% for g in gig_list %}{% if not forloop.first %},{% endif %}{{g.pk}}{% endfor %}>
+      <button class="btn btn-large btn-primary btn-block" type="post">Download results</button>
       </p>
       </form>
     {% for gig in gig_list %}
