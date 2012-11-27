@@ -9,11 +9,6 @@
 <br>
 <div class="row-fluid">
   {% if page.object_list %}
-  <table class="table table-bordered">
-    <thead>
-        <tr><th>Gig Name</th/><th>Venue Name</th/><th>Headlining Band</th><th>Gig Start Time</th/></tr>
-    </thead>
-    <tbody>
     {% load maps %}
     {% search_map page.object_list %}
     <br/>
@@ -23,6 +18,11 @@
       <button class="btn btn-large btn-primary btn-block" type="post">Download results</button>
       </p>
       </form>
+  <table class="table table-bordered">
+    <thead>
+        <tr><th>Gig Name</th/><th>Venue Name</th/><th>Headlining Band</th><th>Gig Start Time</th/></tr>
+    </thead>
+    <tbody>
     {% for gig_result in page.object_list %}
     {% with gig_result.object as gig %}
     {% include "portal/gig_row.html" %}

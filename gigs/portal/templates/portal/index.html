@@ -116,11 +116,6 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 </div>
 <br>
 <div class="row-fluid">
-  <table class="table table-bordered" id="index-table">
-    <thead>
-        <tr><th></th><th>Date</th/><th>Venue Name</th><th>Bands</th><th>Gig Name</th/><th>Cost</th/><th>Address</th/></tr>
-    </thead>
-    <tbody>
     {% load maps %}
     {% map gig_list %}
     <br/>
@@ -130,6 +125,11 @@ $.extend($.fn.dataTableExt.oStdClasses, {
       <button class="btn btn-large btn-primary btn-block" type="post">Download results</button>
       </p>
       </form>
+  <table class="table table-bordered" id="index-table">
+    <thead>
+        <tr><th></th><th>Date</th/><th>Venue Name</th><th>Bands</th><th>Gig Name</th/><th>Cost</th/><th>Address</th/></tr>
+    </thead>
+    <tbody>
     {% for gig in gig_list %}
       {% include "portal/gig_row.html" %}
     {% endfor %}
