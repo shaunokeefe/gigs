@@ -1,0 +1,23 @@
+{
+    "sEcho": {{sEcho}},
+    "iTotalRecords": {{paginator.count}},
+    "iTotalDisplayRecords":{{iTotalDisplayRecords}},
+    "aaData": [
+    {% for search_result in page.object_list %}
+    {% with search_result.object as gig %}
+    [
+        "tmp",
+        "{{gig.start}}",
+        "{{gig.venue.name}}",
+         "band",
+        "{{gig.name}}",
+        "{{gig.cost}}",
+        "{{gig.venue.location}}"
+    ]
+    {% if not forloop.last%}
+    ,
+    {% endif %}
+    {% endwith %}
+    {% endfor %}
+    ]
+}

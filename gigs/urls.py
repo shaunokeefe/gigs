@@ -13,7 +13,7 @@ urlpatterns = patterns(
     '',
     (r'', include(portal_urls)),
     (r'^admin/', include(admin.site.urls)),
-    (r'^search/', include(search_urls)),
+    (r'^index/', include(search_urls)),
     (r'^export_gigs/$', 'django_tablib.views.export', {
             'model': Gig,
             }),

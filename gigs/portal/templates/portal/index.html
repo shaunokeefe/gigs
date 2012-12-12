@@ -98,7 +98,11 @@ $(document).ready(function() {
         $('#index-table').dataTable({
         "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
         "sPaginationType": "bootstrap",
-        "bFilter": false,"bInfo": false
+        "bFilter": false,
+        "bInfo": false,
+        "bProcessing": true,
+        "bServerSide": true,
+        "sAjaxSource": "{% url search_ajax %}{% if query %}q={{query}}{% endif %}"
     } );
 });
 
