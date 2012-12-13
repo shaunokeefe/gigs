@@ -56,7 +56,7 @@ def ajax_search_view(request):
                 }
 
     get_copy = request.GET.copy()
-    get_copy['page'] = int(display_start) + 1
+    get_copy['page'] = int(display_start) / int(page_length) + 1
     request.GET = get_copy
     return basic_search(request, template='search/search.json',
            results_per_page=page_length,
@@ -100,6 +100,7 @@ def basic_search(request, template='search/search.html', load_all=True, form_cla
     results = results.order_by(*sort_by)
     if not template:
         return results
+    count = results.count()
     paginator = Paginator(results, results_per_page or RESULTS_PER_PAGE)
 
     try:
@@ -113,6 +114,7 @@ def basic_search(request, template='search/search.html', load_all=True, form_cla
         'paginator': paginator,
         'query': query,
         'suggestion': None,
+        'count': count,
     }
 
     if getattr(settings, 'HAYSTACK_INCLUDE_SPELLING', False):

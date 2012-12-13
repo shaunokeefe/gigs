@@ -1,7 +1,7 @@
 {
     "sEcho": {{sEcho}},
-    "iTotalRecords": {{paginator.count}},
-    "iTotalDisplayRecords":{{iTotalDisplayRecords}},
+    "iTotalRecords": {{count}},
+    "iTotalDisplayRecords":{{count}},
     "aaData": [
     {% for search_result in page.object_list %}
     {% with search_result.object as gig %}
