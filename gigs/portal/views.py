@@ -9,6 +9,7 @@ from django_tablib.base import mimetype_map
 
 from gigs.portal.datasets import ModelRelatedDataset
 from gigs.gig_registry import models
+from gigs.search.views import basic_search
 
 
 def portal_login(request):
@@ -53,9 +54,9 @@ def export(request, queryset=None, model=None, headers=None, format='xls',
 
 def get_gigs_data(request):
     queryset = models.Gig.objects.all()
-    gigs_ids_string = request.GET.get('ids', None)
-    if gigs_ids_string:
-        gig_ids = gigs_ids_string.split(',')
+    if request.GET.get('q', None):
+        search_queryset = basic_search(request, template=None, load_all=True)
+        gig_ids = [search_result.object.id for search_result in search_queryset]
         queryset = queryset.filter(pk__in=gig_ids)
 
     headers = [

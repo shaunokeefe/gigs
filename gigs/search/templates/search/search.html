@@ -125,8 +125,8 @@ $.extend($.fn.dataTableExt.oStdClasses, {
     {% search_map page.object_list %}
     <br/>
     <form action="/gig_csv_subset/">
+    <input type=hidden name=q value={{query}}>
     <p>
-    <input type=hidden name=ids value={% for g in page.object_list %}{% if not forloop.first %},{% endif %}{{g.object.pk}}{% endfor %}>
       <button class="btn btn-large btn-primary btn-block" type="post">Download results</button>
       </p>
       </form>

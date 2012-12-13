@@ -98,6 +98,8 @@ def basic_search(request, template='search/search.html', load_all=True, form_cla
 
 
     results = results.order_by(*sort_by)
+    if not template:
+        return results
     paginator = Paginator(results, results_per_page or RESULTS_PER_PAGE)
 
     try:
