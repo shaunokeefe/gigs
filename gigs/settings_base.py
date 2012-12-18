@@ -120,6 +120,7 @@ INSTALLED_APPS = (
     'gigs.maps',
     'csvimport',
     'django_tablib',
+    'pysolr',
     'haystack',
     'gmapi',
     # Uncomment the next line to enable admin documentation:
@@ -150,8 +151,7 @@ LOGGING = {
 }
 
 HAYSTACK_SITECONF = 'gigs.search.search_sites'
-HAYSTACK_SEARCH_ENGINE = 'whoosh'
-HAYSTACK_WHOOSH_PATH = os.path.join(os.path.dirname(__file__), 'whoosh_index')
-
+HAYSTACK_SEARCH_ENGINE = 'solr'
+HAYSTACK_SOLR_URL = 'http://127.0.0.1:8080/solr'
 MAPS_REGION_BIAS='au'
 MAPS_REGION_BOUNDS=(-39.20152, 140.962477, -33.981051, 149.97547)

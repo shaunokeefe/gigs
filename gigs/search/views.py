@@ -1,5 +1,5 @@
 from django.conf import settings
-from haystack.views import SearchView#, basic_search
+from haystack.views import FacetedSearchView#, basic_search
 from gigs.search.models import SearchQueryRecord
 
 from django.core.paginator import Paginator, InvalidPage
@@ -9,9 +9,10 @@ from django.template import RequestContext
 from haystack.forms import ModelSearchForm
 from haystack.query import EmptySearchQuerySet, SearchQuerySet
 
-class LoggedSearchView(SearchView):
+class LoggedSearchView(FacetedSearchView):
 
     def __call__(self, request):
+        print 'hi'
         response = super(LoggedSearchView, self).__call__(request)
         query = SearchQueryRecord(
                 query = self.query,

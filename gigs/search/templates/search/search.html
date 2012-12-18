@@ -112,6 +112,36 @@ $.extend($.fn.dataTableExt.oStdClasses, {
     });
 </script>
 {% endblock %}
+{% block sidebar %}
+{{block.super}}
+<div class="well sidebar-facets">
+  <ul class="nav nav-list">
+    <div class='accordian' id='facet-accordian'>
+      <div class='accordian-group'>
+        <div class='accordian-heading'>
+          <li class="nav-header">Venue<a class='accordian-toggle' data-toggle='collapse' data-parent='#facet-accordian' href='#collapse-facets'>(more)</a></li>
+        </div>
+          {% for venue_name in facets.fields.venue_name|slice:":5" %}
+          {% if venue_name.1 %}
+            <li><a href="">{{venue_name.0}}({{venue_name.1}})</a></li> 
+          {% endif %}
+          {% endfor %}
+
+        <div id='collapse-facets' class='accordion-body collapse'> 
+          <div class='accordian-inner'> 
+          {% for venue_name in facets.fields.venue_name|slice:"5:" %}
+          {% if venue_name.1 %}
+            <li><a href="">{{venue_name.0}}({{venue_name.1}})</a></li> 
+          {% endif %}
+          {% endfor %}
+</div>
+</div>
+</div>
+</div>
+  </ul>
+</div>
+{% endblock %}
+
 {% block content %}
 <div class="row-fluid">
     <h1>Gig List</h1>
