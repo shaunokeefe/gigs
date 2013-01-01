@@ -103,7 +103,7 @@ $(document).ready(function() {
         "bInfo": false,
         "bProcessing": true,
         "bServerSide": true,
-        "sAjaxSource": "{% url search_ajax %}{% if query %}?q={{query}}{% endif %}"
+        "sAjaxSource": "{% url search_ajax %}?{% if query %}q={{query}}{% endif %}{% if selected_facets %}{% for facet in selected_facets %}&selected_facets={{facet}}{% endfor %}{% endif %}{% if selected_date_facets %}{% for facet in selected_date_facets %}&selected_date_facets={{facet}}{% endfor %}{% endif %}"
     } );
 });
 
