@@ -24,6 +24,22 @@ class LoggedSearchView(FacetedSearchView):
 
         return response
 
+    def build_form(self, form_kwargs=None):
+        if form_kwargs is None:
+            form_kwargs = {}
+
+        # This way the form can always receive a list containing zero or more
+        # facet expressions:
+        form_kwargs['selected_date_facets'] = self.request.GET.getlist("selected_date_facets")
+
+        return super(LoggedSearchView, self).build_form(form_kwargs)
+
+    def extra_context(self):
+        extra = super(LoggedSearchView, self).extra_context()
+        extra['selected_facets'] = self.request.GET.getlist('selected_facets')
+        extra['selected_date_facets'] = self.request.GET.getlist('selected_date_facets')
+        return extra
+
 column_name_map = {
         0: 'tmp',
         1:'start',
@@ -97,6 +113,23 @@ def basic_search(request, template='search/search.html', load_all=True, form_cla
         form = form_class(searchqueryset=searchqueryset, load_all=load_all)
         results = SearchQuerySet().all()
 
+    selected_facets = request.GET.getlist('selected_facets')
+    for facet in selected_facets:
+        if ":" not in facet:
+            continue
+        field, value = facet.split(":", 1)
+        if value:
+            results = results.narrow(u'%s:"%s"' % (field, results.query.clean(value)))
+
+    selected_date_facets = request.GET.getlist('selected_date_facets')
+    for facet in selected_date_facets:
+        if ":" not in facet:
+            continue
+        field, value = facet.split(":", 1)
+
+        if value:
+            start, to, end, gap = value.strip('[]').split()
+            results = results.narrow(u'%s:[%s TO %s+%s]' % (field, start, start, gap))
 
     results = results.order_by(*sort_by)
     if not template:

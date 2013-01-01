@@ -114,30 +114,12 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 {% endblock %}
 {% block sidebar %}
 {{block.super}}
+{% load faceting %}
 <div class="well sidebar-facets">
   <ul class="nav nav-list">
-    <div class='accordian' id='facet-accordian'>
-      <div class='accordian-group'>
-        <div class='accordian-heading'>
-          <li class="nav-header">Venue<a class='accordian-toggle' data-toggle='collapse' data-parent='#facet-accordian' href='#collapse-facets'>(more)</a></li>
-        </div>
-          {% for venue_name in facets.fields.venue_name|slice:":5" %}
-          {% if venue_name.1 %}
-            <li><a href="">{{venue_name.0}}({{venue_name.1}})</a></li> 
-          {% endif %}
-          {% endfor %}
-
-        <div id='collapse-facets' class='accordion-body collapse'> 
-          <div class='accordian-inner'> 
-          {% for venue_name in facets.fields.venue_name|slice:"5:" %}
-          {% if venue_name.1 %}
-            <li><a href="">{{venue_name.0}}({{venue_name.1}})</a></li> 
-          {% endif %}
-          {% endfor %}
-</div>
-</div>
-</div>
-</div>
+      {% facet_group facets.fields.venue_name venue_name 5 request.get_full_path  selected_facets selected_date_facets %}
+      {% facet_group facets.fields.bands bands 5 request.get_full_path selected_facets selected_date_facets %}
+      {% date_facet_group facets.dates.start date 5 request.get_full_path selected_facets selected_date_facets %}
   </ul>
 </div>
 {% endblock %}
@@ -147,6 +129,7 @@ $.extend($.fn.dataTableExt.oStdClasses, {
     <h1>Gig List</h1>
     <br>
     {% include "search/search_form.html" %}  
+    {% current_facet_list request.get_full_path selected_facets selected_date_facets %}
 </div>
 <br>
 <div class="row-fluid">
