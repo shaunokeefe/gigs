@@ -150,7 +150,6 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 </div>
 <br>
 <div class="row-fluid">
-  {% if page.object_list %}
     {% load maps %}
     {% search_map page.object_list %}
     <br/>
@@ -165,24 +164,8 @@ $.extend($.fn.dataTableExt.oStdClasses, {
         <tr><th></th><th>Date</th/><th>Venue Name</th><th>Bands</th><th>Gig Name</th/><th>Cost</th/><th>Address</th/></tr>
     </thead>
     <tbody>
-    {% for gig_result in page.object_list %}
-    {% with gig_result.object as gig %}
-    {% include "portal/gig_row.html" %}
-    {% endwith %}
-    {% endfor %}
     </tbody>
     </table>
-  {% else %}
-    {% if query %}
-    <div class="alert alert-error">
-      <p>Your search didn't return any results.</p>
-    </div>
-    {% else %}
-    <div class="alert alert-info">
-      <p>Please enter a search term</p>
-    </div>
-    {% endif %}
-  {%endif %}
 </div>
 {% endblock %}
 
