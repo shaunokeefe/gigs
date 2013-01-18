@@ -10,6 +10,9 @@ from gigs.search.views import LoggedSearchView, ajax_search_view
 sqs = SearchQuerySet().facet('venue_name')\
         .facet('name')\
         .facet('bands')\
+        .facet('venue_type')\
+        .facet('venue_suburb')\
+        .facet('cost')\
         .date_facet('start', start_date=datetime.date(1950,1,1), end_date=datetime.date.today(), gap_by='year')#date(1980,1,1), gap_by='year')
 
 urlpatterns = patterns(

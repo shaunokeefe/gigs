@@ -118,6 +118,9 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 <div class="well sidebar-facets">
   <ul class="nav nav-list">
       {% facet_group facets.fields.venue_name venue_name 5 request.get_full_path  selected_facets selected_date_facets %}
+      {% facet_group facets.fields.venue_type venue_type 5 request.get_full_path  selected_facets selected_date_facets %}
+      {% facet_group facets.fields.venue_suburb venue_suburb 5 request.get_full_path  selected_facets selected_date_facets %}
+      {% facet_group facets.fields.cost cost 5 request.get_full_path  selected_facets selected_date_facets %}
       {% facet_group facets.fields.bands bands 5 request.get_full_path selected_facets selected_date_facets %}
       {% date_facet_group facets.dates.start date 5 request.get_full_path selected_facets selected_date_facets %}
   </ul>
