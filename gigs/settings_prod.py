@@ -9,6 +9,16 @@ INSTALLED_APPS += (
     'gunicorn',
 )
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django',
+        'OPTIONS':{
+        'read_default_file':'/etc/tugg/my.cnf',
+        },
+    },
+}
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
