@@ -28,3 +28,9 @@ develop-eggs/
 
 # folder for csv imports
 /csv/
+
+# solr stuff
+/solr/
+
+# tags
+tags
