@@ -30,7 +30,7 @@ class GigAdmin(TablibAdmin):
     fieldsets = [
             (None, {'fields': ['name', 'venue','bands', 'cost']}),
             ('Dates', {'fields': ['start', 'finish']}),
-            ('Meta', {'fields': ['uuid','comment']}),
+            ('Metadata', {'fields': ['uuid','comment']}),
         ]
     formats = ['csv', 'xls']
     headers={
@@ -88,6 +88,7 @@ class LocationAdmin(TablibAdmin):
                 {'fields':
                     [
                         'uuid',
+                        'comment',
                     ]
                 }
             )

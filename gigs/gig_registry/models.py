@@ -12,6 +12,7 @@ class Person(models.Model):
     last_name = models.CharField(max_length=40)
     nick_name = models.CharField(max_length=40, blank=True)
     date_of_birth = models.DateField(blank=True, null=True)
+    comment = models.CharField(max_length=300, blank=True)
 
     def __unicode__(self):
         name = [self.first_name, self.last_name]
@@ -45,6 +46,7 @@ class Band(models.Model):
     genre = models.ManyToManyField(Genre, blank=True, null=True)
     members = models.ManyToManyField(Musician, through='BandMembership', blank=True, null=True)
     founded = models.DateField(blank=True, null=True)
+    comment = models.CharField(max_length=300, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -90,6 +92,7 @@ class Location(models.Model):
     state = models.CharField(max_length=150)
     suburb = models.CharField(max_length=150)
     post_code  = models.CharField(max_length=150)
+    comment = models.CharField(max_length=300, blank=True)
     lat = models.DecimalField(max_digits=12, decimal_places=6, verbose_name='latitude', blank=True, null=True)
     lon = models.DecimalField(max_digits=12, decimal_places=6, verbose_name='longitude', blank=True, null=True)
     
