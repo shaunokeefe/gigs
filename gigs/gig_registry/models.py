@@ -28,6 +28,39 @@ class Source(models.Model):
             rep = rep + " (%s)" % (self.source_type)
         return rep
 
+class UUIDManager(models.Manager):
+    prefix = ''
+    numbers_length = 7
+    def get_next_UUID(self):
+        next_number = 0
+        for item in self.get_query_set().all().order_by('-uuid'):
+            if not item.uuid:
+                continue
+            numeric_substring = item.uuid[1:]
+            try:
+                next_number = int(numeric_substring) + 1
+                if next_number >= 10 ** (self.numbers_length -1):
+                    continue
+                break
+            except ValueError:
+                pass
+        return "%s%s" % (self.prefix, str(next_number).zfill(self.numbers_length))
+
+class GigUUIDManager(UUIDManager):
+    prefix = 'G'
+
+class PersonUUIDManager(UUIDManager):
+    prefix = 'P'
+
+class BandUUIDManager(UUIDManager):
+    prefix = 'B'
+
+class LocationUUIDManager(UUIDManager):
+    prefix = 'L'
+
+class VenueUUIDManager(UUIDManager):
+    prefix = 'V'
+
 class Person(models.Model):
     uuid = models.CharField(max_length=40, unique=True)
     created_at = models.DateField(default=datetime.date.today)
@@ -37,6 +70,7 @@ class Person(models.Model):
     nick_name = models.CharField(max_length=40, blank=True)
     date_of_birth = models.DateField(blank=True, null=True)
     comment = models.TextField(max_length=300, blank=True)
+
 
     def __unicode__(self):
         name = [self.first_name, self.last_name]
@@ -51,6 +85,7 @@ class Manager(Person):
 
 class Musician(Person):
     instrument = models.CharField(max_length=50, blank=True)
+    objects = PersonUUIDManager()
 
 class Owner(Person):
     # Not sure if this will be a thing yet. Just a placeholder
@@ -72,6 +107,8 @@ class Band(models.Model):
     founded = models.DateField(blank=True, null=True)
     comment = models.TextField(max_length=300, blank=True)
 
+    objects = BandUUIDManager()
+
     def __unicode__(self):
         return self.name
 
@@ -88,7 +125,7 @@ class BandMembership(models.Model):
                     self.started,
                     self.finished if self.finished else 'present')
 
-class LocationManager(models.Manager):
+class LocationManager(LocationUUIDManager):
 
 
     def _filter_instance_or_queryset(self, field, instances):
@@ -150,6 +187,8 @@ class Venue(models.Model):
     status_notes = models.CharField(max_length=300, blank=True)
     comment = models.TextField(max_length=300, blank=True)
 
+    objects = VenueUUIDManager()
+
     def __unicode__(self):
         if self.name:
             return self.name
@@ -161,16 +200,14 @@ class GigType(models.Model):
     def __unicode__(self):
         return self.name
 
-class GigUUIDManager(models.Manager):
-    def get_next_UUID(self):
-        max_uuid = self.get_query_set().all().order_by('-uuid')[0].uuid
-        next_number = int(max_uuid[1:]) + 1
-        return "G%s" % (str(next_number).zfill(7))
+#class GigUUIDManager(models.Manager):
+#    def get_next_UUID(self):
+#        max_uuid = self.get_query_set().all().order_by('-uuid')[0].uuid
+#        next_number = int(max_uuid[1:]) + 1
+#        return "G%s" % (str(next_number).zfill(7))
 
 
 class Gig(models.Model):
-
-    objects = GigUUIDManager()
 
     uuid = models.CharField(max_length=40, unique=True)
     created_at = models.DateField(default=datetime.date.today)
@@ -188,7 +225,7 @@ class Gig(models.Model):
     # maybe an 'appearance' model or something like that?
     bands = models.ManyToManyField(Band)
 
-
+    objects = GigUUIDManager()
 
     def __unicode__(self):
         if self.name:
