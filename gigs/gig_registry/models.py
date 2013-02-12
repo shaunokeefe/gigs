@@ -12,13 +12,13 @@ class Person(models.Model):
     last_name = models.CharField(max_length=40)
     nick_name = models.CharField(max_length=40, blank=True)
     date_of_birth = models.DateField(blank=True, null=True)
-    comment = models.CharField(max_length=300, blank=True)
+    comment = models.TextField(max_length=300, blank=True)
 
     def __unicode__(self):
         name = [self.first_name, self.last_name]
-        
+
         if self.nick_name:
-            return (" '%s' " % self.nick_name).join(name) 
+            return (" '%s' " % self.nick_name).join(name)
 
         return " ".join(name)
 
@@ -34,7 +34,7 @@ class Owner(Person):
 
 class Genre(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    
+
     def __unicode__(self):
         return self.name
 
@@ -46,7 +46,7 @@ class Band(models.Model):
     genre = models.ManyToManyField(Genre, blank=True, null=True)
     members = models.ManyToManyField(Musician, through='BandMembership', blank=True, null=True)
     founded = models.DateField(blank=True, null=True)
-    comment = models.CharField(max_length=300, blank=True)
+    comment = models.TextField(max_length=300, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -65,7 +65,7 @@ class BandMembership(models.Model):
                     self.finished if self.finished else 'present')
 
 class LocationManager(models.Manager):
-    
+
 
     def _filter_instance_or_queryset(self, field, instances):
         if isinstance(instances, (QuerySet, list,)):
@@ -92,18 +92,18 @@ class Location(models.Model):
     state = models.CharField(max_length=150)
     suburb = models.CharField(max_length=150)
     post_code  = models.CharField(max_length=150)
-    comment = models.CharField(max_length=300, blank=True)
+    comment = models.TextField(max_length=300, blank=True)
     lat = models.DecimalField(max_digits=12, decimal_places=6, verbose_name='latitude', blank=True, null=True)
     lon = models.DecimalField(max_digits=12, decimal_places=6, verbose_name='longitude', blank=True, null=True)
-    
+
     objects = LocationManager()
 
     def __unicode__(self):
         return "%s, %s %s, %s %s" % (
-                self.street_address, 
-                self.suburb, 
-                self.state, 
-                self.post_code, 
+                self.street_address,
+                self.suburb,
+                self.state,
+                self.post_code,
                 self.country
                 )
 
@@ -124,7 +124,7 @@ class Venue(models.Model):
     venue_type = models.CharField(max_length=50, blank=True)# TODO: make this a set list or fk
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='O')
     status_notes = models.CharField(max_length=300, blank=True)
-    comment = models.CharField(max_length=300, blank=True)
+    comment = models.TextField(max_length=300, blank=True)
 
     def __unicode__(self):
         if self.name:
@@ -140,7 +140,7 @@ class Gig(models.Model):
     venue = models.ForeignKey(Venue)
     name  = models.CharField(max_length=150, blank=True)
     cost = models.FloatField(blank=True, null=True)
-    comment = models.CharField(max_length=300, blank=True)
+    comment = models.TextField(max_length=300, blank=True)
 
     # TODO members can be absent on the night..is this a problem?
     # maybe an 'appearance' model or something like that?
@@ -161,7 +161,7 @@ class Gig(models.Model):
 
         if self.start:
             name += " on %s " % _date(self.start, "l, M j")
-    
+
         if not name:
             name = "No bands and no venue specified"
         return name
