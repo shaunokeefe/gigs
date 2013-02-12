@@ -1,8 +1,32 @@
 from django.db import models
 from django.db.models.query import QuerySet
 from django.template.defaultfilters import date as _date
+from django.contrib import auth
 
 import datetime
+
+
+class SourceType(models.Model):
+    name = models.CharField(max_length=40, unique=True)
+
+    def __unicode__(self):
+        return self.name
+
+class Source(models.Model):
+    name = models.CharField(max_length=40)
+    author = models.CharField(max_length=100, blank=True, null=True)
+    published = models.DateField()
+    added_by = models.ForeignKey(auth.models.User, blank=True, null=True)
+    source_type = models.ForeignKey(SourceType, blank=True, null=True)
+
+    class Meta:
+        unique_together = ('name', 'published')
+
+    def __unicode__(self):
+        rep = "%s, %s" % (self.name, self.published)
+        if self.source_type:
+            rep = rep + " (%s)" % (self.source_type)
+        return rep
 
 class Person(models.Model):
     uuid = models.CharField(max_length=40, unique=True)
@@ -148,6 +172,7 @@ class Gig(models.Model):
     cost = models.FloatField(blank=True, null=True)
     gig_type = models.ForeignKey(GigType, blank=True, null=True)
     comment = models.TextField(max_length=300, blank=True)
+    source = models.ForeignKey(Source, blank=True, null=True)
 
     # TODO members can be absent on the night..is this a problem?
     # maybe an 'appearance' model or something like that?

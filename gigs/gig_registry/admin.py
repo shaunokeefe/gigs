@@ -28,7 +28,7 @@ def get_venue_id(gig):
 
 class GigAdmin(TablibAdmin):
     fieldsets = [
-            (None, {'fields': ['name', 'venue','bands', 'cost', 'gig_type']}),
+            (None, {'fields': ['name', 'venue','bands', 'cost', 'gig_type', 'source']}),
             ('Dates', {'fields': ['start', 'finish']}),
             ('Metadata', {'fields': ['uuid','comment']}),
         ]
@@ -104,4 +104,6 @@ admin.site.register(models.Location, LocationAdmin)
 admin.site.register(models.Genre)
 admin.site.register(models.Gig, GigAdmin)
 admin.site.register(models.GigType)
+admin.site.register(models.Source)
+admin.site.register(models.SourceType)
 admin.site.register(models.BandMembership)
