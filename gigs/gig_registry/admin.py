@@ -1,7 +1,8 @@
 from django.contrib import admin
-from gigs.gig_registry import models
 from django_tablib.admin import TablibAdmin
+from django import forms
 
+from gigs.gig_registry import models
 
 class MusicianInline(admin.TabularInline):
     fields = ['musician', 'started', 'finished', 'date_of_birth', 'instrument',]
@@ -25,8 +26,25 @@ class BandInline(admin.TabularInline):
 def get_venue_id(gig):
     return gig.venue.id
 
+class GigAutofillUUIDForm(forms.ModelForm):
+    class Meta:
+        model = models.Gig
+    def __init__(self, *args, **kwargs):
+        # TODO(shauno): This method stops working once we have multiple
+        # users adding gigs at the same time. Two users pull up the same
+        # form and they will get the same UUID, and the first one to
+        # submit gets to use it, the second one will not be able to submit
+        # their form because the UUID is not unique. Might be better to
+        # generate on save, but this is an implicit action, and may not
+        # be intuitive for the user
+        #
+        if not kwargs.get('initial', None):
+            kwargs['initial'] = {}
+        kwargs['initial'].update({'uuid': models.Gig.objects.get_next_UUID()})
+        super(GigAutofillUUIDForm, self).__init__(*args, **kwargs)
 
 class GigAdmin(TablibAdmin):
+    form =  GigAutofillUUIDForm
     fieldsets = [
             (None, {'fields': ['name', 'venue','bands', 'cost', 'gig_type', 'source']}),
             ('Dates', {'fields': ['start', 'finish']}),

@@ -161,7 +161,17 @@ class GigType(models.Model):
     def __unicode__(self):
         return self.name
 
+class GigUUIDManager(models.Manager):
+    def get_next_UUID(self):
+        max_uuid = self.get_query_set().all().order_by('-uuid')[0].uuid
+        next_number = int(max_uuid[1:]) + 1
+        return "G%s" % (str(next_number).zfill(7))
+
+
 class Gig(models.Model):
+
+    objects = GigUUIDManager()
+
     uuid = models.CharField(max_length=40, unique=True)
     created_at = models.DateField(default=datetime.date.today)
     updated_at = models.DateField(blank=True, null=True)
@@ -177,6 +187,8 @@ class Gig(models.Model):
     # TODO members can be absent on the night..is this a problem?
     # maybe an 'appearance' model or something like that?
     bands = models.ManyToManyField(Band)
+
+
 
     def __unicode__(self):
         if self.name:
