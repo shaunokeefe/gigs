@@ -25,10 +25,10 @@ class BandInline(admin.TabularInline):
 def get_venue_id(gig):
     return gig.venue.id
 
-class GigAdmin(TablibAdmin):
 
+class GigAdmin(TablibAdmin):
     fieldsets = [
-            (None, {'fields': ['name', 'venue','bands', 'cost']}),
+            (None, {'fields': ['name', 'venue','bands', 'cost', 'gig_type']}),
             ('Dates', {'fields': ['start', 'finish']}),
             ('Metadata', {'fields': ['uuid','comment']}),
         ]
@@ -103,4 +103,5 @@ admin.site.register(models.Venue, VenueAdmin)
 admin.site.register(models.Location, LocationAdmin)
 admin.site.register(models.Genre)
 admin.site.register(models.Gig, GigAdmin)
+admin.site.register(models.GigType)
 admin.site.register(models.BandMembership)

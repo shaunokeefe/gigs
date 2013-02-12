@@ -131,6 +131,12 @@ class Venue(models.Model):
             return self.name
         return 'Unnamed venue'
 
+class GigType(models.Model):
+    name = models.CharField(max_length=40, unique=True)
+
+    def __unicode__(self):
+        return self.name
+
 class Gig(models.Model):
     uuid = models.CharField(max_length=40, unique=True)
     created_at = models.DateField(default=datetime.date.today)
@@ -140,6 +146,7 @@ class Gig(models.Model):
     venue = models.ForeignKey(Venue)
     name  = models.CharField(max_length=150, blank=True)
     cost = models.FloatField(blank=True, null=True)
+    gig_type = models.ForeignKey(GigType, blank=True, null=True)
     comment = models.TextField(max_length=300, blank=True)
 
     # TODO members can be absent on the night..is this a problem?
