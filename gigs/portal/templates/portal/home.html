@@ -41,4 +41,10 @@ visualise the musical journey of major bands from their early roots.
                   <p><a class="btn">Go &raquo;</a></p> 
               </div>
           </div>
+          <div class="row-fluid">
+              <div class="span12">
+                  {% load discovery %}
+                  {% recent_edits model="gig" num_edits="6"%}
+              </div>
+          </div>
 {% endblock %}
