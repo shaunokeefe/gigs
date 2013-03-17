@@ -241,7 +241,7 @@ class Gig(models.Model):
             name +=  " @ " + self.venue.name
 
         if self.start:
-            name += " on %s " % _date(self.start, "l, M j")
+            name += " on %s " % _date(self.start, "l, M j Y")
 
         if not name:
             name = "No bands and no venue specified"

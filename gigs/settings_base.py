@@ -11,7 +11,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', 
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'db.sqlite',
         'USER': 'gigs',
     }
@@ -118,8 +118,11 @@ INSTALLED_APPS = (
     'gigs.portal',
     'gigs.search',
     'gigs.maps',
+    'gigs.missing',
+    'gigs.discovery',
     'csvimport',
     'django_tablib',
+    'extra_views',
     'pysolr',
     'haystack',
     'gmapi',
@@ -155,3 +158,4 @@ HAYSTACK_SEARCH_ENGINE = 'solr'
 HAYSTACK_SOLR_URL = 'http://127.0.0.1:8080/solr'
 MAPS_REGION_BIAS='au'
 MAPS_REGION_BOUNDS=(-39.20152, 140.962477, -33.981051, 149.97547)
+DISCOVERY_APPS = ('gig_registry',)

@@ -1,0 +1,7 @@
+{% if today %}
+{{today|first}}
+{% elif this_month %}
+{{this_month|first}}
+{% elif past_decades %}
+{{past_decades.0|first}}
+{% endif %}

@@ -1,0 +1,29 @@
+{% if today %}
+{% with today|first as entry%}
+<b>On this day in {{entry.start.year}}</b>
+<p>
+{{entry}}
+</p>
+{% endwith %}
+{% elif this_month %}
+{% with this_month|first as entry%}
+<b>This Month in {{entry.start.year}}</b>
+<p>
+{{this_month|first}}
+</p>
+{% endwith %}
+{% elif past_decades %}
+{% for years, entry in past_decades.items %}
+<b>From {{years}} years ago</b>
+<p>
+{{entry|first}}
+</p>
+{% endfor %}
+{% elif weekdays %}
+{% with weekdays|first as entry%}
+<b>Past gig on a {{entry.start|date:"l"}}</b>
+<p>
+{{entry}}
+</p>
+{% endwith %}
+{% endif %}
