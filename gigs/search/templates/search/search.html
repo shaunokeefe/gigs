@@ -128,7 +128,8 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 <div class="row-fluid">
     <h1>Gig List</h1>
     <br>
-    {% include "search/search_form.html" %}  
+    {% load searchform %}
+    {% search_form "small" %}
     {% current_facet_list request.get_full_path selected_facets selected_date_facets %}
 </div>
 <br>

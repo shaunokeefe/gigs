@@ -93,9 +93,9 @@
               {% endif %}
 
             </div> <!-- btn-group -->
-            <form class="navbar-search pull-right" action="{% url index %}">
+            <!--<form class="navbar-search pull-right" action="{% url search_index %}">
               <input type="text" name="q" class="search-query" placeholder="Search...">
-            </form>
+          </form>-->
           </div><!-- nav-collapse -->
         </div><!-- container-fluid -->
       </div><!-- navbar-inner -->
@@ -109,7 +109,7 @@
             <ul class="nav nav-list">
               <li class="nav-header">Pages</li>      
               <li><a href="{% url home %}"><i class="icon-home"></i>Home</a></li>      
-              <li><a href="{% url index %}"><i class="icon-th-list"></i>Gigs</a></li>     
+              <li><a href="{% url search_index %}"><i class="icon-th-list"></i>Gigs</a></li>     
               <li><a href="#" class="vapourware"><i class="icon-signal"></i>Stats</a></li>     
               {% if user.is_authenticated and user.is_staff %}
               <li class="nav-header">Admin</li>      

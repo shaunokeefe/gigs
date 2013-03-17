@@ -12,7 +12,6 @@ from haystack.query import EmptySearchQuerySet, SearchQuerySet
 class LoggedSearchView(FacetedSearchView):
 
     def __call__(self, request):
-        print 'hi'
         response = super(LoggedSearchView, self).__call__(request)
         query = SearchQueryRecord(
                 query = self.query,

@@ -14,6 +14,6 @@ sqs = SearchQuerySet().facet('venue_name')\
 
 urlpatterns = patterns(
     'search.views.',
-    url(r'^$', LoggedSearchView(searchqueryset=sqs, form_class=FacetedAllSearchForm), name='index'),
+    url(r'^$', LoggedSearchView(searchqueryset=sqs, form_class=FacetedAllSearchForm), name='search_index'),
     url(r'^search_ajax/$', ajax_search_view, name='search_ajax'),
 )
