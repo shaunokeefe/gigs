@@ -1,51 +1,65 @@
-{% extends "portal/portal_base.html"%}
-{% block content %}
-        <div class="hero-unit"> 
-            <h1>The Ultimate Gig Guide</h1> 
-            <p style="color: white;"><big>
-The Ultimate Gig Guide (TUGG) tracks the history of the live music scene
-in Melbourne from organised dance hall events, to discos and the
-thriving pub music scene of today.</big></p>
-          </div> 
-          <div class="row-fluid">
-            <div class="span6">
-              <h1> What's Inside?</h1>
-              <p> The Ultimate Gig Guide (TUGG) tracks the history of the live music 
-              scene in Melbourne from organised dance hall events, to discos 
-              and the thriving pub music scene of today.</p>
-            </div>
-            <div class="span6">
-              {% load searchform %}
-              {% search_form large %}  
-            </div>
-          </div>
-          <div class="row-fluid">
-              <div class="span4">
-              	  <img src="/static/img/musicphoto1-bw.jpg" class="img-rounded"
-              	  style="height:120px"/>
-                  <h2>Browse Gigs</h2>
-                  <p>Start exploring Melbourne's rich music history here.</p>
-                  <p><a class="btn btn-primary" href="index">Go &raquo;</a></p> 
-              </div>
-              <div class="span4 vapourware">
-              	  <img src="/static/img/cowboys-bw.jpg" class="img-rounded"
-              	  style="height:120px;"/>
-                  <h2>Add Gigs</h2>
-                  <p>Contribute contemporary gig listings or upload your own spreadsheets.</p>
-                  <p><a class="btn">Go &raquo;</a></p> 
-              </div>
-              <div class="span4 vapourware">
-              	  <img src="/static/img/musicphoto3-bw-fade.jpg" class="img-rounded"
-              	  style="height:120px;"/>
-                  <h2>Review Gigs</h2>
-                  <p>Check if our version of history matches your recollections.</p>
-                  <p><a class="btn">Go &raquo;</a></p> 
-              </div>
-          </div>
-          <div class="row-fluid">
-              <div class="span12">
-                  {% load discovery %}
-                  {% recent_edits model="gig" num_edits="6"%}
-              </div>
-          </div>
+{% extends "portal/portal_min_base.html" %}
+{% block beforecontainer %}
+<div class="front-page-banner container">
+</div>
 {% endblock %}
+<!-- <div id="home"> -->
+
+{% block mainbody %}
+<div class="row homebody">
+  <div class="span6" id="home-intro">
+    <h1>HEADING LEVEL 1</h1> 
+    <p>
+
+    The Ultimate Gig Guide (TUGG) tracks the history of the live music scene
+    in Melbourne from organised dance hall events, to discos and the
+    thriving pub music scene of today.</p>
+  </div> 
+  <div class="span6" id="home-search">
+    {% load searchform %}
+    {% search_form large %}  
+  </div>
+  <div class="row">
+    <div class="span12">
+      <div class="horizontal-divider"></div>
+    </div>
+  </div>
+  <div class="row">
+      <div class="span3">
+      	  <img src="/static/img/musicphoto1-bw.jpg" class="img-rounded"
+      	  style="height:120px"/>
+          <h2>Browse Gigs</h2>
+          <p>Start exploring Melbourne's rich music history here.</p>
+          <p><a class="btn btn-primary" href="index">Go &raquo;</a></p> 
+      </div>
+      <div class="span3 vapourware">
+      	  <img src="/static/img/cowboys-bw.jpg" class="img-rounded"
+      	  style="height:120px;"/>
+          <h2>Add Gigs</h2>
+          <p>Contribute contemporary gig listings or upload your own spreadsheets.</p>
+          <p><a class="btn">Go &raquo;</a></p> 
+      </div>
+      <div class="span3 vapourware">
+          <img src="/static/img/musicphoto3-bw-fade.jpg" class="img-rounded"
+          style="height:120px;"/>
+          <h2>Review Gigs</h2>
+          <p>Check if our version of history matches your recollections.</p>
+          <p><a class="btn">Go &raquo;</a></p> 
+      </div>
+      <div class="span3 vapourware">
+          <img src="/static/img/musicphoto3-bw-fade.jpg" class="img-rounded"
+          style="height:120px;"/>
+          <h2>Review Gigs</h2>
+          <p>Check if our version of history matches your recollections.</p>
+          <p><a class="btn">Go &raquo;</a></p> 
+      </div>
+  </div>
+  <div class="row-fluid">
+      <div class="span12">
+          {% load discovery %}
+          {% recent_edits model="gig" num_edits="6"%}
+      </div>
+  </div>
+</div>
+{% endblock %}
+<!-- </div> -->
