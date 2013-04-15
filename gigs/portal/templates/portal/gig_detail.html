@@ -8,7 +8,7 @@
   <h2>Gig Info</h2>
   <div class="well">
       <a href="{% url portal_gig_detail gig.id %}">{{gig}}</a>
-    <p><strong>start time:</strong> {{gig.start|date:"l, M j, o"}}</p>
+    <p><strong>start time:</strong> {{gig.start|date:"l, M j, Y"}}</p>
   </div>
 </div>
 <div id="gig-children" class="row-fluid">
