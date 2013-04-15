@@ -1,18 +1,32 @@
 {{object.name}}
+{{object.comment}}
+{{object.finish}}
+{{object.cost}}
+{% if object.gig_type %}
+{{object.gig_type}}
+{% endif %}
+{{object.source.name}}
+{{object.source.author}}
+{{object.source.source_type.name}}
+{{object.source.added_by}}
+{{object.start|date:"D F M w Y y d/m/y d/m/Y j/n/y j/n/Y"}}
 {% for band in object.bands.all %}
 {{band.name}}
-{% for musician in band.musicians.all%}
+{% for musician in band.musicians.all %}
 {{musician.first_name}}
 {{musician.last_name}}
 {{musician.nick_name}}
 {% endfor %}
 {% endfor %}
 {{object.venue.name}}
-{{object.location.street_address}}
-{{object.location.country}}
-{{object.location.state}}
-{{object.location.postcode}}
-{{object.location.suburb}}
+{{object.venue.comment}}
+{{object.venue.location.street_address}}
+{{object.venue.location.country}}
+{{object.venue.location.state}}
+{{object.venue.location.post_code}}
+{{object.venue.location.suburb}}
+{{object.venue.location.building_name}}
+{{object.venue.location.comment}}
 {% for genre in object.genres.all %}
 {{genre.name}}
 {% endfor %}
