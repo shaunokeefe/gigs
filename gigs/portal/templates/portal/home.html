@@ -5,10 +5,12 @@
 {% endblock %}
 <!-- <div id="home"> -->
 
+{% block bodyid %}id="home"{% endblock %}
+
 {% block mainbody %}
 <div class="row homebody">
   <div class="span6" id="home-intro">
-    <h1>HEADING LEVEL 1</h1> 
+    <h1>What’s inside?  </h1> 
     <p>
 
     The Ultimate Gig Guide (TUGG) tracks the history of the live music scene
@@ -24,37 +26,26 @@
       <div class="horizontal-divider"></div>
     </div>
   </div>
-  <div class="row">
-      <div class="span3">
-      	  <img src="/static/img/musicphoto1-bw.jpg" class="img-rounded"
-      	  style="height:120px"/>
-          <h2>Browse Gigs</h2>
-          <p>Start exploring Melbourne's rich music history here.</p>
-          <p><a class="btn btn-primary" href="index">Go &raquo;</a></p> 
+  <div class="row" id="home-action-boxes">
+      <div class="span3" id="gig-search">
+          <p>Remember that gig where you saw that band that time?</p>
+          <h2>Gig Search</h2>
       </div>
-      <div class="span3 vapourware">
-      	  <img src="/static/img/cowboys-bw.jpg" class="img-rounded"
-      	  style="height:120px;"/>
-          <h2>Add Gigs</h2>
-          <p>Contribute contemporary gig listings or upload your own spreadsheets.</p>
-          <p><a class="btn">Go &raquo;</a></p> 
+      <div class="span3" id="lucky-tugging">
+          <h2><span class="word-lucky">Lucky</span><span class="word-tugging">Tugging</span></h2>
+          <p>Take a lucky dip into the past!</p>
       </div>
-      <div class="span3 vapourware">
-          <img src="/static/img/musicphoto3-bw-fade.jpg" class="img-rounded"
-          style="height:120px;"/>
-          <h2>Review Gigs</h2>
-          <p>Check if our version of history matches your recollections.</p>
-          <p><a class="btn">Go &raquo;</a></p> 
+      <div class="span3" id="join-the-party">
+          <h2><span class="word-join-the">Join the</span><span class="word-party">Party</span></h2>
+          <p><img src="/static/css/images/elements/call-to-action-button-white-up.png" />
+          Contribute to TUGG!</p>
       </div>
-      <div class="span3 vapourware">
-          <img src="/static/img/musicphoto3-bw-fade.jpg" class="img-rounded"
-          style="height:120px;"/>
-          <h2>Review Gigs</h2>
-          <p>Check if our version of history matches your recollections.</p>
-          <p><a class="btn">Go &raquo;</a></p> 
+      <div class="span3" id="tugging-the-data">
+          <h2>Tugging the Data</h2>
+          <p>What does it all mean?</p>
       </div>
   </div>
-  <div class="row-fluid">
+  <div class="row" id="recent-tugging">
       <div class="span12">
           {% load discovery %}
           {% recent_edits model="gig" num_edits="6"%}
