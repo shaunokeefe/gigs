@@ -129,8 +129,9 @@ def basic_search(request, template='search/search.html', load_all=True, form_cla
         if value:
             start, to, end, gap = value.strip('[]').split()
             results = results.narrow(u'%s:[%s TO %s+%s]' % (field, start, start, gap))
-
-    results = results.order_by(*sort_by)
+    if not sort_by == ['tmp']:
+        results = results.order_by(*sort_by)
+    results = results.order_by('-score')
     if not template:
         return results
     count = results.count()
