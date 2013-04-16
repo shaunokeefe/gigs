@@ -5,14 +5,14 @@
     </div>
     {% for facet in facets|slice:":5" %}
       {% if facet.1 %}
-      <li><a href="{{full_path}}?{% for f in selected_facets %}selected_facets={{f}}&{% endfor %}{% for f in selected_date_facets %}selected_date_facets={{f}}&{% endfor %}selected_date_facets=start:[{{facet.3|urlencode}} TO {{facet.3|urlencode}}{{facet.2|urlencode}}]">{{facet.0}}({{facet.1}})</a></li> 
+      <li><a href="{{full_path}}?{% for f in selected_facets %}selected_facets={{f}}&{% endfor %}{% for f in selected_date_facets %}selected_date_facets={{f}}&{% endfor %}selected_date_facets=start:[{{facet.3|urlencode}} TO {{facet.3|urlencode}}{{facet.2|urlencode}}]">{{facet.0}} ({{facet.1}})</a></li> 
       {% endif %}
       {% endfor %}
       <div id='collapse-{{facet_name}}-facets' class='accordion-body collapse'> 
       <div class='accordian-inner'> 
       {% for facet in facets|slice:"5:" %}
       {% if facet.1 %}
-      <li><a href="{{full_path}}?{% for f in selected_facets %}selected_facets={{f}}&{% endfor %}{% for f in selected_date_facets %}selected_date_facets={{f}}&{% endfor %}selected_date_facets=start:[{{facet.3|urlencode}} TO {{facet.3|urlencode}}{{facet.2|urlencode}}]">{{facet.0}}({{facet.1}})</a></li> 
+      <li><a href="{{full_path}}?{% for f in selected_facets %}selected_facets={{f}}&{% endfor %}{% for f in selected_date_facets %}selected_date_facets={{f}}&{% endfor %}selected_date_facets=start:[{{facet.3|urlencode}} TO {{facet.3|urlencode}}{{facet.2|urlencode}}]">{{facet.0}} ({{facet.1}})</a></li> 
       {% endif %}
       {% endfor %}
       </div>

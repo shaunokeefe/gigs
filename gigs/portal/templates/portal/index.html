@@ -114,9 +114,8 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 
 {% block content %}
 <div class="row-fluid">
-    <h1>Gig List</h1>
+    <h1>The Gig List</h1>
     <br>
-    {% include "search/search_form.html" %}  
 </div>
 <br>
 <div class="row-fluid">
@@ -142,3 +141,7 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 </div>
 {% endblock %}
 
+{% block right-bar %}
+    Right stuff.
+    {% include "search/search_form.html" %}  
+{% endblock %}
