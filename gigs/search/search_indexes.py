@@ -1,10 +1,11 @@
 from gigs.gig_registry.models import Gig
 from haystack.indexes import RealTimeSearchIndex, \
-    CharField, DateField, FloatField, MultiValueField
+    CharField, DateField, FloatField, MultiValueField, \
+    EdgeNgramField
 from haystack import site
 
 class GigIndex(RealTimeSearchIndex):
-    text = CharField(document=True, use_template=True)
+    text = EdgeNgramField(document=True, use_template=True)
     tmp = CharField()
     start = DateField(model_attr='start', faceted=True)
     venue_name = CharField(model_attr='venue__name', faceted=True)
