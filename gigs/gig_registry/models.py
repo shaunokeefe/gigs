@@ -148,7 +148,7 @@ class Location(models.Model):
     created_at = models.DateField(default=datetime.date.today)
     updated_at = models.DateField(blank=True, null=True)
     # this will be replaced with geodjango
-    building_name = models.DateField(max_length=150, blank=True, null=True)
+    building_name = models.CharField(max_length=150, blank=True, null=True)
     street_address = models.CharField(max_length=150)
     country = models.CharField(max_length=150)
     state = models.CharField(max_length=150)
