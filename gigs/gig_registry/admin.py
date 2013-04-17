@@ -83,6 +83,11 @@ class GigAdmin(TablibAdmin):
 
     filter_horizontal = ('bands',)
     list_filter = ('venue', 'bands',)
+    def get_gig_type(obj):
+        return "%s" % (obj.gig_type.name)
+    get_gig_type.short_description = 'Gig type'
+    list_display = ['venue', 'name', 'start', 'cost', get_gig_type]
+    search_fields = ['name', 'venue__name', 'comment']
 
 def get_location_id(venue):
     return venue.location.id
@@ -94,7 +99,7 @@ class VenueAutofillUUIDForm(AutofillUUIDForm):
 class VenueAdmin(TablibAdmin):
     form = VenueAutofillUUIDForm
 
-    list_display = ['name', 'location']
+    list_display = ['name', 'location', 'established', 'venue_type', 'status']
 
     formats = ['csv', 'xls']
     headers={
@@ -114,10 +119,13 @@ class LocationAutofillUUIDForm(AutofillUUIDForm):
 
 class LocationAdmin(TablibAdmin):
     form =  LocationAutofillUUIDForm
+    list_display = ['street_address', 'building_name', 'suburb', 'state', 'post_code', 'lat', 'lon']
+    list_filter = ('suburb', 'post_code', 'state', 'building_name')
     fieldsets = [
             ('Address',
                 {'fields':
                     [
+                        'building_name',
                         'street_address',
                         'suburb',
                         'state',
@@ -145,6 +153,7 @@ class LocationAdmin(TablibAdmin):
         ]
 
     formats = ['csv', 'xls']
+    search_fields = ['street_address', 'suburb', 'post_code', 'state', 'building_name', 'comment']
 
 admin.site.register(models.Band, BandAdmin)
 admin.site.register(models.Musician, MusicianAdmin)
