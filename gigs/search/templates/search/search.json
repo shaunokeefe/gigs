@@ -7,12 +7,12 @@
     {% with search_result.object as gig %}
     [
         "<a href='{% url portal_gig_detail gig.id %}'><i class='icon-zoom-in'></i></a>",
-        "{{gig.start|date:'l, M j, Y'}}",
+         "<div class='accordian' id='band-list-accordian'><div class='accordian-group'>{% for band in gig.bands.all %}{% if forloop.first %}<div class 'accordian-heading'><a href='{% url portal_band_detail band.id %}'>{{band.name}}</a> {% if gig.bands.count|add:-1%}<a class='accordian-toggle' data-toggle='collapse' data-parent='#band-list-accordian' href='#collapse-{{gig.id}}'>({{gig.bands.count|add:-1}} other{{gig.bands.count|add:-1|pluralize}})</a> {% endif %} </div> <div id='collapse-{{gig.id}}' class='accordion-body collapse'> <div class='accordian-inner'> {% else %} <a href='{% url portal_band_detail band.id %}'>{{band.name}}</a><br/> {% endif %} {% endfor %}</div></div></div></div>",
         "<a href='{% url portal_venue_detail gig.venue.id %}'>{{gig.venue.name}}</a>",
-     "<div class='accordian' id='band-list-accordian'><div class='accordian-group'>{% for band in gig.bands.all %}{% if forloop.first %}<div class 'accordian-heading'><a href='{% url portal_band_detail band.id %}'>{{band.name}}</a> {% if gig.bands.count|add:-1%}<a class='accordian-toggle' data-toggle='collapse' data-parent='#band-list-accordian' href='#collapse-{{gig.id}}'>({{gig.bands.count|add:-1}} other{{gig.bands.count|add:-1|pluralize}})</a> {% endif %} </div> <div id='collapse-{{gig.id}}' class='accordion-body collapse'> <div class='accordian-inner'> {% else %} <a href='{% url portal_band_detail band.id %}'>{{band.name}}</a><br/> {% endif %} {% endfor %}</div></div></div></div>",
-    "<a href='{% url portal_gig_detail gig.id %}'>{% if gig.name %}{{gig.name}}{% else %}(None){% endif %}</a>",
-    "{% if gig.cost %}{{gig.cost}}{% else %}(Not specified){% endif %}",
-       "<a href='{% url portal_venue_detail gig.venue.id %}'>{{gig.venue.location}}</a>"
+        "{{gig.start|date:'l, M j, Y'}}",
+        "<a href='{% url portal_gig_detail gig.id %}'>{% if gig.name %}{{gig.name}}{% else %}(None){% endif %}</a>",
+        {% comment %}"{% if gig.cost %}{{gig.cost}}{% else %}(Not specified){% endif %}",{% endcomment %}
+        "<a href='{% url portal_venue_detail gig.venue.id %}'>{{gig.venue.location}}</a>"
     ]
     {% if not forloop.last%}
     ,
