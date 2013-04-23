@@ -1,62 +1,11 @@
 {% extends "portal/portal_min_base.html" %}
 
-{% block navbar %}
-    <!-- Navbar
-    ================================================== --> 
-    <div class="navbar container navbar-fixed-top"> 
-      <div class="navbar-inner"> 
-        <div class="container"> 
-          <a class="brand" href="{% url home %}">TUGG</a>
-          <a class="btn btn-navbar text-right" data-toggle="collapse" data-target=".nav-collapse"> 
-            <span class="icon-bar"></span> 
-            <span class="icon-bar"></span> 
-            <span class="icon-bar"></span> 
-          </a> 
-          <div class="nav-collapse pull-right"> 
-            <ul class="nav"> 
-              <li><a href="{% url about %}">About</a></li> 
-              <li><a href="{% url contact%}">Contact</a></li> 
-            <li>
-            <div class="dropdown" id="login-btn-div">
-                {% if user.is_authenticated %}
-                <a class=" dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="icon-user"></i>{{user.username}}
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><i class="icon-signout"></i><a href="{% url logout %}">Sign Out</a></li>
-              </ul>
-              {% else %}
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="icon-user"></i>Log in
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" style="padding: 15px; padding-bottom: 0px">
-                  <li>
-                    <form action="{% url login %}" method="post">
-                      {% csrf_token %}
-                        <input type="text" name="username" placeholder="User Name"/> 
-                        <input type="password" name="password" placeholder="Password"/> 
-                        <input class="btn btn-primary" type="submit"/> 
-                    </form>
-                  </li>
-              </ul>
-              {% endif %}
-
-            </div>
-            </li>
-            </ul>
-            <!--<form class="navbar-search pull-right" action="{% url search_index %}">
-              <input type="text" name="q" class="search-query" placeholder="Search...">
-          </form>-->
-          </div><!-- nav-collapse -->
-        </div><!-- container-fluid -->
-      </div><!-- navbar-inner -->
-    </div><!-- navbar -->
-{% endblock %}
+{% block bodyid %}id="not-home"{% endblock %}
 
 {% block mainbody %}
       <div id="middle" class="row">
+        {% include "portal/social_media_buttons.html" %}
+
         <div class="span2">
           {% block sidebar %}
           {% comment %}
@@ -76,13 +25,14 @@
             
           </div>
           {% endcomment %}
+          &nbsp;
           {% endblock %}
         </div> <!-- end sidebar-->
-        <div id=content class="span7">
+        <div id=content class="span{% block middle-width %}7{% endblock %}">
           {% block content %}
           {% endblock %}
         </div> <!-- content-->
-        <div id="right-col" class="span3">
+        <div id="right-col" class="span{% block right-width %}3{% endblock %}">
 	  {% block right-bar %}
           {% endblock %}
         </div>
