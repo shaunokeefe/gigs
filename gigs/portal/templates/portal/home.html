@@ -1,6 +1,7 @@
 {% extends "portal/portal_min_base.html" %}
 {% block beforecontainer %}
 <div class="front-page-banner container">
+{% include "portal/social_media_buttons.html" %}
 </div>
 {% endblock %}
 <!-- <div id="home"> -->
@@ -23,14 +24,16 @@
   </div>
   <div class="row">
     <div class="span12">
-      <div class="horizontal-divider"></div>
+      <hr />
     </div>
   </div>
   <div class="row" id="home-action-boxes">
+      <a href="/index">
       <div class="span3" id="gig-search">
           <p>Remember that gig where you saw that band that time?</p>
           <h2>Gig Search</h2>
       </div>
+      </a>
       <div class="span3" id="lucky-tugging">
           <h2><span class="word-lucky">Lucky</span><span class="word-tugging">Tugging</span></h2>
           <p>Take a lucky dip into the past!</p>

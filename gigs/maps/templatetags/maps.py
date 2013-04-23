@@ -125,7 +125,7 @@ class GigSearchMapNode(MapNode):
         return rendered_form
 
 def do_map(parser, token):
-    
+    ###TODO add height/width parameters here.   
     try:
         tag_name, instances = token.split_contents()
     except ValueError:

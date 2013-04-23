@@ -4,16 +4,29 @@
 
 {% block content %}
 <div id="bands-divider" class="span6">
-  <h1><a href = "{% url portal_band_detail band.id %}">{{band.name}}</a></h1>
-  <h2>Members</h2>
-  {% if band.members.count %}
-    {% for member in band.members.all %}
-    <p>{{member}}</p>
-    {% endfor %}
-  {% else %}
-  <p>No members currently listed</p>
-  {% endif %}
-  <br/>
+  <h2>Band details</h2>
+    Band name: <b><a href = "{% url portal_band_detail band.id %}">{{band.name}}</a></b>
+    <table>
+      <tr>
+        <td>
+          Years performing
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Members
+        </td>
+        <td>
+        {% if band.members.count %}
+          {% for member in band.members.all %}
+          <p>{{member}}</p>
+          {% endfor %}
+        {% else %}
+        <p>No members currently listed</p>
+        {% endif %}
+        </td>
+      </tr>
+    </table>
   {% bands_played_with band %}
   {% if band|has_locations %}
   <h2>Gigs played</h2>
