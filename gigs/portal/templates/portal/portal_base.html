@@ -30,10 +30,13 @@
         <div id=content class="span{% block middle-width %}7{% endblock %}">
           {% block content %}
           {% endblock %}
+
         </div> <!-- content-->
-        <div id="right-col" class="span{% block right-width %}3{% endblock %}">
-	  {% block right-bar %}
+        <div class="right-col span{% block right-width %}3{% endblock %}">
+	        {% block right-bar %}
           {% endblock %}
         </div>
       </div> <!-- middle-->
+      {% block bottom %}
+      {% endblock %}
 {% endblock %}

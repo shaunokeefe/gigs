@@ -1,8 +1,9 @@
-{% extends "portal/portal_base.html" %}
+{% extends "portal/portal_detail.html" %}
 {% load maps %}
 {% block content %}
-<div id="venue-info" class="row-fluid">
-  <h1><a href="{% url portal_venue_detail venue.id %}">{{venue.name}}</a></h1>
+<div id="venue-info" class="row">
+  <h2>Venue details</h2>
+  <h3>{{venue.name}}</h2>
   <div id="venue" class="span12">
     <dl>
       <dt>Status</dt> 
@@ -14,7 +15,7 @@
     </dl>
   </div><!-- venue-->
       <h2>Location</h2>
-  <div id="location-info" class="row-fluid"> 
+  <div id="location-info" class="row"> 
     <div id="location-text" class="span6">
       {% if venue|has_locations %}
       {% with venue.location as location %}
@@ -30,4 +31,10 @@
       {% endif %}
   </div><!-- location-info -->
 </div><!-- venue-info -->
+
+{% endblock %}
+
+{% block right-bar %}
+    {% map venue %}
+    {% search_map page.object_list %}
 {% endblock %}
