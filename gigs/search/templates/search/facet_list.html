@@ -1,5 +1,5 @@
 {% for facet in facet_list %}
-<span class="label">
+<span class="facet label">
     <a href="{{full_path}}?{% if query %}q={{query}}&{% endif %}{{ facet.other_facets.render_url }}">{{facet.value}}<i class="icon-remove"></i></a>
-</span><br>
+</span>
 {% endfor %}

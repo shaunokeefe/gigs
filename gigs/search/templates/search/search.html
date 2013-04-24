@@ -132,11 +132,10 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 <div class="row">
     <h2>Gig List</h2>
 </div>
+{% current_facet_list request.get_full_path selected_facets selected_date_facets %}
 <div class="row">
   <table class="table" id="index-table">
     <thead>
-        <!--         <tr><th></th><th>Date</th/><th>Venue Name</th><th>Bands</th><th>Gig Name</th/><th>Cost</th/><th>Address</th/></tr> -->
-
         <tr><th></th><th>Gig Name</th/><th>Venue</th><th>Date/time</th/></tr>
     </thead>
     <tbody>
