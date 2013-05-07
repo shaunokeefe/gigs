@@ -41,8 +41,8 @@
     <meta name="description" content="">
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css?{% now "U" %}">
     <link rel="stylesheet" href="/static/css/default.css?{% now "U" %}">
+    {% block extraheader %}{% endblock %}
     <!-- <link rel="text/css" href="http://fonts.googleapis.com/css?family=Fjalla+One|Lobster|Magra" /> -->
-
   </head>
   <body {% block bodyid %}{% endblock %}>
     {% block navbar %}
@@ -110,10 +110,13 @@
 
     {% block footer %}
       <footer> 
-        <!-- <p>&copy; Deakin University, VeRSI 2012</p>  -->
         <div id="footer-image" >
           <p>
-          asanothuonethu otuehs ontu oesnuho nsteo usnotehu seohu sneouh ntoeh utnoehusnouh seou hnuh otuhnouth 
+          <img src="/static/css/images/cc-by-nd-sa.png" class="creative-commons"/> 
+          Website content and data by <a href="http://www.deakin.edu.au">Deakin University</a>.<br/> Licensed under
+          <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/au/">Creative Commons BY-ND-SA 3.0 Australia</a>.
+
+
         </p>
         </div>
       </footer> 
@@ -121,16 +124,7 @@
     </div><!--container-->
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-    <!--
-    <script src="https://github.com/dbushell/Socialite/raw/master/socialite.min.js"></script>
-    <script>
-    $(document).ready(function() {
-      Socialite.load($(".social-media-box"));
-    });
-    </script>
-  -->
     <script type="text/javascript">var switchTo5x=false;</script>
-    <!--<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>-->
     <script type="text/javascript" src="/static/buttons.js"></script>
     <script type="text/javascript">
     stLight.options({publisher: "ur-24e62f76-1f66-e3aa-1190-c533b729ca11", doNotHash: true, doNotCopy: true, hashAddressBar: false});

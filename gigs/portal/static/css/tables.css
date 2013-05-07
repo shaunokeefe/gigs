@@ -1,0 +1,116 @@
+table.table thead .sorting,
+table.table thead .sorting_asc,
+table.table thead .sorting_desc,
+table.table thead .sorting_asc_disabled,
+table.table thead .sorting_desc_disabled {
+cursor: pointer;
+    *cursor: hand;
+}
+ 
+table.table thead .sorting { background: url('images/sort_both.png') no-repeat center right; }
+table.table thead .sorting_asc { background: url('images/sort_asc.png') no-repeat center right; }
+table.table thead .sorting_desc { background: url('images/sort_desc.png') no-repeat center right; }
+ 
+table.table thead .sorting_asc_disabled { background: url('images/sort_asc_disabled.png') no-repeat center right; }
+table.table thead .sorting_desc_disabled { background: url('images/sort_desc_disabled.png') no-repeat center right; }
+
+div.dataTables_length {
+	    /*###TODO what do we do about this? */
+    display: none;
+
+}
+
+div.dataTables_length label {
+    width: 460px;
+    float: left;
+    text-align: left;
+}
+ 
+div.dataTables_length select {
+    width: 75px;
+}
+ 
+div.dataTables_filter label {
+    float: right;
+    width: 460px;
+}
+ 
+div.dataTables_info {
+    padding-top: 8px;
+}
+ 
+div.dataTables_paginate {
+    float: right;
+    margin: 0;
+}
+ 
+table {
+    margin: 1em 0;
+    clear: both;
+}
+
+.dataTable thead tr {
+	background: black;
+	color: white;
+	font: bold 13px Magra;
+}
+
+.dataTable tbody tr {
+	/*background: black;*/
+	color: black;
+	font: 13px Magra;
+}
+
+.dataTable tbody tr a {
+	color: #0A5B4D;
+}
+
+.dataTable tbody tr a:hover {
+	color: #34B9A3;
+}
+
+.dataTable tbody tr:hover td,
+.dataTable tbody tr:hover th {
+    background-color: #0A5B4D;
+    color: white;
+}
+
+.dataTable tbody tr:hover td a,
+.dataTable tbody tr:hover th a {
+    color: black;
+}
+
+
+#download-csv-btn {
+    background-image: url('/static/css/images/elements/download-icon.png');
+    background-color: rgba(0,0,0,0);
+    border-style: none;
+    width:20px;
+    height:20px;
+}
+
+.pagination a { 
+    /* border-style: none; */
+    line-height: 12px;
+    padding: 2px 2px 4px 2px;
+    background-color: white;
+    border-radius:2px;
+    margin-left: 2px;
+    margin-right: 2px;
+    border: 1px solid #cce;
+}
+
+.pagination .active a {
+    background: hsl(161,60%,45%);
+    color: white;
+}
+
+.prev a,.next a { border-style: none; background:none;}
+
+.pagination ul {
+    /* Should probably kill this somewhere else. */
+    box-shadow:none;
+    -webkit-box-shadow:none;
+    -moz-box-shadow:none;
+
+}

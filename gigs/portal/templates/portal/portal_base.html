@@ -1,6 +1,12 @@
 {% extends "portal/portal_min_base.html" %}
 
 {% block bodyid %}id="not-home"{% endblock %}
+
+{% block extraheader %} 
+   <link rel="stylesheet" href="/static/css/tables.css?{% now "U" %}">
+{% endblock %}
+
+
 {% block mainbody %}
       <div id="middle" class="row">
         {% include "portal/social_media_buttons.html" %}

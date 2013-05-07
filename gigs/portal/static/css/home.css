@@ -1,0 +1,199 @@
+/* Home page (/index.html) only */
+
+#home .container.mainbody { 
+	/* border: 4px solid hsl(50, 50%, 70%);*/
+	border-image-source: url('images/elements/borders-combined-8bit.png');
+	border-image-slice: 8 8 8 8;
+	border-image-width: 8px;
+	border-image-repeat: repeat;
+	border-image-outset: 8px;
+    border-width: 1px; /* ugh, firefox ignores this. Chrome adds this to
+									  border-image-width, so it should be 0 - but if it's 0 it doesn't show the border at all. */
+	background-image:url('images/elements/paper-texture-bg.jpg');
+	background-repeat: repeat;
+	width: 964px;
+	margin-top: 0px; /* no navbar, no margin. */
+}
+
+.homebody{
+	padding: 1em;
+}
+
+.homebody hr {
+	width: auto;
+}
+
+.homebody .span6 { 
+	width: 459px; /* ugh. the default is 460px, but with maincontent's fancy border, that *just* causes wrappage. */
+}
+
+.front-page-banner {
+	background-image:url('images/elements/top-TUGG-banner.png');
+	width: 980px;
+	height: 260px;
+}
+
+.hero-unit {
+	background-color: rgb(53,194,115); /* grass green */
+}
+
+
+#home-intro {
+	box-sizing: border-box;
+}
+#home-intro p{
+	font-family: "Fjalla One";
+	font-size: 16px;
+	font-weight: normal;
+	color: #000;
+	padding: 20px;
+}
+
+#home-intro h1 {
+	padding-left: 20px;
+	text-transform: uppercase;
+	margin-top:34px;
+}
+
+#home-search {
+	background-image: url('images/elements/search-BG-flat-crop.png');
+	height: 162px;
+	width: 412px; 
+	border-radius: 4px;
+	box-shadow: 4px 4px 4px gray;
+
+	/*box-sizing: border-box;  /* Risky maybe... not supported < IE8, may conflict with Bootstrap? */
+	padding: 20px;
+	/*border-radius: 4px;
+	box-shadow: 4px 4px 4px 0px #333; */
+}
+#home-search p, #home-search h1 {
+	/*padding: 1em;*/
+}
+
+#home-search h1 {
+	color: white;
+	text-transform: uppercase;
+
+}
+
+#home-search button 
+/* On the front page, the button sits flush up against its input, hanging over with a glyph thing. */
+{
+	text-transform: uppercase;
+	margin-left: -4px;
+	text-transform: uppercase;
+	border:none;
+	border-radius:0;
+	-webkit-border-radius:0;
+	background: hsl(345, 80%,50%);
+	color: white;
+	padding: 6px 20px
+}
+
+#home-search input {
+	background-image:url('images/elements/left-arrow-search-bar.png');
+	background-repeat: no-repeat;
+	background-position: right;
+	border:none;
+	padding: 6px 20px
+}
+
+#home-search p {
+	font-family: 'Lobster';
+	font-size: 16px;
+	padding-top: 10px;
+	font-weight: bold;
+}
+
+/* The four major entry point boxes. */
+
+#home-action-boxes {
+	margin-left: 20px; /* bootstrap has this as -20px. Probably doing something very wrong here. */
+}
+
+#home-action-boxes div {
+	width: 210px;
+	height: 210px;
+}
+
+#home-action-boxes h2 {
+	font-family: Fjalla One;
+	text-transform: uppercase;
+	font-size: 42px;
+	font-weight: bold;
+	margin-left: 5px;
+	margin-top: 8px;
+	margin-bottom: 5px;
+}
+
+#home-action-boxes p {
+	font-family: Lobster;
+	font-size: 16px;
+	margin-left: 5px;
+}
+
+
+
+#gig-search {
+	background-image: url('images/elements/gig-search.png');
+}
+
+#gig-search h2 { 
+	color: white; text-shadow: 2px 2px 2px black;
+	margin-left: 5px;
+}
+#gig-search p { 
+	color: black; background-color: #Fbfff0; /* yellowish tinted white, my guess */
+    width: 60%;
+    /* quirky offsetting for this text */
+    font-size: 16px;
+    padding: 4px;
+    margin: 85px 20px 15px 3px;
+    text-align: center;
+}
+
+
+#lucky-tugging {
+	background-image: url('images/elements/lucky-tugging.png');
+}
+
+#lucky-tugging h2 { 
+	color: #c5c702; /* dull yellow */
+	margin:  104px 0px 0px 8px;
+}
+#lucky-tugging p { 
+	color: white; 
+	/* this text can clash with background */
+	text-shadow: 1px 0px 2px black;
+}
+.word-tugging { 
+	font-size: 70%; 
+	display: block; 
+	clear: left;/* probably not the right way to force a new line */}
+
+#join-the-party {
+	background-image: url('images/elements/join-the-party.png');
+}
+
+#join-the-party h2 { color: #228f72; /* teal */}
+#join-the-party p { color: white;}
+
+.word-join-the { font-size: 70%; display: block; clear: left;}
+
+
+#tugging-the-data {
+	background-image: url('images/elements/tugging-the-data.png');
+}
+
+#tugging-the-data h2 {
+	color:  #ac0230; /* scarlet */ text-shadow: 2px 2px 2px black;
+	margin: 10px 10px 10px 10px;
+
+}
+#tugging-the-data p { 
+	color: white; background: black;
+	display: inline-block;
+	padding: 2px;
+}
+
