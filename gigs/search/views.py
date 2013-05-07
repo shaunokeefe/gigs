@@ -1,6 +1,4 @@
 from django.conf import settings
-from haystack.views import FacetedSearchView#, basic_search
-from gigs.search.models import SearchQueryRecord
 
 from django.core.paginator import Paginator, InvalidPage
 from django.http import Http404
@@ -8,6 +6,10 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from haystack.forms import ModelSearchForm
 from haystack.query import EmptySearchQuerySet, SearchQuerySet
+from haystack.views import FacetedSearchView#, basic_search
+
+from gigs.search.models import SearchQueryRecord
+from gigs.search.facets import FacetSet
 
 class LoggedSearchView(FacetedSearchView):
 
@@ -35,8 +37,9 @@ class LoggedSearchView(FacetedSearchView):
 
     def extra_context(self):
         extra = super(LoggedSearchView, self).extra_context()
-        extra['selected_facets'] = self.request.GET.getlist('selected_facets')
-        extra['selected_date_facets'] = self.request.GET.getlist('selected_date_facets')
+        selected_facets = self.request.GET.getlist('selected_facets')
+        selected_date_facets = self.request.GET.getlist('selected_date_facets')
+        extra['selected_facets'] = FacetSet(facet_string_list=selected_facets, date_facet_string_list=selected_date_facets)
         return extra
 
 column_name_map = {
@@ -102,33 +105,31 @@ def basic_search(request, template='search/search.html', load_all=True, form_cla
     query = ''
     results = EmptySearchQuerySet()
 
+    for key in ('search_results_query', 'selected_facets'):
+        try:
+            del request.session[key]
+        except:
+            pass
+
     if request.GET.get('q'):
         form = form_class(request.GET, searchqueryset=searchqueryset, load_all=load_all)
 
         if form.is_valid():
             query = form.cleaned_data['q']
+            request.session['search_results_query'] = query
             results = form.search()
     else:
         form = form_class(searchqueryset=searchqueryset, load_all=load_all)
         results = SearchQuerySet().all()
 
     selected_facets = request.GET.getlist('selected_facets')
-    for facet in selected_facets:
-        if ":" not in facet:
-            continue
-        field, value = facet.split(":", 1)
-        if value:
-            results = results.narrow(u'%s:"%s"' % (field, results.query.clean(value)))
-
     selected_date_facets = request.GET.getlist('selected_date_facets')
-    for facet in selected_date_facets:
-        if ":" not in facet:
-            continue
-        field, value = facet.split(":", 1)
+    selected_facets = FacetSet(facet_string_list=selected_facets,
+            date_facet_string_list=selected_date_facets)
 
-        if value:
-            start, to, end, gap = value.strip('[]').split()
-            results = results.narrow(u'%s:[%s TO %s+%s]' % (field, start, start, gap))
+    request.session['selected_facets'] = selected_facets
+    results = selected_facets.narrow(results)
+
     if not sort_by == ['tmp']:
         results = results.order_by(*sort_by)
     results = results.order_by('-score')
@@ -139,6 +140,7 @@ def basic_search(request, template='search/search.html', load_all=True, form_cla
 
     try:
         page = paginator.page(int(request.GET.get('page', 1)))
+        request.session['page'] = page
     except InvalidPage:
         raise Http404("No such page of results!")
 

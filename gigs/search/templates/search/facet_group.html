@@ -3,17 +3,17 @@
     <div class='accordian-heading'>
         <li class="nav-header">{{facet_name}}<a class='accordian-toggle' data-toggle='collapse' data-parent='#{{facet_name}}-facet-accordian' href='#collapse-{{facet_name}}-facets'>(more)</a></li>
     </div>
-    {% for facet in facets|slice:":5" %}
-      {% if facet.1 %}
-      <li><a href="{{full_path}}?{% for f in selected_facets %}selected_facets={{f}}&{% endfor %}{% for f in selected_date_facets %}selected_date_facets={{f|urlencode}}&{% endfor %}selected_facets={{facet_name}}:{{facet.0|urlencode }}">{{facet.0}}({{facet.1}})</a></li> 
+    {% for facet in facets_new|slice:":5" %}
+      {% if facet.count %}
+      <li><a href="{{full_path}}?q={{query}}&{{ facet.to_select.render_url }}">{{facet.value}}({{facet.count}})</a></li> 
       {% endif %}
-      {% endfor %}
-      <div id='collapse-{{facet_name}}-facets' class='accordion-body collapse'> 
+    {% endfor %}
+    <div id='collapse-{{facet_name}}-facets' class='accordion-body collapse'> 
       <div class='accordian-inner'> 
-          {% for facet in facets|slice:"5:" %}
-      {% if facet.1 %}
-      <li><a href="{{full_path}}?{% for f in selected_facets %}selected_facets={{f}}&{% endfor %}{% for f in selected_date_facets %}selected_date_facets={{f|urlencode}}&{% endfor %}selected_facets={{facet_name}}:{{facet.0|urlencode }}">{{facet.0}}({{facet.1}})</a></li> 
-      {% endif %}
+      {% for facet in facets_new|slice:"5:" %}
+        {% if facet.count %}
+        <li><a href="{{full_path}}?q={{query}}&{{ facet.to_select.render_url }}">{{facet.value}}({{facet.count}})</a></li> 
+        {% endif %}
       {% endfor %}
       </div>
     </div>

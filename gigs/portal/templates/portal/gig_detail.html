@@ -1,9 +1,11 @@
 {% extends "portal/portal_base.html" %}
 {% load maps %}
+{% load search_results %}
 
 {% block content %}
 <h1><a href="{% url portal_gig_detail gig.id %}">{{gig}}</a></h1>
 <br>
+{% search_results %}
 <div id="gig-info" class="row-fluid">
   <h2>Gig Info</h2>
   <div class="well">

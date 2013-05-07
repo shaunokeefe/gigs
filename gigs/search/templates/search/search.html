@@ -103,7 +103,7 @@ $(document).ready(function() {
         "bInfo": false,
         "bProcessing": true,
         "bServerSide": true,
-        "sAjaxSource": "{% url search_ajax %}?{% if query %}q={{query}}{% endif %}{% if selected_facets %}{% for facet in selected_facets %}&selected_facets={{facet}}{% endfor %}{% endif %}{% if selected_date_facets %}{% for facet in selected_date_facets %}&selected_date_facets={{facet}}{% endfor %}{% endif %}"
+        "sAjaxSource": "{% url search_ajax %}?{% if query %}q={{query}}&{% endif %}{{selected_facets.render_url}}"
     } );
 });
 
@@ -117,9 +117,9 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 {% load faceting %}
 <div class="well sidebar-facets">
   <ul class="nav nav-list">
-      {% facet_group facets.fields.venue_name venue_name 5 request.get_full_path  selected_facets selected_date_facets %}
-      {% facet_group facets.fields.bands bands 5 request.get_full_path selected_facets selected_date_facets %}
-      {% date_facet_group facets.dates.start date 5 request.get_full_path selected_facets selected_date_facets %}
+      {% facet_group facets.fields.venue_name venue_name 5 request.get_full_path  selected_facets  query %}
+      {% facet_group facets.fields.bands bands 5 request.get_full_path selected_facets  query %}
+      {% date_facet_group facets.dates.start date 5 request.get_full_path selected_facets query %}
   </ul>
 </div>
 {% endblock %}
@@ -130,7 +130,7 @@ $.extend($.fn.dataTableExt.oStdClasses, {
     <br>
     {% load searchform %}
     {% search_form "small" %}
-    {% current_facet_list request.get_full_path selected_facets selected_date_facets %}
+    {% current_facet_list request.get_full_path selected_facets  query %}
 </div>
 <br>
 <div class="row-fluid">
