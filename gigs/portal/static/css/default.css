@@ -209,7 +209,8 @@ hr, .horizontal-divider {
 	margin-bottom: 0; /* no gap between them */
 
 	color: black;
-	font: 16px Magra;
+	font-size: 16px;
+	font-family: 'Magra', 'Tahoma', 'Geneva', sans-serif;
 	padding-top: 20px;
 	padding-left: 20px;
 	width: 140px; /* same as the div it's in - ugly. */
@@ -241,7 +242,8 @@ hr, .horizontal-divider {
 
 .facet-caption {
 	color: #000000;
-	font: 16px Lobster;
+	font-size: 16px;
+	font-family: 'Lobster','Tahoma','Geneva',sans-serif;
 }
 
 span.label { /* facet labels with X */
@@ -291,7 +293,7 @@ span.label { /* facet labels with X */
 #footer-image p {
 	margin: 0px 300px 0px 260px;
 	padding-top: 125px;
-	font-family: 'Magra';
+	font-family: 'Magra', 'Tahoma', 'Geneva', sans-serif;
 	font-size: 11px;
 	color: #333;
 }
@@ -316,7 +318,7 @@ span.label { /* facet labels with X */
 #recent-tugging p {
 	line-height: 10px;
 	font-size: 13px;
-	font-family: Magra;
+	font-family: 'Magra', 'Tahoma', 'Geneva', sans-serif;
 	margin-bottom: 4px; /* Make the rows bunch up a bit. */
 }
 
@@ -327,7 +329,7 @@ span.label { /* facet labels with X */
 }
 
 #recent-tugging h2 {
-	font-family: Magra;
+	font-family: 'Magra', 'Tahoma', 'Geneva', sans-serif;
 	font-size: 25px;
 	font-weight: bold;
 	color: #000000;
