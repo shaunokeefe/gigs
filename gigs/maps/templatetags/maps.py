@@ -10,7 +10,8 @@ from gigs.gig_registry.models import Location, Gig, Venue, Band
 
 
 class MapForm(forms.Form):
-    map = forms.Field(widget=GoogleMap(attrs={'width':510, 'height':510}))
+    # ###TODO get these numbers right, I'm just guessing.
+    map = forms.Field(widget=GoogleMap(attrs={'width':220, 'height':220}))
 
     def has_locations(self):
         return True
@@ -124,7 +125,7 @@ class GigSearchMapNode(MapNode):
         return rendered_form
 
 def do_map(parser, token):
-    
+    ###TODO add height/width parameters here.   
     try:
         tag_name, instances = token.split_contents()
     except ValueError:

@@ -1,35 +1,66 @@
-.vapourware {
-    font-style: italic;
-	zoom: 1;
-	filter: alpha(opacity=50);
-	opacity: 0.5;
+@font-face {
+  font-family: 'Fjalla One';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Fjalla One'), local('FjallaOne-Regular'), url(http://themes.googleusercontent.com/static/fonts/fjallaone/v1/rxxXUYj4oZ6Q5oDJFtEd6r3hpw3pgy2gAi-Ip7WPMi0.woff) format('woff');
+}
+@font-face {
+  font-family: 'Lobster';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lobster'), url(http://themes.googleusercontent.com/static/fonts/lobster/v5/NIaFDq6p6eLpSvtV2DTNDQLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+}
+@font-face {
+  font-family: 'Magra';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Magra'), url(http://themes.googleusercontent.com/static/fonts/magra/v1/5mmKlSloEdHMhJ2GHKCr6KCWcynf_cDxXwCLxiixG1c.woff) format('woff');
+}
+@font-face {
+  font-family: 'Magra';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Magra Bold'), local('Magra-Bold'), url(http://themes.googleusercontent.com/static/fonts/magra/v1/YlhLowBXAVg7FJcSC0CClXYhjbSpvc47ee6xR_80Hnw.woff) format('woff');
 }
 
-#front-page-art {
-/*background-color: rgba(180, 180, 144, 0.6);
-opacity: 0.6;*/
+/************* General elements that appear anywhere ***************/
+
+body,p { 
+	font-family: 'Magra', 'Tahoma', 'Geneva', sans-serif;
+	font-size: 13px;
+	color: black;
 }
 
-.img-rounded {
-/* supported in more recent Bootstrap? */
-    border-radius: 10px;
+body {
+	background: #f7f3e4;
 }
 
-.hero-unit {
-	background-color: rgb(153,194,115); /* grass green */
+h1,h2,h3 {
+	font-family: 'Fjalla One', 'Tahoma', 'Geneva', sans-serif;
 }
 
-a {
-	color: rgb(255, 18, 94); /* magenta */
+h1 { 
+	font-size: 60px; font-weight: 100; margin-top:15px;
+}
+h2 { 
+	font-size: 30px; color: #c6c803; text-transform: uppercase;
+	letter-spacing:-2px;
+}
+h3 { 
+	font-size: 20px; color: #333; text-transform:uppercase;
+	letter-spacing:-2px;
 }
 
-a:hover {
-    color: rgb(190,10,80);
+
+
+.fancy-link {
+	font-family: 'Lobster','Tahoma','Geneva',sans-serif;
 }
+
 
 .btn-primary {
+	/* This probably needs to go - was from the previous pink/green skin */
 	background-color: rgb(255, 18, 94);
-	
 	background-image: -ms-linear-gradient(top, #08C, #05C);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(255, 18, 94)), to(rgb(255, 18, 94)));
 	background-image: -webkit-linear-gradient(top, rgb(255, 18, 94), rgb(200, 18, 60));
@@ -39,8 +70,7 @@ a:hover {
 	background-repeat: repeat-x;
 	border-color: #a52;
 	filter: progid:dximagetransform.microsoft.gradient(startColorstr='#FF88cc', endColorstr='#FF55cc', GradientType=0);
-	filter: progid:dximagetransform.microsoft.gradient(enabled=false);
-	
+	filter: progid:dximagetransform.microsoft.gradient(enabled=false);	
 }
 
 .btn-primary:hover,
@@ -52,54 +82,257 @@ a:hover {
   *background-color: #b14;
 }
 
-
 blockquote {
     border-left: none;
 }
 
 
-table.table thead .sorting,
-table.table thead .sorting_asc,
-table.table thead .sorting_desc,
-table.table thead .sorting_asc_disabled,
-table.table thead .sorting_desc_disabled {
-cursor: pointer;
-    *cursor: hand;
-}
- 
-table.table thead .sorting { background: url('images/sort_both.png') no-repeat center right; }
-table.table thead .sorting_asc { background: url('images/sort_asc.png') no-repeat center right; }
-table.table thead .sorting_desc { background: url('images/sort_desc.png') no-repeat center right; }
- 
-table.table thead .sorting_asc_disabled { background: url('images/sort_asc_disabled.png') no-repeat center right; }
-table.table thead .sorting_desc_disabled { background: url('images/sort_desc_disabled.png') no-repeat center right; }
-
-div.dataTables_length label {
-    width: 460px;
-    float: left;
-    text-align: left;
-}
- 
-div.dataTables_length select {
-    width: 75px;
-}
- 
-div.dataTables_filter label {
-    float: right;
-    width: 460px;
-}
- 
-div.dataTables_info {
-    padding-top: 8px;
-}
- 
-div.dataTables_paginate {
-    float: right;
-    margin: 0;
-}
- 
-table {
-    margin: 1em 0;
-    clear: both;
+hr, .horizontal-divider { 
+	background-image: url('images/elements/horizontal-divider-line.png');
+	width: 740px;
+	height: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 40px;
+	clear: both;
+	border:none;
 }
 
+.container { /* will need to stop this affecting other pages */
+	width: 980px;
+}
+
+.container.mainbody {
+	margin-top: 40px; /* leaving room for navbar */
+    /* 'faux columns' technique - applies to not-the-homepage. */
+    background: url('images/elements/TUGG-general-BG-faux-col.jpg') repeat-y;	
+
+}
+
+
+/******************** Specific sections *************************/
+
+/* The top "about / contact / log in" bar on every page. */
+
+#home .navbar-fixed-top {
+	/* Override 'fixed'ness for the front page - the text needs to not float over the rest of the page. */
+	position: relative;
+}
+/* Top navbar graphic (black, "TUGG" set at a jaunty angle) */
+.navbar-fixed-top .navbar-inner {
+	background-image: url('images/elements/top-nav-general-BG.png');
+	width: 980px;
+	height: 40px;
+}
+
+#home .navbar-inner {
+	/* On the home page, the nav bar floats over the title graphic. */
+	background:none;
+	right:-10px;
+	position: absolute;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+#login-btn-div {
+	display: inline-block;
+}
+
+
+.navbar .nav > li a {
+	color: white;
+	font-size: 16px;
+	text-transform:lowercase;
+}
+
+.navbar .nav > li div {
+	/* For the (dropdown) login button */
+	padding-top:10px;
+	padding-left:10px;
+}
+
+#login-btn-div .dropdown-menu {
+	background:#333;
+	right:-30px; /* Line up with right hand border...not sure if a good idea. */
+
+}
+
+/* This is a transparent, clickable div that sits over the navbar graphic on non-home pages. */
+.brand {
+	padding:50px;
+	width:140px;
+	height: 20px;
+}
+
+
+
+
+/******** "Middle" section of page includes left and right side bars */
+
+#middle > .span2 {
+		margin-right: 40px; /* this really shouldn't be needed - something's gone wrong. */
+		/* margin-left: 0???; */
+}
+
+#middle #content .row {
+	margin-left: 10px;
+	margin-right: 10px;
+
+}
+
+#middle #content h2 {
+	margin-top: 30px;
+
+}
+
+#middle {
+	position: relative; /* for social media icons, which are absolute positioned */
+}
+
+/****** Social media box is fixed in place towards the upper right *******/
+.social-media-box {
+	float:right;
+	margin-top:220px;
+}
+
+#not-home .social-media-box {
+	float:none;
+	position:absolute;
+	right:20px;
+	margin-top:10px;
+}
+
+
+/****** Left side bar and facets **********/
+.sidebar-nav, .sidebar-facets {
+	/*background: hsl(185, 40%, 85%);*/ /* ###TODO get spec for this */
+	margin-bottom: 0; /* no gap between them */
+
+	color: black;
+	font-size: 16px;
+	font-family: 'Magra', 'Tahoma', 'Geneva', sans-serif;
+	padding-top: 20px;
+	padding-left: 20px;
+	width: 140px; /* same as the div it's in - ugly. */
+}
+
+.sidebar-facets .accordian-group a {
+	font-size: 11px; /* 13px in spec? */
+	font-weight: normal;
+	color: black;
+	/* sometimes the links should be green? #0A5B4D */
+}
+
+.sidebar-facets .accordian-group > li {
+	border-bottom: 1px solid hsl(176,33%,70%);
+}
+
+.sidebar-facets .accordian-heading li {
+	font-size: 11px; /* guessing... */
+	font-weight: bold;
+	text-transform:uppercase;
+	color: black;
+	text-shadow: none;
+}
+
+.accordian-group > li {
+		margin-left: 10px; /* indent under heading */
+
+}
+
+.facet-caption {
+	color: #000000;
+	font-size: 16px;
+	font-family: 'Lobster','Tahoma','Geneva',sans-serif;
+}
+
+span.label { /* facet labels with X */
+	background: #0A5B4D;
+}
+
+/******* Right column has search box and map results sometimes ******/
+
+/* yellow search box on right hand side */
+.right-col .form-search { 
+	padding: 10px; /* clean this up */
+	background-color: #DCDE68;
+	margin-top: 97px; /* hacky way to make it line up with top of data table */
+}
+
+#right-col .form-search button i{
+	/* replace standard search icon */
+	background-image: none;
+}
+
+#right-col .form-search button/*.btn.btn-primary*/{
+	/* replace standard search icon */
+	background-image: url('images/elements/small-search-button-up.jpg');
+	background-color: hsl(171,100%,36%); /* with PNG, 33% */
+	border-style:none;
+	border-radius:2px;
+	background-repeat:no-repeat;
+	background-position: 2px 2px;
+	width:26px;
+	height:26px;
+}
+#right-col .form-search button:hover {
+	background-image:url('images/elements/small-search-button-down.jpg');
+	background-position:2px 2px;
+	background-color: hsl(173,100%,39%); /* with PNG, 36% */
+}
+
+/************* Footer *********/
+
+
+#footer-image {
+	background-image:url('images/elements/footer-BG.png');
+	width:964px;
+	height:190px;
+}
+
+#footer-image p {
+	margin: 0px 300px 0px 260px;
+	padding-top: 125px;
+	font-family: 'Magra', 'Tahoma', 'Geneva', sans-serif;
+	font-size: 11px;
+	color: #333;
+}
+
+.creative-commons {
+	float: left;
+	margin-right: 10px;
+}
+
+
+/* Recent tugging - list of recent actions on some pages. */
+
+#recent-tugging {
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+#not-home #recent-tugging {
+	margin-left: 60px;
+}
+
+#recent-tugging p {
+	line-height: 10px;
+	font-size: 13px;
+	font-family: 'Magra', 'Tahoma', 'Geneva', sans-serif;
+	margin-bottom: 4px; /* Make the rows bunch up a bit. */
+}
+
+#recent-tugging div div div {
+	border-top: 1px solid #888;
+	padding-top:20px;
+	margin-right: 20px;
+}
+
+#recent-tugging h2 {
+	font-family: 'Magra', 'Tahoma', 'Geneva', sans-serif;
+	font-size: 25px;
+	font-weight: bold;
+	color: #000000;
+
+
+}

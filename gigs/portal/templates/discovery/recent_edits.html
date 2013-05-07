@@ -1,9 +1,9 @@
-<div>
+<div id="recent-tugging">
     <h2>Recent Tugging</h2>
     <div>
     {% for e in recent_edits %}
-    <p><b>{{e.action_time|timesince}} ago</b> {{e.content_type.model}} <a href='{% url portal_gig_detail e.get_edited_object.id %}'>{{e.get_edited_object}}</a>
-    {% if e.is_addition %} was added {% elif e.is_edit %} was edited {% else %} was deleted {% endif %}</p>
+    <p><span class="when-edit">{{e.action_time|timesince}} ago:</span> The {{e.content_type.model|lower}} <a href='{% url portal_gig_detail e.get_edited_object.id %}'>{{e.get_edited_object}}</a>
+    {% if e.is_addition %} was added{% elif e.is_edit %} was edited{% else %} was deleted{% endif %}.</p>
     {% endfor %}
     </div>
 </div>

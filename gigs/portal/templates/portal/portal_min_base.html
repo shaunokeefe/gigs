@@ -1,0 +1,137 @@
+{#  Copyright (c) 2012, VeRSI Consortium                   #}
+{#    (Victorian eResearch Strategic Initiative, Australia)           #}
+{#  All rights reserved.                           #}
+{#                                        #}
+{#  Redistribution and use in source and binary forms, with or without       #}
+{#  modification, are permitted provided that the following conditions       #}
+{#  are met:                                   #}
+{#                                        #}
+{#     * Redistributions of source code must retain the above copyright       #}
+{#       notice, this list of conditions and the following disclaimer.       #}
+{#     * Redistributions in binary form must reproduce the above       #}
+{#       copyright notice, this list of conditions and the following       #}
+{#       disclaimer in the documentation and/or other materials provided   #}
+{#       with the distribution.                           #}
+{#     * Neither the name of the VeRSI, the VeRSI Consortium members, nor  #}
+{#       the names of its contributors may be used to endorse or promote   #}
+{#       products derived from this software without specific prior       #}
+{#       written permission.                           #}
+{#                                        #}
+{#  THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS''       #}
+{#  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,  #}
+{#  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A           #}
+{#  PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS AND   #}
+{#  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,  #}
+{#  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,       #}
+{#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR       #}
+{#  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY       #}
+{#  OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT       #}
+{#  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE  #}
+{#  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.   #}
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>The Ultimate Gig Guide</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css?{% now "U" %}">
+    <link rel="stylesheet" href="/static/css/default.css?{% now "U" %}">
+    {% block extraheader %}{% endblock %}
+    <!-- <link rel="text/css" href="http://fonts.googleapis.com/css?family=Fjalla+One|Lobster|Magra" /> -->
+  </head>
+  <body {% block bodyid %}{% endblock %}>
+    {% block navbar %}
+        <!-- Navbar
+    ================================================== --> 
+    <div class="navbar container navbar-fixed-top"> 
+      <div class="navbar-inner"> 
+        <div class="container"> 
+          <a class="brand" href="{% url home %}"><!--TUGG--></a>
+          <a class="btn btn-navbar text-right" data-toggle="collapse" data-target=".nav-collapse"> 
+            <span class="icon-bar"></span> 
+            <span class="icon-bar"></span> 
+            <span class="icon-bar"></span> 
+          </a> 
+          <div class="nav-collapse pull-right"> 
+            <ul class="nav"> 
+              <li><a href="{% url about %}">About</a></li> 
+              <li><a href="{% url contact%}">Contact</a></li> 
+            <li>
+            <div class="dropdown" id="login-btn-div">
+                {% if user.is_authenticated %}
+                <a class=" dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user"></i>{{user.username}}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><i class="icon-signout"></i><a href="{% url logout %}">Sign Out</a></li>
+              </ul>
+              {% else %}
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    Log in
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" style="padding: 15px; padding-bottom: 0px">
+                  <li>
+                    <form action="{% url login %}" method="post">
+                      {% csrf_token %}
+                        <input type="text" name="username" placeholder="User Name"/> 
+                        <input type="password" name="password" placeholder="Password"/> 
+                        <input class="btn btn-primary" type="submit"/> 
+                    </form>
+                  </li>
+              </ul>
+              {% endif %}
+
+            </div>
+            </li>
+            </ul>
+            <!--<form class="navbar-search pull-right" action="{% url search_index %}">
+              <input type="text" name="q" class="search-query" placeholder="Search...">
+          </form>-->
+          </div><!-- nav-collapse -->
+        </div><!-- container-fluid -->
+      </div><!-- navbar-inner -->
+    </div><!-- navbar -->
+{% endblock %}
+
+    {% block beforecontainer %}
+    {% endblock %}
+    
+    <div class="container mainbody">
+
+    {% block mainbody %}
+    {% endblock %}
+
+    {% block footer %}
+      <footer> 
+        <div id="footer-image" >
+          <p>
+          <img src="/static/css/images/cc-by-nd-sa.png" class="creative-commons"/> 
+          Website content and data by <a href="http://www.deakin.edu.au">Deakin University</a>.<br/> Licensed under
+          <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/au/">Creative Commons BY-ND-SA 3.0 Australia</a>.
+
+
+        </p>
+        </div>
+      </footer> 
+    {% endblock %}
+    </div><!--container-->
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">var switchTo5x=false;</script>
+    <script type="text/javascript" src="/static/buttons.js"></script>
+    <script type="text/javascript">
+    stLight.options({publisher: "ur-24e62f76-1f66-e3aa-1190-c533b729ca11", doNotHash: true, doNotCopy: true, hashAddressBar: false});
+    </script>
+  <script type="text/javascript" src="/static/bootstrap/js/bootstrap.js"></script>  
+    
+    {% block script %}
+    {% endblock script %}
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{% extends "portal/portal_base.html" %}
+
+{% block bottom %}
+      <div id="bottom" class="row">
+        <div class="span{% block middle-width %}7{% endblock %} offset2">
+          <hr/>
+                {% load discovery %}
+                {% recent_edits model="gig" num_edits="6"%}
+        </div>
+        <div class="right-col span{% block right-width %}3{% endblock %}">
+          {% include "search/search_form.html" %}  
+        </div>
+      </div><!-- bottom -->
+{% endblock %}

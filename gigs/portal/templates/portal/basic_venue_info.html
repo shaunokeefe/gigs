@@ -1,17 +1,21 @@
 <div id="venue-info" class="row-fluid">
-  <div id="venue" class="span12 well">
-    <dl class="dl-horizontal">
-      <dt>Venue name</dt>
-        <dd><a href="{% url portal_venue_detail venue.id %}">{{venue.name}}</a></dd>
-        <dt>Status</dt> 
-        <dd>{{venue.status}}</dd>
-        <dt>venue type<dt> 
-        <dd>{{venue.venue_type}}</dd>
-        <dt>Comment</dt> 
-        <dd>{{venue.comment}}</dd>
-      </dl>
+  <div id="venue" class="span12">
+      <h4><a href="{% url portal_venue_detail venue.id %}">{{venue.name}}</a></h4>
+      <p>Status: {{venue.status}}</p>
+      <p>Type: {{venue.venue_type}}</p>
+      <address>Location:
+        
+        <a href="{% url portal_location_detail venue.location.id %}">
+          <strong>{{venue.location.name}}</strong>
+          {{venue.location.street_address}}
+          {{venue.location.suburb}}<!-- , {{location.postcode}} -->
+        </a>
+        </address>
+      
+      <p>Comments: {% if venue.comment %} {{venue.comment}} {% else %} <span class="no-comments">No comments</span>{% endif %}</p>
     </div><!-- venue-->
-
+{% comment %}
+    Not sure whether to modify basic_location_info or not.
     <div id="location-info" class="row-fluid">
       <h2>Location</h2>
     {% if venue.location %}
@@ -22,4 +26,6 @@
     <p>No location listed for this venue</p>
     {% endif %}
   </div><!-- location-info -->
+{% endcomment %}
+
 </div><!-- venue-info -->

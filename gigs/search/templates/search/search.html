@@ -114,8 +114,12 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 {% endblock %}
 {% block sidebar %}
 {{block.super}}
+
+
 {% load faceting %}
-<div class="well sidebar-facets">
+<div class="sidebar-facets">
+<p class="facet-caption">Showing results for: "TODO"</p>
+<p class="facet-instruction">Filter results by:</p>
   <ul class="nav nav-list">
       {% facet_group facets.fields.venue_name venue_name 5 request.get_full_path  selected_facets selected_date_facets %}
       {% facet_group facets.fields.bands bands 5 request.get_full_path selected_facets selected_date_facets %}
@@ -125,31 +129,34 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 {% endblock %}
 
 {% block content %}
-<div class="row-fluid">
-    <h1>Gig List</h1>
-    <br>
-    {% load searchform %}
-    {% search_form "small" %}
-    {% current_facet_list request.get_full_path selected_facets selected_date_facets %}
+<div class="row">
+    <h2>Gig List</h2>
 </div>
-<br>
-<div class="row-fluid">
-    {% load maps %}
-    {% search_map page.object_list %}
-    <br/>
-    <form action="/gig_csv_subset/">
-    <input type=hidden name=q value={{query}}>
-    <p>
-      <button class="btn btn-large btn-primary btn-block" type="post">Download results</button>
-      </p>
-      </form>
-  <table class="table table-bordered" id="index-table">
+{% current_facet_list request.get_full_path selected_facets selected_date_facets %}
+<div class="row">
+  <table class="table" id="index-table">
     <thead>
-        <tr><th></th><th>Date</th/><th>Venue Name</th><th>Bands</th><th>Gig Name</th/><th>Cost</th/><th>Address</th/></tr>
+        <tr><th></th><th>Gig Name</th/><th>Venue</th><th>Date/time</th/></tr>
     </thead>
     <tbody>
     </tbody>
     </table>
+    <form action="/gig_csv_subset/">
+    <input type=hidden name=q value={{query}}>
+    <p>
+      <button type="post" id="download-csv-btn"></button>
+      Download this list as a CSV file.
+      </p>
+      </form>
 </div>
 {% endblock %}
 
+{% block right-bar %}
+    {% comment %}
+    {% load searchform %}
+    {% search_form "small" %}
+    {% endcomment %}
+    {% include "search/search_form.html" %}  
+    {% load maps %}
+    {% search_map page.object_list %}
+{% endblock %}
