@@ -23,10 +23,12 @@
   src: local('Magra Bold'), local('Magra-Bold'), url(http://themes.googleusercontent.com/static/fonts/magra/v1/YlhLowBXAVg7FJcSC0CClXYhjbSpvc47ee6xR_80Hnw.woff) format('woff');
 }
 
+/************* General elements that appear anywhere ***************/
+
 body,p { 
-font-family: 'Magra', 'Tahoma', 'Geneva', sans-serif;
-font-size: 13px;
-color: black;
+	font-family: 'Magra', 'Tahoma', 'Geneva', sans-serif;
+	font-size: 13px;
+	color: black;
 }
 
 body {
@@ -55,283 +57,10 @@ h3 {
 	font-family: 'Lobster','Tahoma','Geneva',sans-serif;
 }
 
-.front-page-banner {
-	background-image:url('images/elements/top-TUGG-banner.png');
-	width: 980px;
-	height: 260px;
-}
 
-#footer-image {
-	background-image:url('images/elements/footer-BG.png');
-	width:964px;
-	height:190px;
-}
-
-#footer-image p {
-		margin: 0px 300px 0px 300px;
-		padding-top: 125px;
-		font-family: 'Magra';
-		font-size: 11px;
-		color: #333;
-}
-.container { /* will need to stop this affecting other pages */
-	width: 980px;
-}
-
-.container.mainbody {
-	margin-top: 40px; /* leaving room for navbar */
-    /* 'faux columns' technique - applies to not-the-homepage. */
-    background: url('images/elements/TUGG-general-BG-faux-col.jpg') repeat-y;	
-
-}
-
-#home .container.mainbody { 
-	/* border: 4px solid hsl(50, 50%, 70%);*/
-	border-image-source: url('images/elements/borders-combined-8bit.png');
-	border-image-slice: 8 8 8 8;
-	border-image-width: 8px;
-	border-image-repeat: repeat;
-	border-image-outset: 8px;
-    border-width: 1px; /* ugh, firefox ignores this. Chrome adds this to
-    border-image-width, so it should be 0 - but if it's 0 it doesn't show the border at all. */
-	background-image:url('images/elements/paper-texture-bg.jpg');
-	background-repeat: repeat;
-	width: 964px;
-	margin-top: 0px; /* no navbar, no margin. */
-}
-
-.homebody{
-	padding: 1em;
-}
-
-.homebody .span6 { 
-	width: 459px; /* ugh. the default is 460px, but with maincontent's fancy border, that *just* causes wrappage. */
-}
-
-.horizontal-divider { 
-	background-image: url('images/elements/horizontal-divider-line.png');
-	width: 940px;
-	height: 10px;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	margin-left: 20px;
-	clear: both;
-}
-
-#home-intro {
-	box-sizing: border-box;
-}
-#home-intro p{
-	font-family: "Fjalla One";
-	font-size: 16px;
-	font-weight: normal;
-	color: #000;
-	padding: 20px;
-}
-
-#home-intro h1 {
-	padding-left: 20px;
-	text-transform: uppercase;
-	margin-top:34px;
-}
-
-#home-search {
-	background-image: url('images/elements/search-BG-flat-crop.png');
-	height: 162px;
-	width: 412px; 
-	border-radius: 4px;
-	box-shadow: 4px 4px 4px gray;
-
-	/*box-sizing: border-box;  /* Risky maybe... not supported < IE8, may conflict with Bootstrap? */
-	padding: 20px;
-	/*border-radius: 4px;
-	box-shadow: 4px 4px 4px 0px #333; */
-}
-#home-search p, #home-search h1 {
-	/*padding: 1em;*/
-}
-
-#home-search h1 {
-	color: white;
-	text-transform: uppercase;
-
-}
-
-#home-search p {
-	font-family: 'Lobster';
-	font-size: 16px;
-	padding-top: 10px;
-}
-
-#recent-tugging {
-	margin-left: 20px;
-	margin-top: 20px;
-}
-
-#recent-tugging p {
-	line-height: 6px;
-	font-size: 13px;
-	font-family: Magra;
-}
-
-#recent-tugging div div div {
-	border-top: 1px solid #888;
-	padding-top:20px;
-	margin-right: 20px;
-}
-
-#recent-tugging h2 {
-	font-family: Magra;
-	font-size: 25px;
-	font-weight: bold;
-	color: #000000;
-
-
-}
-
-/*
-.form-search input {
-	font-family: 'Magra';
-	font-size: 16px;
-	color: #666666;
-}
-*/
-
-#login-btn-div {
-	display: inline-block;
-}
-
-/* Top nav graphic */
-.navbar-fixed-top .navbar-inner {
-	background-image: url('images/elements/top-nav-general-BG.png');
-	width: 980px;
-	height: 40px;
-}
-
-.brand {
-	display: none !important; /* ##TODO reinstate a clickable home link */
-}
-
-.vapourware {
-    font-style: italic;
-	zoom: 1;
-	filter: alpha(opacity=50);
-	opacity: 0.5;
-}
-
-#home-action-boxes {
-	margin-left: 20px; /* bootstrap has this as -20px. Probably doing something very wrong here. */
-}
-
-#home-action-boxes div {
-	width: 210px;
-	height: 210px;
-}
-
-#home-action-boxes h2 {
-	font-family: Fjalla One;
-	text-transform: uppercase;
-	font-size: 42px;
-	font-weight: bold;
-	margin-left: 5px;
-	margin-top: 8px;
-	margin-bottom: 5px;
-}
-
-#home-action-boxes p {
-	font-family: Lobster;
-	font-size: 16px;
-	margin-left: 5px;
-}
-
-
-#gig-search {
-	background-image: url('images/elements/gig-search.png');
-}
-
-#gig-search h2 { 
-	color: white; text-shadow: 2px 2px 2px black;
-	margin-left: 5px;
-}
-#gig-search p { 
-	color: black; background-color: #Fbfff0; /* yellowish tinted white, my guess */
-    width: 60%;
-    /* quirky offsetting for this text */
-    font-size: 16px;
-    padding: 4px;
-    margin: 85px 20px 15px 3px;
-    text-align: center;
-}
-
-
-#lucky-tugging {
-	background-image: url('images/elements/lucky-tugging.png');
-}
-
-#lucky-tugging h2 { 
-	color: #c5c702; /* dull yellow */
-	margin:  104px 0px 0px 8px;
-}
-#lucky-tugging p { 
-	color: white; 
-	/* this text can clash with background */
-	text-shadow: 1px 0px 2px black;
-}
-.word-tugging { 
-	font-size: 70%; 
-	display: block; 
-	clear: left;/* probably not the right way to force a new line */}
-
-#join-the-party {
-	background-image: url('images/elements/join-the-party.png');
-}
-
-#join-the-party h2 { color: #228f72; /* teal */}
-#join-the-party p { color: white;}
-.word-join-the { font-size: 70%; display: block; clear: left;}
-
-
-#tugging-the-data {
-	background-image: url('images/elements/tugging-the-data.png');
-}
-
-#tugging-the-data h2 {
-	color:  #ac0230; /* scarlet */ text-shadow: 2px 2px 2px black;
-	margin: 10px 10px 10px 10px;
-
-}
-#tugging-the-data p { 
-	color: white; background: black;
-	display: inline-block;
-	padding: 2px;
-}
-
-#front-page-art {
-/*background-color: rgba(180, 180, 144, 0.6);
-opacity: 0.6;*/
-}
-
-.img-rounded {
-/* supported in more recent Bootstrap? */
-    border-radius: 10px;
-}
-
-.hero-unit {
-	background-color: rgb(53,194,115); /* grass green */
-}
-
-/*
-a {
-	color: rgb(255, 18, 94); /* magenta *//*
-}
-
-a:hover {
-    color: rgb(190,10,80);
-}
-*/
 .btn-primary {
+	/* This probably needs to go - was from the previous pink/green skin */
 	background-color: rgb(255, 18, 94);
-	
 	background-image: -ms-linear-gradient(top, #08C, #05C);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(255, 18, 94)), to(rgb(255, 18, 94)));
 	background-image: -webkit-linear-gradient(top, rgb(255, 18, 94), rgb(200, 18, 60));
@@ -341,8 +70,7 @@ a:hover {
 	background-repeat: repeat-x;
 	border-color: #a52;
 	filter: progid:dximagetransform.microsoft.gradient(startColorstr='#FF88cc', endColorstr='#FF55cc', GradientType=0);
-	filter: progid:dximagetransform.microsoft.gradient(enabled=false);
-	
+	filter: progid:dximagetransform.microsoft.gradient(enabled=false);	
 }
 
 .btn-primary:hover,
@@ -354,116 +82,96 @@ a:hover {
   *background-color: #b14;
 }
 
-
 blockquote {
     border-left: none;
 }
 
 
-table.table thead .sorting,
-table.table thead .sorting_asc,
-table.table thead .sorting_desc,
-table.table thead .sorting_asc_disabled,
-table.table thead .sorting_desc_disabled {
-cursor: pointer;
-    *cursor: hand;
-}
- 
-table.table thead .sorting { background: url('images/sort_both.png') no-repeat center right; }
-table.table thead .sorting_asc { background: url('images/sort_asc.png') no-repeat center right; }
-table.table thead .sorting_desc { background: url('images/sort_desc.png') no-repeat center right; }
- 
-table.table thead .sorting_asc_disabled { background: url('images/sort_asc_disabled.png') no-repeat center right; }
-table.table thead .sorting_desc_disabled { background: url('images/sort_desc_disabled.png') no-repeat center right; }
-
-div.dataTables_length {
-	    /*###TODO what do we do about this? */
-    display: none;
-
+hr, .horizontal-divider { 
+	background-image: url('images/elements/horizontal-divider-line.png');
+	width: 740px;
+	height: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 40px;
+	clear: both;
+	border:none;
 }
 
-div.dataTables_length label {
-    width: 460px;
-    float: left;
-    text-align: left;
-}
- 
-div.dataTables_length select {
-    width: 75px;
-}
- 
-div.dataTables_filter label {
-    float: right;
-    width: 460px;
-}
- 
-div.dataTables_info {
-    padding-top: 8px;
-}
- 
-div.dataTables_paginate {
-    float: right;
-    margin: 0;
-}
- 
-table {
-    margin: 1em 0;
-    clear: both;
+.container { /* will need to stop this affecting other pages */
+	width: 980px;
 }
 
-.dataTable thead tr {
-	background: black;
+.container.mainbody {
+	margin-top: 40px; /* leaving room for navbar */
+    /* 'faux columns' technique - applies to not-the-homepage. */
+    background: url('images/elements/TUGG-general-BG-faux-col.jpg') repeat-y;	
+
+}
+
+
+/******************** Specific sections *************************/
+
+/* The top "about / contact / log in" bar on every page. */
+
+#home .navbar-fixed-top {
+	/* Override 'fixed'ness for the front page - the text needs to not float over the rest of the page. */
+	position: relative;
+}
+/* Top navbar graphic (black, "TUGG" set at a jaunty angle) */
+.navbar-fixed-top .navbar-inner {
+	background-image: url('images/elements/top-nav-general-BG.png');
+	width: 980px;
+	height: 40px;
+}
+
+#home .navbar-inner {
+	/* On the home page, the nav bar floats over the title graphic. */
+	background:none;
+	right:-10px;
+	position: absolute;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+#login-btn-div {
+	display: inline-block;
+}
+
+
+.navbar .nav > li a {
 	color: white;
-	font: bold 13px Magra;
+	font-size: 16px;
+	text-transform:lowercase;
 }
 
-.dataTable tbody tr {
-	/*background: black;*/
-	color: black;
-	font: 13px Magra;
+.navbar .nav > li div {
+	/* For the (dropdown) login button */
+	padding-top:10px;
+	padding-left:10px;
 }
 
-.dataTable tbody tr a {
-	color: #0A5B4D;
+#login-btn-div .dropdown-menu {
+	background:#333;
+	right:-30px; /* Line up with right hand border...not sure if a good idea. */
+
 }
 
-.dataTable tbody tr a:hover {
-	color: #34B9A3;
+/* This is a transparent, clickable div that sits over the navbar graphic on non-home pages. */
+.brand {
+	padding:50px;
+	width:140px;
+	height: 20px;
 }
 
-.dataTable tbody tr:hover td,
-.dataTable tbody tr:hover th {
-    background-color: #0A5B4D;
-    color: white;
-}
-
-.dataTable tbody tr:hover td a,
-.dataTable tbody tr:hover th a {
-    color: black;
-}
-
-.sidebar-nav, .sidebar-facets {
-	/*background: hsl(185, 40%, 85%);*/ /* ###TODO get spec for this */
-	margin-bottom: 0; /* no gap between them */
-
-	color: black;
-	font: 16px Magra;
-	padding-top: 20px;
-	padding-left: 20px;
-	width: 140px; /* same as the div it's in - ugly. */
-	/*box-sizing: border-box; */
 
 
-	/*border: none;
-	border-radius: 0px;
-	-webkit-border-radius: 0px;
-	-moz-border-radius: 0px;
-*/
-}
+
+/******** "Middle" section of page includes left and right side bars */
 
 #middle > .span2 {
 		margin-right: 40px; /* this really shouldn't be needed - something's gone wrong. */
-
+		/* margin-left: 0???; */
 }
 
 #middle #content .row {
@@ -477,6 +185,35 @@ table {
 
 }
 
+#middle {
+	position: relative; /* for social media icons, which are absolute positioned */
+}
+
+/****** Social media box is fixed in place towards the upper right *******/
+.social-media-box {
+	float:right;
+	margin-top:220px;
+}
+
+#not-home .social-media-box {
+	float:none;
+	position:absolute;
+	right:20px;
+	margin-top:10px;
+}
+
+
+/****** Left side bar and facets **********/
+.sidebar-nav, .sidebar-facets {
+	/*background: hsl(185, 40%, 85%);*/ /* ###TODO get spec for this */
+	margin-bottom: 0; /* no gap between them */
+
+	color: black;
+	font: 16px Magra;
+	padding-top: 20px;
+	padding-left: 20px;
+	width: 140px; /* same as the div it's in - ugly. */
+}
 
 .sidebar-facets .accordian-group a {
 	font-size: 11px; /* 13px in spec? */
@@ -511,8 +248,10 @@ span.label { /* facet labels with X */
 	background: #0A5B4D;
 }
 
+/******* Right column has search box and map results sometimes ******/
+
 /* yellow search box on right hand side */
-#right-col .form-search { 
+.right-col .form-search { 
 	padding: 10px; /* clean this up */
 	background-color: #DCDE68;
 	margin-top: 97px; /* hacky way to make it line up with top of data table */
@@ -540,36 +279,58 @@ span.label { /* facet labels with X */
 	background-color: hsl(173,100%,39%); /* with PNG, 36% */
 }
 
-#download-csv-btn {
-	background-image: url('/static/css/images/elements/download-icon.png');
-	background-color: rgba(0,0,0,0);
-	border-style: none;
-	width:20px;
-	height:20px;
+/************* Footer *********/
+
+
+#footer-image {
+	background-image:url('images/elements/footer-BG.png');
+	width:964px;
+	height:190px;
 }
 
-.pagination a { 
-	/* border-style: none; */
-	line-height: 12px;
-	padding: 2px 2px 4px 2px;
-	background-color: white;
-	border-radius:2px;
-	margin-left: 2px;
-	margin-right: 2px;
-	border: 1px solid #cce;
+#footer-image p {
+	margin: 0px 300px 0px 260px;
+	padding-top: 125px;
+	font-family: 'Magra';
+	font-size: 11px;
+	color: #333;
 }
 
-.pagination .active a {
-	background: hsl(161,60%,45%);
-	color: white;
+.creative-commons {
+	float: left;
+	margin-right: 10px;
 }
 
-.prev a,.next a { border-style: none; background:none;}
 
-.pagination ul {
-	/* Should probably kill this somewhere else. */
-	box-shadow:none;
-	-webkit-box-shadow:none;
-	-moz-box-shadow:none;
+/* Recent tugging - list of recent actions on some pages. */
+
+#recent-tugging {
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+#not-home #recent-tugging {
+	margin-left: 60px;
+}
+
+#recent-tugging p {
+	line-height: 10px;
+	font-size: 13px;
+	font-family: Magra;
+	margin-bottom: 4px; /* Make the rows bunch up a bit. */
+}
+
+#recent-tugging div div div {
+	border-top: 1px solid #888;
+	padding-top:20px;
+	margin-right: 20px;
+}
+
+#recent-tugging h2 {
+	font-family: Magra;
+	font-size: 25px;
+	font-weight: bold;
+	color: #000000;
+
 
 }

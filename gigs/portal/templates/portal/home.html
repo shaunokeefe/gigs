@@ -8,6 +8,10 @@
 
 {% block bodyid %}id="home"{% endblock %}
 
+{% block extraheader %} 
+   <link rel="stylesheet" href="/static/css/home.css?{% now "U" %}">
+{% endblock %}
+
 {% block mainbody %}
 <div class="row homebody">
   <div class="span6" id="home-intro">
