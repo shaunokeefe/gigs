@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.query import QuerySet
 from django.template.defaultfilters import date as _date
 from django.contrib import auth
+from django.core.urlresolvers import reverse
 
 import datetime
 
@@ -111,6 +112,9 @@ class Band(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('portal_band_detail', args=[str(self.id)])
 
 class BandMembership(models.Model):
     started = models.DateField()

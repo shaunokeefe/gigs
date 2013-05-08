@@ -1,0 +1,8 @@
+<h3>{{band}} has played with</h3>
+<ul>
+{% for band in bands %}
+<li>
+<a href="{{band.get_absolute_url}}">{{band}}</a>
+</li>
+{% endfor %}
+</ul>

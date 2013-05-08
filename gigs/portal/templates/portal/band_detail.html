@@ -1,5 +1,6 @@
 {% extends "portal/portal_base.html" %}
 {% load maps %}
+{% load bands %}
 
 {% block content %}
 <div id="bands-divider" class="span6">
@@ -13,6 +14,7 @@
   <p>No members currently listed</p>
   {% endif %}
   <br/>
+  {% bands_played_with band %}
   {% if band|has_locations %}
   <h2>Gigs played</h2>
   {% map band %}
