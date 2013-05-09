@@ -105,18 +105,15 @@ def basic_search(request, template='search/search.html', load_all=True, form_cla
     query = ''
     results = EmptySearchQuerySet()
 
-    for key in ('search_results_query', 'selected_facets'):
-        try:
-            del request.session[key]
-        except:
-            pass
-
+    try:
+        del request.session['selected_facets']
+    except:
+        pass
     if request.GET.get('q'):
         form = form_class(request.GET, searchqueryset=searchqueryset, load_all=load_all)
 
         if form.is_valid():
             query = form.cleaned_data['q']
-            request.session['search_results_query'] = query
             results = form.search()
     else:
         form = form_class(searchqueryset=searchqueryset, load_all=load_all)
@@ -140,7 +137,6 @@ def basic_search(request, template='search/search.html', load_all=True, form_cla
 
     try:
         page = paginator.page(int(request.GET.get('page', 1)))
-        request.session['page'] = page
     except InvalidPage:
         raise Http404("No such page of results!")
 
