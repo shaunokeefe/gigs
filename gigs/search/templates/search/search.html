@@ -132,7 +132,7 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 <div class="row">
     <h2>Gig List</h2>
 </div>
-{% current_facet_list request.get_full_path selected_facets selected_date_facets %}
+{% current_facet_list request.get_full_path selected_facets query %}
 <div class="row">
   <table class="table" id="index-table">
     <thead>
