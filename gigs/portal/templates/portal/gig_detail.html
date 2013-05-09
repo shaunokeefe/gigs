@@ -7,7 +7,7 @@
 
 <p class="nav-links">
   <!-- ###TODO link to somewhere -->
-  <!-- large triangle: &#x25C0; --> &#x25c4;&nbsp;Return to search results
+  <!-- large triangle: &#x25C0; --> &#x25c4;&nbsp;{% search_results %}
 </p>
 
 <p class="facet-caption">
@@ -19,7 +19,6 @@ Try exploring further by clicking on a supporting band or on a venue to find out
 {% block content %}
   <div id="gig-info" class="span5">
     <h2>Gig Details</h2>
-      {% search_results %}
       Gig name: <b>{{gig}}</b>
       {% comment %} Where can this go?   <p><strong>start time:</strong> {{gig.start|date:"l, M j, Y"}}</p> {% endcomment %}
 
