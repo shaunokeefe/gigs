@@ -118,8 +118,8 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 
 {% load faceting %}
 <div class="sidebar-facets">
-<p class="facet-caption">Showing results for: "TODO"</p>
-<p class="facet-instruction">Filter results by:</p>
+  <p class="facet-caption">Showing results for: "{{query}}"</p>
+  <p class="facet-instruction">Filter results by:</p>
   <ul class="nav nav-list">
       {% facet_group facets.fields.venue_name venue_name 5 request.get_full_path  selected_facets  query %}
       {% facet_group facets.fields.bands bands 5 request.get_full_path selected_facets  query %}
