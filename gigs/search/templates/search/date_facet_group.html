@@ -10,7 +10,7 @@
       {% endfor %}
       <div id='collapse-{{facet_name}}-facets' class='accordion-body collapse'> 
       <div class='accordian-inner'> 
-      {% for facet in facets|slice:"5:" %}
+      {% for facet in new_facets|slice:"5:" %}
       {% if facet.count %}
       <li><a href="{{full_path}}?q={{query}}&{{ facet.to_select.render_url }}">{{facet.value}} ({{facet.count}})</a></li> 
       {% endif %}
