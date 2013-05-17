@@ -1,11 +1,2 @@
-<div id="band">
-    <p><strong><a href = "{% url portal_band_detail band.id %}">{{band.name}}</a></strong></p>
-  <p><strong>Members</strong></p>
-  {% if band.members.count %}
-  {% for member in band.members.all %}
-    <p>{{member}}</p>
-  {% endfor %}
-  {% else %}
-  <p>No band members listed</p>
-  {% endif %}
-</div>
+<p><span class="detail-title">Name: </span><a href = "{% url portal_band_detail band.id %}">{{band.name}}</a></strong></p>
+<p><span class="detail-title">Members: </span>{% if band.members.count %}{% for member in band.members.all %}{{member}}{% endfor %}{% else %}No band members listed{% endif %}</p>

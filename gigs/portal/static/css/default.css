@@ -44,17 +44,22 @@ h1 {
 }
 h2 { 
 	font-size: 30px; color: #c6c803; text-transform: uppercase;
-	letter-spacing:-2px;
 }
 h3 { 
 	font-size: 20px; color: #333; text-transform:uppercase;
-	letter-spacing:-2px;
 }
-
-
 
 .fancy-link {
 	font-family: 'Lobster','Tahoma','Geneva',sans-serif;
+}
+
+a {
+    color: #0A5B4D;
+}
+
+a:hover {
+    color: #34B9A3;
+    text-decoration:none;
 }
 
 
@@ -89,11 +94,10 @@ blockquote {
 
 hr, .horizontal-divider { 
 	background-image: url('images/elements/horizontal-divider-line.png');
-	width: 740px;
+	width: 760px;
 	height: 10px;
 	margin-top: 20px;
 	margin-bottom: 20px;
-	margin-left: 40px;
 	clear: both;
 	border:none;
 }
@@ -180,15 +184,53 @@ hr, .horizontal-divider {
 
 }
 
-#middle #content h2 {
+#middle #content {
 	margin-top: 30px;
 
+}
+
+#content h2 {
+    margin-bottom: 20px;
 }
 
 #middle {
 	position: relative; /* for social media icons, which are absolute positioned */
 }
 
+/****** Detail pages ******/
+
+.band {
+    border-top: 1px solid #888;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.band.last {
+	border-bottom: 1px solid #888;
+    margin-bottom: 20px;
+}
+
+#gig-properties {
+    margin-bottom:20px;
+}
+
+.detail-heading {
+	color: #000000;
+	font-size: 15px;
+	font-family: 'Magra';
+    margin-bottom: 5px;
+}
+
+.detail-title {
+	color: #000000;
+	font-size: 15px;
+	font-family: 'Magra';
+	font-weight: bold;
+}
+
+.detail-info-list {
+    line-height: 150%
+}
 /****** Social media box is fixed in place towards the upper right *******/
 .social-media-box {
 	float:right;
@@ -250,11 +292,16 @@ span.label { /* facet labels with X */
 	background: #0A5B4D;
 }
 
+/******* Right Column ******/
+
+#middle #right-col {
+	margin-top: 30px;
+}
+
 /******* Right column has search box and map results sometimes ******/
 
 /* yellow search box on right hand side */
 .right-col .form-search { 
-	padding: 10px; /* clean this up */
 	background-color: #DCDE68;
 	margin-top: 97px; /* hacky way to make it line up with top of data table */
 }
@@ -279,6 +326,49 @@ span.label { /* facet labels with X */
 	background-image:url('images/elements/small-search-button-down.jpg');
 	background-position:2px 2px;
 	background-color: hsl(173,100%,39%); /* with PNG, 36% */
+}
+
+.form-search-small-container {
+    background-color: #C6C803;
+	border-style:none;
+	border-radius:3px;
+    margin-right: 20px;
+}
+
+.form-search-small-container button {
+	background-image: url('images/elements/small-search-button-up.jpg');
+	background-color: hsl(171,100%,36%); /* with PNG, 33% */
+	border-style:none;
+	border-radius:2px;
+	background-repeat:no-repeat;
+	background-position: 2px 2px;
+	width:26px;
+	height:26px;
+    margin-bottom:9px;
+    margin-left:3px;
+}
+.form-search-small-container button:hover {
+	background-image: url('images/elements/small-search-button-down.jpg');
+	background-color: hsl(171,100%,36%); /* with PNG, 33% */
+}
+
+.form-search-small-container form {
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+/* small map */
+
+#right-col #map-container h3 {
+    padding-top:5px;
+    padding-left:5px;
+}
+#right-col #map-container {
+    background-color: #C6C803;
+	border-style:none;
+	border-radius:3px;
+    margin-top: 20px;
+    margin-right:20px;
 }
 
 /************* Footer *********/
@@ -311,8 +401,15 @@ span.label { /* facet labels with X */
 	margin-top: 20px;
 }
 
-#not-home #recent-tugging {
-	margin-left: 60px;
+#bottom #recent-tugging {
+	margin-left: 0px;
+	margin-top: 0px;
+}
+
+#not-home #recent-tugging div {
+	border-top: 1px solid #888;
+	padding-top:20px;
+	margin-right: 20px;
 }
 
 #recent-tugging p {
@@ -333,6 +430,4 @@ span.label { /* facet labels with X */
 	font-size: 25px;
 	font-weight: bold;
 	color: #000000;
-
-
 }

@@ -1,8 +1,7 @@
-<div id="venue-info" class="row-fluid">
-  <div id="venue" class="span12">
-      <h4><a href="{% url portal_venue_detail venue.id %}">{{venue.name}}</a></h4>
-      <p>Status: {{venue.status}}</p>
-      <p>Type: {{venue.venue_type}}</p>
+<div id="venue-info" class="detail-info-list">
+      <a href="{% url portal_venue_detail venue.id %}">{{venue.name}}</a><br/>
+      Status: {{venue.get_status_display}}<br/>
+      Type: {% if venue.venue_type %}{{venue.venue_type}}{% else %}No venue type specified{% endif %}<br/>
       <address>Location:
         
         <a href="{% url portal_location_detail venue.location.id %}">
@@ -12,11 +11,10 @@
         </a>
         </address>
       
-      <p>Comments: {% if venue.comment %} {{venue.comment}} {% else %} <span class="no-comments">No comments</span>{% endif %}</p>
-    </div><!-- venue-->
+      Comments: {% if venue.comment %} {{venue.comment}} {% else %} <span class="no-comments">No comments</span>{% endif %}
 {% comment %}
     Not sure whether to modify basic_location_info or not.
-    <div id="location-info" class="row-fluid">
+    <div id="location-info" class="row">
       <h2>Location</h2>
     {% if venue.location %}
       {% with venue.location as location %}
@@ -27,5 +25,4 @@
     {% endif %}
   </div><!-- location-info -->
 {% endcomment %}
-
 </div><!-- venue-info -->

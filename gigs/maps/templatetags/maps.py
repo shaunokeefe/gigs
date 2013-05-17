@@ -11,7 +11,7 @@ from gigs.gig_registry.models import Location, Gig, Venue, Band
 
 class MapForm(forms.Form):
     # ###TODO get these numbers right, I'm just guessing.
-    map = forms.Field(widget=GoogleMap(attrs={'width':220, 'height':220}))
+    map = forms.Field(widget=GoogleMap(attrs={'width':280, 'height':280}))
 
     def has_locations(self):
         return True

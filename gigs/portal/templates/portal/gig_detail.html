@@ -1,80 +1,54 @@
-{% extends "portal/portal_base.html" %}
+{% extends "portal/detail_base.html" %}
 {% load maps %}
 {% load search_results %}
 
-{% block sidebar %}
-<div class="sidebar-facets"><!-- ###TODO generalise class name-->
-
-<p class="nav-links">
-  <!-- ###TODO link to somewhere -->
-  <!-- large triangle: &#x25C0; --> &#x25c4;&nbsp;{% search_results %}
-</p>
-
-<p class="facet-caption">
+{% block detail_hint %}
 Try exploring further by clicking on a supporting band or on a venue to find out more.
-</p>
-</div>
 {% endblock %}
 
 {% block content %}
-  <div id="gig-info" class="span5">
-    <h2>Gig Details</h2>
-      Gig name: <b>{{gig}}</b>
-      {% comment %} Where can this go?   <p><strong>start time:</strong> {{gig.start|date:"l, M j, Y"}}</p> {% endcomment %}
-
-      <div id="gig-children">
-          <div id="bands-divider">
-            <h3>Bands</h3>
-            {% for band in gig.bands.all %}
-            {% include "portal/basic_band_info.html" %}
-            {% endfor %}
-
-        </div><!-- bands-divider -->
-        <div id="other-divider">
-          <h3>Stages</h3>
-          {% if gig.stages.count %}
-          <div id="stages" class="span12 well">
-            <ul>
-              {% for stage in gig.stages.all %}
-              <li>{{stage.name}}(capacity:{{stage.capacity}})</li>
-              {% endfor %}
-            </ul>
-          </div><!-- stages -->
-          {% else %}
-          <p>No stages for this gig</p>
-          {% endif %}
-        </div><!-- other-divider -->
-      </div><!-- gig-children -->
-
-    <!-- ###TODO is this actually meaningful? download a single record? -->
-    <form action="/gig_csv_subset/">
-      <input type=hidden name=q value={{query}}>
-      <p>
-        <button type="post" id="download-csv-btn"></button>
-        Download this gig listing as a CSV file.
-      </p>
-    </form>
-
-  </div><!-- gig-info -->
-  <hr />
+<div id="gig-info">{%comment %}class="span5">{% endcomment %}
+  <h2>Gig Details</h2>
+  <div id="gig-properties">
+    <p>Gig name: <b>{{gig}}</b></p>
+    {% comment %} Where can this go?   <p><strong>start time:</strong> {{gig.start|date:"l, M j, Y"}}</p> {% endcomment %}
+  </div>
+  <div id="bands">
+    {% for band in gig.bands.all %}
+    <div class="band{% if forloop.last %} last{% endif %}">
+      {% if forloop.first %}
+      <div class="detail-heading">Bands</div>
+      {% endif %}
+      {% include "portal/basic_band_info.html" %}
+    </div>
+      {% endfor %}
+  </div><!-- bands -->
+  <!-- ###TODO is this actually meaningful? download a single record? -->
+  <form action="/gig_csv_subset/">
+    <input type=hidden name=q value={{query}}>
+    <p>
+      <button type="post" id="download-csv-btn"></button>
+      Download this gig listing as a CSV file.
+    </p>
+  </form>
+</div><!-- gig-info -->
 {% endblock %}
 
 {% block right-bar %}
-    <div id="gig-info" class="span5-fluid">
-          <h3>Venue details</h3>
-            {% if gig.venue %}
-            {% with gig.venue as venue %}
-            {% include "portal/basic_venue_info.html" %}
-            {% endwith %}
-            {% if gig|has_locations %}
-            {% map gig %}
-            {% endif %}
-          {% else %}
-          <p>No Venue listed for this gig</p>
-          {% endif %}
-    </div>
+  <div id="venue-details" class="side-detail">
+    <div class="detail-heading">Venue details</div>
+   {% if gig.venue %}
+   {% with gig.venue as venue %}
+   {% include "portal/basic_venue_info.html" %}
+   {% endwith %}
+   {% if gig|has_locations %}
+   <div id="map-container">
+     <h3 class="map-heading">GIG MAP</h3>
+     {% map gig %}
+   </div>
+   {% endif %}
+   {% else %}
+   <p>No Venue listed for this gig</p>
+   {% endif %}
+   </div><!-- side-detail -->
 {% endblock %}
-
-{% comment %}Too hacky?{% endcomment %}
-{% block middle-width %}5{% endblock %}
-{% block right-width %}5{% endblock %}

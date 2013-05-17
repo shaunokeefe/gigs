@@ -8,38 +8,28 @@
 
 
 {% block mainbody %}
-      <div id="middle" class="row">
-        {% include "portal/social_media_buttons.html" %}
+<div id="middle" class="row">
+  {% include "portal/social_media_buttons.html" %}
+  <div class="span2">
+    {% block sidebar %}
+    &nbsp;
+    {% endblock %}
+  </div> <!-- end sidebar -->
+  <div id ="container" class="span10">
+    <div class="row">
+      <div id=content class="span{% block middle-width %}7{% endblock %}">
+        {% block content %}
+        {% endblock %}
+      </div> <!-- content -->
+  
+      <div id="right-col" class="span{% block right-width %}3{% endblock %}">
+        {% block right-bar %}
+        {% endblock %}
+      </div> <!-- right-col -->
+    </div> <!-- row -->
 
-        <div class="span2">
-          {% block sidebar %}
-          {% comment %}
-          <div class="sidebar-nav"> 
-            <ul class="nav nav-list">
-              <li class="nav-header">Pages</li>      
-              <li><a href="{% url home %}"><i class="icon-home"></i>Home</a></li>      
-              <li><a href="{% url search_index %}"><i class="icon-th-list"></i>Gigs</a></li>     
-              <li><a href="#" class="vapourware"><i class="icon-signal"></i>Stats</a></li>     
-              {% if user.is_authenticated and user.is_staff %}
-              <li class="nav-header">Admin</li>      
-              <li><a href="{% url admin:gig_registry_gig_add %}"><i class="icon-plus"></i>Add a Gig</a></li>     
-              <li><a href="{% url admin:gig_registry_gig_changelist %}"><i class="icon-edit"></i>Edit a Gig</a></li>
-              <li><a href="{% url admin:auth_user_changelist %}"><i class="icon-user"></i>Manage Users</a></li>
-              {% endif%}
-            </ul>
-            
-          </div>
-          {% endcomment %}
-          &nbsp;
-          {% endblock %}
-        </div> <!-- end sidebar-->
-        <div id=content class="span{% block middle-width %}7{% endblock %}">
-          {% block content %}
-          {% endblock %}
-        </div> <!-- content-->
-        <div id="right-col" class="span{% block right-width %}3{% endblock %}">
-	  {% block right-bar %}
-          {% endblock %}
-        </div>
-      </div> <!-- middle-->
+    {% block bottom %}
+    {% endblock %}
+  </div> <!-- container -->
+</div> <!-- middle -->
 {% endblock %}
