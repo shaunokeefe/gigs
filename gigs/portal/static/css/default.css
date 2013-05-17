@@ -292,6 +292,17 @@ span.label { /* facet labels with X */
 	background: #0A5B4D;
 }
 
+span.facet a {
+    color: #FFFFFF;
+	font-size: 13px;
+    font-weight: bold;
+}
+
+span.facet .icon-remove {
+    margin-top: 3px;
+    margin-left: 3px;
+}
+
 /******* Right Column ******/
 
 #middle #right-col {

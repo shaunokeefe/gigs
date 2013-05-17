@@ -152,12 +152,18 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 {% endblock %}
 
 {% block right-bar %}
-    {% comment %}
     {% load searchform %}
     {% search_form "small" %}
+    {% comment %}
     {% current_facet_list request.get_full_path selected_facets  query %}
-    {% endcomment %}
     {% include "search/search_form.html" %}  
+    {% endcomment %}
     {% load maps %}
-    {% search_map page.object_list %}
+    <div id="map-container">
+      <h3 class="map-heading">GIG MAP</h3>
+      {% search_map page.object_list %}
+    </div>
 {% endblock %}
+
+{% block middle-width %}6{% endblock %}
+{% block right-width %}4{% endblock %}
