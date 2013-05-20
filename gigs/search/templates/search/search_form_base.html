@@ -5,6 +5,6 @@
     {% block help_text %}
     {% endblock %}
     <input type="text" name="{% block input_name %}q{% endblock %}" class="{% block input_class %}input-xlarge{% endblock %}" {% if query %}value="{{query}}"{% else %}placeholder="{% block placeholder%}Enter your search term...{% endblock %}"{% endif %}>
-    <button type="submit" class="{% block button_class %}btn btn-primary input-append{% endblock %}">{% block button_text %}Search<{% endblock %}</button>
+    <button type="submit" class="{% block button_class %}btn btn-primary input-append{% endblock %}">{% block button_text %}Search{% endblock %}</button>
 </form>
 </div>
