@@ -13,6 +13,7 @@ urlpatterns = patterns(
     url(r'^band/(?P<pk>\d+)/$', DetailView.as_view(model=Band, template_name="portal/band_detail.html"), name='portal_band_detail'),
     url(r'^venue/(?P<pk>\d+)/$', DetailView.as_view(model=Venue, template_name="portal/venue_detail.html"), name='portal_venue_detail'),
     url(r'^location/(?P<pk>\d+)/$', DetailView.as_view(model=Location, template_name="portal/location_detail.html"), name='portal_location_detail'),
+    url(r'^tugging/$', TemplateView.as_view(template_name='portal/tugging.html'), name='tugging'),
     url(r'^login/$', 'portal_login', name='login'), 
     url(r'^logout/$', logout, {'next_page':'/'}, name='logout'), 
 )

@@ -1,7 +1,7 @@
 from gigs.settings_base import *
 
-DEBUG = False
-TEMPLATE_DEBUG = False
+DEBUG = True
+TEMPLATE_DEBUG = True
 
 ADMINS = ()
 
