@@ -44,12 +44,12 @@ class LoggedSearchView(FacetedSearchView):
 
 column_name_map = {
         0: 'tmp',
-        1:'start',
         2:'venue_name',
-        3:'bands',
-        4:'name',
-        5:'cost',
-        6:'venue_location',
+        1: 'bands',
+        #4:'name',
+        #2: 'cost',
+        #2: 'venue_location',
+        3: 'start',
     }
 
 def ajax_search_view(request):
