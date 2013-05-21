@@ -102,6 +102,9 @@ class VenueAdmin(TablibAdmin):
     form = VenueAutofillUUIDForm
 
     list_display = ['name', 'location', 'established', 'venue_type', 'status']
+    list_filter = ('venue_type', 'status', 'location__suburb')
+
+    search_fields = ['name', 'venue_type', 'location__suburb', 'comment']
 
     formats = ['csv', 'xls']
     headers={
