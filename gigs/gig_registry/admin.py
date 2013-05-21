@@ -53,6 +53,8 @@ class BandAutofillUUIDForm(AutofillUUIDForm):
 class BandAdmin(admin.ModelAdmin):
     form = BandAutofillUUIDForm
     inlines = [MembershipInline]
+    list_display = ['name']
+    search_fields = ['name', 'comment']
 
 class BandInline(admin.TabularInline):
     model = models.Gig.bands.through
