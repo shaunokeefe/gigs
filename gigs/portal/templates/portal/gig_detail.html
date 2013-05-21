@@ -7,10 +7,10 @@ Try exploring further by clicking on a supporting band or on a venue to find out
 {% endblock %}
 
 {% block content %}
-<div id="gig-info">{%comment %}class="span5">{% endcomment %}
+<div id="gig-info">
   <h2>Gig Details</h2>
   <div id="gig-properties">
-    <p>Gig name: <b>{{gig}}</b></p>
+    <span class="detail-heading">Gig name: <b>{{gig}}</b></span>
     {% comment %} Where can this go?   <p><strong>start time:</strong> {{gig.start|date:"l, M j, Y"}}</p> {% endcomment %}
   </div>
   <div id="bands">

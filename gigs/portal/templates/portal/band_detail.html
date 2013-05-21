@@ -1,36 +1,50 @@
-{% extends "portal/portal_base.html" %}
+{% extends "portal/detail_base.html" %}
 {% load maps %}
 {% load bands %}
 
+{% block detail_hint %}
+Try exploring further by clicking on a gig this band played or a related band
+{% endblock %}
+
 {% block content %}
-<div id="bands-divider" class="span6">
+<div id="band-info">
   <h2>Band details</h2>
-    Band name: <b><a href = "{% url portal_band_detail band.id %}">{{band.name}}</a></b>
+  <div id="band-properties" >
+
+      <span class="detail-heading">Band name: <b>{{band.name}}</b></span>
     <table>
-      <tr>
-        <td>
-          Years performing
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Members
-        </td>
+      <tr><td>Years performing:</td><td>Not listed</td></tr>
+      <tr><td>Members:</td>
         <td>
         {% if band.members.count %}
-          {% for member in band.members.all %}
-          <p>{{member}}</p>
-          {% endfor %}
+        {% for member in band.members.all %}
+          {{member}}{% if not forloop.last %},{% endif %}
+        {% endfor %}
         {% else %}
-        <p>No members currently listed</p>
+          No members currently listed
         {% endif %}
         </td>
       </tr>
     </table>
+  </div>
+  <form action="/gig_csv_subset/">
+    <input type=hidden name=q value={{query}}>
+    <p>
+      <button type="post" id="download-csv-btn"></button>
+      Download these gig listing as a CSV file.
+    </p>
+  </form>
+</div>
+{% endblock %}
+
+{% block right-bar %}
+  <div class="side-detail">
   {% bands_played_with band %}
   {% if band|has_locations %}
-  <h2>Gigs played</h2>
-  {% map band %}
+  <div id="map-container">
+    <h3 class="map-heading">GIG MAP</h3>
+    {% map band %}
+  </div>
   {% endif %}
-</div>
+  </div>
 {% endblock %}

@@ -1,18 +1,23 @@
-{% extends "portal/portal_base.html" %}
+{% extends "portal/detail_base.html" %}
 {% load maps %}
 
+{% block detail_hint %}
+{% endblock %}
+
 {% block content %}
-<div id="location-info" class="row-fluid">
-    <h1><a href="{% url portal_location_detail location.id %}">
-    <address>
-      <strong>{{venue.location.name}}</strong>
-      {{location.street_address}}
-      {{location.suburb}}, {{location.postcode}}
-      {{location.country}}
-    </address>
-</a>
-</h1>
-{% map location %}
+<div id="location-info">
+ <h2>Location details</h2>
+  <div id="location-properties" >
+    <span class="detail-heading">Address: <b>{{location}}</b></span>
+  </div>
 </div>
 {% endblock %}
 
+{% block right-bar %}
+<div class="side-detail">
+  <div id="map-container">
+    <h3 class="map-heading">LOCATION</h3>
+    {% map location %}
+  </div>
+</div>
+{% endblock %}

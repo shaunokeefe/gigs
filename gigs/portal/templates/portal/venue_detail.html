@@ -1,33 +1,43 @@
-{% extends "portal/portal_base.html" %}
+{% extends "portal/detail_base.html" %}
 {% load maps %}
+{% load search_results %}
+
+{% block detail_hint %}
+Try exploring further by clicking on a supporting band or on a venue to find out more.
+{% endblock %}
+
 {% block content %}
-<div id="venue-info" class="row-fluid">
-  <h1><a href="{% url portal_venue_detail venue.id %}">{{venue.name}}</a></h1>
-  <div id="venue" class="span12">
-    <dl>
-      <dt>Status</dt> 
-      <dd>{{venue.status|default:"None"}}</dd>
-      <dt>venue type<dt> 
-      <dd>{{venue.venue_type|default:"None"}}</dd>
-      <dt>Comment</dt> 
-      <dd>{{venue.comment|default:"None"}}</dd>
-    </dl>
-  </div><!-- venue-->
-      <h2>Location</h2>
-  <div id="location-info" class="row-fluid"> 
-    <div id="location-text" class="span6">
-      {% if venue|has_locations %}
-      {% with venue.location as location %}
-      {% include "portal/basic_location_info.html" %}
-      {% endwith %}
-    </div> <!-- location-text -->
-    <div id="locations-map" class="span6">
-      {% map venue %}
-    </div><!-- locations-map -->
-      {% else %}
-      <p>No location listed</p>
-  </div><!--  location-text -->
-      {% endif %}
-  </div><!-- location-info -->
+<div id="venue-info">
+  <h2>Venue Details</a></h2>
+  <div id="venue-properties">
+    <p><span class="detail-heading">Name: <b>{{venue.name|default:"None"}}</b></span>
+    <p>Status: {{venue.get_status_display|default:"None"}}
+    <p>Type of venue:{{venue.type|default:"None"}}
+    <p>Comment:{{venue.comment|default:"None"}}
+  </div><!-- venue-properties -->
 </div><!-- venue-info -->
+<form action="/gig_csv_subset/">
+    <input type=hidden name=q value="{{venue.name}}"> {% comment %} #TODO fetch related gigs using fields {% endcomment%}
+    <p>
+      <button type="post" id="download-csv-btn"></button>
+      Download this gig listing as a CSV file.
+    </p>
+  </form>
+{% endblock %}
+
+{% block right-bar %}
+<div id="location-details" class="side-detail">
+  <div class="detail-heading">Location details</div>
+  {% if venue|has_locations %}
+  {% with venue.location as location %}
+  {% include "portal/basic_location_info.html" %}
+  {% endwith %}
+  <div id="map-container">
+    <h3 class="map-heading">VENUE MAP</h3>
+    {% map venue %}
+  </div><!-- map-container -->
+   {% else %}
+  <p>No location listed</p>
+   {% endif %}
+</div><!-- location-details -->
 {% endblock %}

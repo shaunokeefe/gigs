@@ -1,0 +1,40 @@
+{% extends "portal/portal_base.html" %}
+{% load maps %}
+{% load search_results %}
+
+{% block sidebar %}
+<div class="sidebar-facets"><!-- ###TODO generalise class name-->
+
+<p class="nav-links">
+  <!-- ###TODO link to somewhere -->
+  <!-- large triangle: &#x25C0; --> &#x25c4;&nbsp;{% search_results %}
+</p>
+
+<p class="facet-caption">
+{% block detail_hint %}
+{% endblock %}
+</p>
+</div>
+{% endblock %}
+
+{% block bottom %}
+<div id="bottom-divider" class="row">
+  <div class="span10">
+  <hr />
+  </div>
+</div><!-- bottom-divider -->
+<div id="bottom" class="row">
+  <div class="span6">
+    {% load discovery %}
+    {% recent_edits model="gig" num_edits="6"%}
+  </div>
+  <div class="span4">
+  {% load searchform %}
+  {% search_form small %}  
+  </div>
+</div> <!-- bottom -->
+{% endblock %}
+
+{% comment %}Too hacky?{% endcomment %}
+{% block middle-width %}6{% endblock %}
+{% block right-width %}4{% endblock %}
