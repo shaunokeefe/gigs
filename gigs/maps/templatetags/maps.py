@@ -93,8 +93,6 @@ class MapNode(template.Node):
         form = MapForm(initial={'map':self.gmap})
         rendered_form = render_to_string('maps/map_form_and_js.html', {'form': form})
         return rendered_form
-        #context['form'] = MapForm(initial={'map': self.gmap})
-        #return ''
 
 class GigSearchMapNode(MapNode):
     
@@ -103,17 +101,9 @@ class GigSearchMapNode(MapNode):
             locatables = self.locatables.resolve(context)
         except template.VariableDoesNotExist:
             return ''
-        
-        gigs = [gig_search_result.object for gig_search_result in locatables] 
-        #for gig_search_result in locatables:
-            #gig = gig_search_result.object
-        locations = get_location_queryset(gigs)
-            #if gig.venue and  gig.venue.location:
-            #    lat = gig.venue.location.lat
-            #    lon = gig.venue.location.lon
-        for location in locations:
-            lat = location.lat
-            lon = location.lon
+
+        locations = set((r.location_lat, r.location_lon) for r in locatables)
+        for lat, lon in locations:
             if lat and lon:
                 marker = maps.Marker(opts = {
                     'map': self.gmap,

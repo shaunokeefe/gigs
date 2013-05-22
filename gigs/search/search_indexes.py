@@ -13,6 +13,8 @@ class GigIndex(RealTimeSearchIndex):
     cost = FloatField(model_attr='cost', default=0)
     name = CharField(model_attr='name', default=0, faceted=True)
     venue_location = CharField(faceted=True)
+    location_lat = FloatField(model_attr='venue__location__lat', stored=True, null=True)
+    location_lon = FloatField(model_attr='venue__location__lon', stored=True, null=True)
 
     def prepare_bands(self, obj):
         return [band.name for band in obj.bands.all()]

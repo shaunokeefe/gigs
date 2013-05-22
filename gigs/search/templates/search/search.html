@@ -154,14 +154,10 @@ $.extend($.fn.dataTableExt.oStdClasses, {
 {% block right-bar %}
     {% load searchform %}
     {% search_form "small" %}
-    {% comment %}
-    {% current_facet_list request.get_full_path selected_facets  query %}
-    {% include "search/search_form.html" %}  
-    {% endcomment %}
     {% load maps %}
     <div id="map-container">
       <h3 class="map-heading">GIG MAP</h3>
-      {% search_map page.object_list %}
+      {% search_map paginator.object_list %}
     </div>
 {% endblock %}
 
