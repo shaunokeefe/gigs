@@ -89,6 +89,7 @@ def recent_edits(*args, **kwargs):
             models = [model]
         recent_edits = admin_models.LogEntry.objects.\
             filter(content_type__model__in=models).\
+            exclude(action_flag=admin_models.DELETION).\
             order_by('?')[:num_edits]
         rendered_string = render_to_string(
             'discovery/recent_edits.html',
