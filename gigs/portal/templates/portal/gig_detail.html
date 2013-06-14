@@ -14,10 +14,16 @@ Try exploring further by clicking on a supporting band or on a venue to find out
     {% comment %} Where can this go?   <p><strong>start time:</strong> {{gig.start|date:"l, M j, Y"}}</p> {% endcomment %}
   </div>
   <div id="bands">
-    {% for band in gig.bands.all %}
+    {% for band in gig.get_headlining_bands %}
+      {% if forloop.first %}
+      <div class="detail-heading">Headlining band</div>
+      {% endif %}
+      {% include "portal/basic_band_info.html" %}
+    {% endfor %}
+    {% for band in gig.get_non_headlining_bands %}
     <div class="band{% if forloop.last %} last{% endif %}">
       {% if forloop.first %}
-      <div class="detail-heading">Bands</div>
+      <div class="detail-heading">Other bands</div>
       {% endif %}
       {% include "portal/basic_band_info.html" %}
     </div>
