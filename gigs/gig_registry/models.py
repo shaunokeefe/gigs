@@ -240,9 +240,8 @@ class Gig(models.Model):
             return self.name
         name = ""
         if self.bands.count():
-            bands = self.bands.all()
-            name = bands[0].name
-            if bands.count() > 1:
+            name = ', '.join([band.name for band in self.get_headlining_bands()])
+            if self.get_non_headlining_bands():
                 name += " and others"
 
         if self.venue:
