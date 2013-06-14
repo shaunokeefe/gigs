@@ -58,6 +58,16 @@ class BandAdmin(admin.ModelAdmin):
 
 class BandInline(admin.TabularInline):
     model = models.Gig.bands.through
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        # limit the choice of stages to stages listed
+        # for the gig's venue
+        if db_field.name == "stage":
+            try:
+                gig = request.gig
+                kwargs["queryset"] = models.Stage.objects.filter(venue__exact=gig.venue)
+            except AttributeError:
+                pass
+        return super(BandInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
 def get_venue_id(gig):
     return gig.venue.id
@@ -69,27 +79,39 @@ class GigAutofillUUIDForm(AutofillUUIDForm):
 class GigAdmin(TablibAdmin):
     form =  GigAutofillUUIDForm
     fieldsets = [
-            (None, {'fields': ['name', 'venue','bands', 'cost', 'gig_type', 'source']}),
+            (None, {'fields': ['name', 'venue', 'cost', 'gig_type', 'source']}),
             ('Dates', {'fields': ['start', 'finish']}),
             ('Metadata', {'fields': ['uuid','comment']}),
         ]
     formats = ['csv', 'xls']
-    headers={
+    headers = {
         'name': 'name',
         'start': 'start',
         'finish': 'finish',
         'cost': 'cost',
         'comment': 'comment',
         'venue.id': get_venue_id,
-        }
+    }
 
-    filter_horizontal = ('bands',)
+    inlines = (BandInline,)
+
     list_filter = ('venue', 'bands',)
+    search_fields = ['name', 'venue__name', 'comment']
+
+    def get_form(self, request, obj=None, **kwargs):
+        # add the gig object to the request so that it
+        # can be passed down to the inlines. The inlines
+        # use the object to limit the chocies in drop-
+        # downs to relevant choices
+        request.gig = obj
+        return super(GigAdmin, self).get_form(request, obj, **kwargs)
+
     def get_gig_type(obj):
         return "%s" % (obj.gig_type.name)
     get_gig_type.short_description = 'Gig type'
+
     list_display = ['venue', 'name', 'start', 'cost', get_gig_type]
-    search_fields = ['name', 'venue__name', 'comment']
+
 
 def get_location_id(venue):
     return venue.location.id
@@ -171,3 +193,4 @@ admin.site.register(models.GigType)
 admin.site.register(models.Source)
 admin.site.register(models.SourceType)
 admin.site.register(models.BandMembership)
+admin.site.register(models.Stage)

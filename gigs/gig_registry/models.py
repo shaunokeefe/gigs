@@ -177,6 +177,9 @@ class Stage(models.Model):
     name = models.CharField(max_length=50)
     capacity = models.IntegerField(blank=True)
 
+    def __unicode__(self):
+        return self.name
+
 class Venue(models.Model):
     STATUS_CHOICES = (
             ('O', 'Open'),
@@ -228,7 +231,7 @@ class Gig(models.Model):
 
     # TODO members can be absent on the night..is this a problem?
     # maybe an 'appearance' model or something like that?
-    bands = models.ManyToManyField(Band)
+    bands = models.ManyToManyField(Band, through='Performance')
 
     objects = GigUUIDManager()
 
@@ -251,3 +254,43 @@ class Gig(models.Model):
         if not name:
             name = "No bands and no venue specified"
         return name
+
+    def get_headlining_bands(self):
+        return self.bands.filter(performance__order=Performance.HEADLINER)
+
+    def get_non_headlining_bands(self):
+        return self.bands.exclude(performance__order=Performance.HEADLINER).order_by('performance__order')
+
+
+class Performance(models.Model):
+    HEADLINER       = 1
+    FIRST_SUPPORT   = 2
+    SECOND_SUPPORT  = 3
+    THIRD_SUPPORT   = 4
+    FOURTH_SUPPORT  = 5
+    FIFTH_SUPPORT   = 6
+    SIXTH_SUPPORT   = 7
+    SEVENTH_SUPPORT = 8
+    EIGTH_SUPPORT   = 9
+    NINTH_SUPPORT   = 10
+    TENTH_SUPPORT   = 11
+
+    ORDER_CHOICES = (
+            (HEADLINER, 'Headliner'),
+            (FIRST_SUPPORT, 'First support'),
+            (SECOND_SUPPORT, 'Second support'),
+            (THIRD_SUPPORT, 'Third support'),
+            (FOURTH_SUPPORT, 'Fourth support'),
+            (FIFTH_SUPPORT, 'Fifth support'),
+            (SIXTH_SUPPORT, 'Sixth support'),
+            (SEVENTH_SUPPORT, 'Seventh support'),
+            (EIGTH_SUPPORT, 'Eigth support'),
+            (NINTH_SUPPORT, 'Ninth support'),
+            (TENTH_SUPPORT, 'Tenth support'),
+            )
+    band = models.ForeignKey(Band)
+    gig = models.ForeignKey(Gig)
+    order = models.IntegerField(choices=ORDER_CHOICES, default=1)
+    time = models.TimeField(null=True, blank=True)
+    genre = models.ManyToManyField(Genre, blank=True, null=True)
+    stage = models.ForeignKey(Stage, null=True, blank=True)
