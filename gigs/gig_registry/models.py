@@ -259,7 +259,9 @@ class Gig(models.Model):
         return self.bands.filter(performance__order=Performance.HEADLINER)
 
     def get_non_headlining_bands(self):
-        return self.bands.exclude(performance__order=Performance.HEADLINER).order_by('performance__order')
+        return [p.band for p in Performance.objects.\
+                exclude(order=Performance.HEADLINER).\
+                filter(gig=self).order_by('order')]
 
 
 class Performance(models.Model):
