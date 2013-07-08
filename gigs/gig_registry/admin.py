@@ -109,8 +109,20 @@ class GigAdmin(TablibAdmin):
     def get_gig_type(obj):
         return "%s" % (obj.gig_type.name)
     get_gig_type.short_description = 'Gig type'
+    get_gig_type.admin_order_field = 'gig_type__name'
 
-    list_display = ['venue', 'name', 'start', 'cost', get_gig_type]
+    def get_venue_name(obj):
+        return "%s" % (obj.venue.name)
+    get_venue_name.short_description = 'Venue'
+    get_venue_name.admin_order_field = 'venue__name'
+
+    def get_gig(obj):
+        return obj
+    get_gig.short_description = 'Gig'
+    get_gig.admin_order_field = 'id'
+
+    list_display = [get_gig, get_venue_name, 'name', 'start', 'cost', get_gig_type]
+    ordering = ['-id']
 
 
 def get_location_id(venue):
