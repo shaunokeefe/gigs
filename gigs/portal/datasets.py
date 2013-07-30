@@ -1,6 +1,7 @@
+from django.db.models.fields.related import ForeignKey
+from django.contrib import auth
 from django_tablib import datasets
 from django_tablib.models import DatasetMetaclass
-from django.db.models.fields.related import ForeignKey
 
 class RelatedDataset(datasets.SimpleDataset):
 
@@ -13,6 +14,9 @@ class RelatedDataset(datasets.SimpleDataset):
                 attr_part = attr_parts.pop(0)
                 if len(attr_parts):
                     current_obj = getattr(current_obj, attr_part)
+                    if current_obj is None:
+                        attrs.append(None)
+                        break
                     continue
 
                 if callable(attr_part):
@@ -48,8 +52,12 @@ class ModelRelatedDataset(RelatedDataset):
 
         for field in [f for f in fields if isinstance(f, ForeignKey)]:
             related_model_class = field.rel.to
+            # Skip tracing down sensitive User model
+            if related_model_class == auth.models.User:
+                continue
+            field_name = field.name
             related_fields = self._get_fields(related_model_class)
-            related_fields = [related_model_class.__name__.lower() + '.' + rf for rf in related_fields]
+            related_fields = [field_name + '.' + rf for rf in related_fields]
             field_names.extend(related_fields)
 
         return field_names
