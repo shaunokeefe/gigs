@@ -1,0 +1,18 @@
+[submodule "puppet/modules/puppi"]
+	path = puppet/modules/puppi
+	url = git://github.com/example42/puppi.git
+[submodule "puppet/modules/solr"]
+	path = puppet/modules/solr
+	url = git://github.com/example42/puppet-solr.git
+[submodule "puppet/modules/vcsrepo"]
+	path = puppet/modules/vcsrepo
+	url = https://github.com/puppetlabs/puppetlabs-vcsrepo.git
+[submodule "puppet/modules/stdlib"]
+	path = puppet/modules/stdlib
+	url = https://github.com/puppetlabs/puppetlabs-stdlib.git
+[submodule "puppet/modules/mysql"]
+	path = puppet/modules/mysql
+	url = https://github.com/puppetlabs/puppetlabs-mysql.git
+[submodule "puppet/modules/tugg"]
+	path = puppet/modules/tugg
+	url = https://github.com/shaunokeefe/tugg-puppet.git
