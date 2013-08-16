@@ -1,0 +1,10 @@
+django==1.4
+beautifulsoup==3.2.1
+pysolr==3.0.6
+django-haystack==1.2.7
+django-tablib ==2.4.1
+whoosh==2.4.1
+django-gmapi==1.0.1
+south==0.8.1
+mock==1.0.1
+-e git+https://github.com/shaunokeefe/django-csvimport.git#egg=csvimport
