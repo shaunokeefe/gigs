@@ -5,6 +5,7 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 from gigs.portal import urls as portal_urls
 from gigs.search import urls as search_urls
+from gigs.gig_registry import urls as gig_registry_urls
 from gigs.gig_registry.models import Gig, Venue, Location
 
 admin.autodiscover()
@@ -12,6 +13,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     (r'', include(portal_urls)),
+    (r'^api/', include(gig_registry_urls)),
     (r'^admin/', include(admin.site.urls)),
     (r'^index/', include(search_urls)),
     (r'^export_gigs/$', 'django_tablib.views.export', {

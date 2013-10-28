@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'django_tablib',
     'pysolr',
     'haystack',
+    'tastypie',
     'gmapi',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
