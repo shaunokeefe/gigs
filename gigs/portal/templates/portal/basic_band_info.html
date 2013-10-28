@@ -1,2 +1,2 @@
-<p><span class="detail-title">Name: </span><a href = "{% url portal_band_detail band.id %}">{{band.name}}</a></strong></p>
+<p><span class="detail-title">Name: </span><a href = "{% url "portal_band_detail" band.id %}">{{band.name}}</a></strong></p>
 <p><span class="detail-title">Members: </span>{% if band.members.count %}{% for member in band.members.all %}{{member}}{% endfor %}{% else %}No band members listed{% endif %}</p>

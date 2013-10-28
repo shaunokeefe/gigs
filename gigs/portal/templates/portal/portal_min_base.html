@@ -51,7 +51,7 @@
     <div class="navbar container navbar-fixed-top"> 
       <div class="navbar-inner"> 
         <div class="container"> 
-          <a class="brand" href="{% url home %}"><!--TUGG--></a>
+          <a class="brand" href="{% url "home" %}"><!--TUGG--></a>
           <a class="btn btn-navbar text-right" data-toggle="collapse" data-target=".nav-collapse"> 
             <span class="icon-bar"></span> 
             <span class="icon-bar"></span> 
@@ -59,8 +59,8 @@
           </a> 
           <div class="nav-collapse pull-right"> 
             <ul class="nav"> 
-              <li><a href="{% url about %}">About</a></li> 
-              <li><a href="{% url contact%}">Contact</a></li> 
+              <li><a href="{% url "about" %}">About</a></li>
+              <li><a href="{% url "contact" %}">Contact</a></li>
             <li>
             <div class="dropdown" id="login-btn-div">
                 {% if user.is_authenticated %}
@@ -69,7 +69,7 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><i class="icon-signout"></i><a href="{% url logout %}">Sign Out</a></li>
+                    <li><i class="icon-signout"></i><a href="{% url "logout" %}">Sign Out</a></li>
               </ul>
               {% else %}
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -78,7 +78,7 @@
                 </a>
                 <ul class="dropdown-menu" style="padding: 15px; padding-bottom: 0px">
                   <li>
-                    <form action="{% url login %}" method="post">
+                    <form action="{% url "login" %}" method="post">
                       {% csrf_token %}
                         <input type="text" name="username" placeholder="User Name"/> 
                         <input type="password" name="password" placeholder="Password"/> 
@@ -91,7 +91,7 @@
             </div>
             </li>
             </ul>
-            <!--<form class="navbar-search pull-right" action="{% url search_index %}">
+            <!--<form class="navbar-search pull-right" action="{% url "search_index" %}">
               <input type="text" name="q" class="search-query" placeholder="Search...">
           </form>-->
           </div><!-- nav-collapse -->

@@ -1,5 +1,5 @@
 <div class="{% block container_class %}form-search-container{% endblock %}">
-<form class="{% block search_form_class %}form-search{% endblock %}" action="{% url search_index %}">
+<form class="{% block search_form_class %}form-search{% endblock %}" action="{% url "search_index" %}">
     {% block search_heading %}
     {% endblock %}
     {% block help_text %}

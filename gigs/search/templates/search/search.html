@@ -103,7 +103,7 @@ $(document).ready(function() {
         "bInfo": false,
         "bProcessing": true,
         "bServerSide": true,
-        "sAjaxSource": "{% url search_ajax %}?{% if query %}q={{query}}&{% endif %}{{selected_facets.render_url}}"
+        "sAjaxSource": "{% url "search_ajax" %}?{% if query %}q={{query}}&{% endif %}{{selected_facets.render_url}}"
     } );
 });
 

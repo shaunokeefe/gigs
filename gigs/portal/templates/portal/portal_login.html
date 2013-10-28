@@ -8,7 +8,7 @@
 </div>
 {% endif %}
 
-<form action="{% url login %}" method="post">
+<form action="{% url "login" %}" method="post">
   {% csrf_token %}
     <input type="text" name="username" placeholder="User Name"/> 
     <input type="password" name="password" placeholder="Password"/> 
