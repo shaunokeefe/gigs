@@ -1,5 +1,6 @@
 
 from django.conf.urls.defaults import *
+from django.http import HttpResponse
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -24,6 +25,8 @@ urlpatterns = patterns(
             'model': Location,
             }),
     (r'^gig_csv_subset/', 'gigs.portal.views.get_gigs_data'),
+    (r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: /", mimetype="text/plain"))
+        )
 )
 
 
