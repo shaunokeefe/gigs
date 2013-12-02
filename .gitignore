@@ -34,3 +34,6 @@ develop-eggs/
 
 # tags
 tags
+
+# vagrant
+.vagrant
