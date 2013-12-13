@@ -7,4 +7,5 @@ whoosh==2.4.1
 django-gmapi==1.0.1
 south==0.8.1
 mock==1.0.1
+django-import-export==0.1.5
 -e git+https://github.com/shaunokeefe/django-csvimport.git#egg=csvimport

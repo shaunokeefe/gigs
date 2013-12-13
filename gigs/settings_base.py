@@ -119,6 +119,7 @@ INSTALLED_APPS = (
     'gigs.search',
     'gigs.maps',
     'gigs.discovery',
+    'gigs.export',
     'csvimport',
     'django_tablib',
     'pysolr',
