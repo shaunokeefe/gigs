@@ -1,3 +1,4 @@
+from django.db.models import Count, Max
 from import_export.resources import ModelResource
 from import_export.fields import Field
 
@@ -8,6 +9,23 @@ from gigs.export.fields import RelatedM2MResourceField
 class FollowModelResource(ModelResource):
     """Handle multiple return values from export_field
     """
+
+    def get_export_headers(self):
+
+        headers = []
+        for field in self.get_fields():
+            if isinstance(field, RelatedM2MResourceField):
+                sub_headers = field.related_resource.get_export_headers()
+                count = self._meta.model.objects.all().annotate(num=Count(field.column_name)).aggregate(max=Max('num'))['max']
+                formatted_headers = []
+                for i in range(count):
+                    for header in sub_headers:
+                        formatted_headers.append("%s.%d.%s" % (field.column_name, i, header))
+                headers.extend(formatted_headers)
+
+            else:
+                headers.append(field.column_name)
+        return headers
 
     def export_resource(self, obj):
         values = []
@@ -43,3 +61,6 @@ class GigResource(FollowModelResource):
 
     class Meta:
         model = Gig
+
+    # TODO (shauno): could try setting column_name as a descriptor
+    # which returns a list of headers for all the band fields

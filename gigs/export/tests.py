@@ -159,6 +159,72 @@ class FollowModelResourceTest(TestCase):
         pizza_values = pizza_resource.export(queryset=Pizza.objects.filter(pk=self.pizza.pk))
         topping1_values = topping_resource.export(queryset=Topping.objects.filter(pk=self.topping1.pk))
         topping2_values = topping_resource.export(queryset=Topping.objects.filter(pk=self.topping2.pk))
+        for v in topping1_values[0]:
+            self.assertIn(v, pizza_values[0])
+        for v in topping2_values[0]:
+            self.assertIn(v, pizza_values[0])
 
-        for v in topping1_values + topping2_values:
-            self.assertIn(v, pizza_values)
+class GigResourceTest(TestCase):
+
+    def setUp(self):
+        self.location = Location(street_address='The street address')
+        self.location.save()
+
+        self.venue = Venue(name='The Northcote Social Club', location=self.location)
+        self.venue.save()
+
+        self.gig1 = Gig.objects.create(name='Laneway', venue=self.venue, start=datetime.now())
+        self.gig1.save()
+        self.band1 = Band(name='The Drones')
+        self.band1.save()
+        self.band2 = Band(name='Chvrches')
+        self.band2.save()
+        performance = Performance.objects.create(band=self.band1, gig=self.gig1, order=Performance.HEADLINER)
+        performance.save()
+        performance = Performance.objects.create(band=self.band2, gig=self.gig1, order=Performance.FIRST_SUPPORT)
+        performance.save()
+
+        self.gig2 = Gig(name='Laneway2', venue=self.venue, start=datetime.now(), uuid='2')
+        self.gig2.save()
+        self.band3 = Band(name='Peter Coombe')
+        self.band3.save()
+        performance = Performance.objects.create(band=self.band3, gig=self.gig2, order=Performance.HEADLINER)
+        performance.save()
+
+    def test_header_length(self):
+        # Check headers are the same length as what comes out of export
+        resource = GigResource()
+        headers = resource.get_export_headers()
+        rs = resource.get_export_headers()
+        gig = Gig.objects.filter(pk=self.gig1.pk)
+        exported_data = resource.export(gig)
+        self.assertEqual(len(headers), (exported_data.width))
+
+        gig = Gig.objects.filter(pk=self.gig2.pk)
+        exported_data = resource.export(gig)
+        self.assertEqual(len(headers), (exported_data.width))
+
+    def test_bands(self):
+        resource = GigResource()
+        headers = resource.get_export_headers()
+        gig = Gig.objects.filter(pk=self.gig1.pk)
+        exported_data = resource.export(gig)
+
+        self.assertTrue('bands.0.name' in headers)
+        band1_name_column = headers.index('bands.0.name')
+        band1_name = exported_data[0][band1_name_column]
+        self.assertEqual(band1_name, self.band1.name)
+
+        self.assertTrue('bands.1.name' in headers)
+        band2_name_column = headers.index('bands.1.name')
+        band2_name = exported_data[0][band2_name_column]
+        self.assertEqual(band2_name, self.band2.name)
+
+        self.assertFalse('bands.2.name' in headers)
+
+        gig = Gig.objects.filter(pk=self.gig2.pk)
+        exported_data = resource.export(gig)
+
+        band1_name_column = headers.index('bands.0.name')
+        band1_name = exported_data[0][band1_name_column]
+        self.assertEqual(band1_name, self.band3.name)

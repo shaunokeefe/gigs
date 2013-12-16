@@ -1,4 +1,5 @@
 from django.db.models import ForeignKey
+from django.db.models import Count, Max
 
 from import_export.fields import Field
 from import_export.resources import modelresource_factory
@@ -12,7 +13,8 @@ class RelatedResourceField(Field):
     """
 
     def __init__(self, related_resource, *args, **kwargs):
-        self.related_resource = related_resource
+        self.model =  related_resource._meta.model
+        self.related_resource =  modelresource_factory(self.model, related_resource)()
         super(RelatedResourceField, self).__init__(*args, **kwargs)
 
 class RelatedForeignKeyResourceField(RelatedResourceField):
@@ -29,9 +31,8 @@ class RelatedForeignKeyResourceField(RelatedResourceField):
 
         model = value.__class__
 
-        rendered_values = []
-        related_resource_instance = modelresource_factory(model, self.related_resource)
-        return related_resource_instance().export_resource(value)
+        return self.related_resource.export_resource(value)
+
 
 class RelatedM2MResourceField(RelatedResourceField):
     """Export fields from related Models
@@ -39,6 +40,9 @@ class RelatedM2MResourceField(RelatedResourceField):
     Use a resource defined for a related model
     to export the fields for that model
     """
+    def get_max_num_related(self, obj):
+        count = obj.__class__.objects.all().annotate(num=Count(self.attribute)).aggregate(max=Max('num'))['max']
+        return count
 
     def export(self, obj):
         value = self.get_value(obj)
@@ -55,7 +59,12 @@ class RelatedM2MResourceField(RelatedResourceField):
 
         values = value.all()
         rendered_values = []
-        related_resource_instance = modelresource_factory(model, self.related_resource)
         for value in values:
-            rendered_values.extend(related_resource_instance().export_resource(value))
+            rendered_values.extend(self.related_resource.export_resource(value))
+
+        # pad out
+        values_per_entry = len(self.related_resource.get_export_headers())
+        pad_len = (self.get_max_num_related(obj) - len(values)) * values_per_entry
+        rendered_values.extend([None] * pad_len)
+
         return rendered_values
